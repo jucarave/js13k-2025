@@ -12,16 +12,23 @@
 const cr_width = 800,
 cr_height = 450,
 cr_v_shader = `
+  precision mediump float;
   attribute vec3 a_p;
+  attribute vec2 a_uv;
   uniform mat4 u_cw, u_cp, u_m;
+  varying vec2 v_uv;
   void main() {
     gl_Position = u_cp * u_cw * u_m * vec4(a_p, 1.0);
+    v_uv = a_uv;
   }
 `, 
 
 cr_f_shader = `
+  precision mediump float;
+  uniform sampler2D u_tex;
+  varying vec2 v_uv;
   void main() {
-    gl_FragColor = vec4(1.0);
+    gl_FragColor = texture2D(u_tex, v_uv);
   }
 `,
 
@@ -30,7 +37,10 @@ cr_Mathcos = cr_Math.cos,
 cr_Mathsin = cr_Math.sin,
 cr_document = document,
 
-cr_room = [0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0]; // Room coordinates set by x, y pairs
+cr_room = [0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0], // Room coordinates set by x, y pairs
+cr_img = [
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC'
+];
 
 /**
  * SECTION VARIABLES
@@ -55,7 +65,8 @@ let cr_canvas,      // HTMLCanvasElement
                           0, 0, -0.1, 0],
   
   cr_identityMatrix = cr_matTranslate(), // Static identity matrix for transformations
-  cr_geometries = { cr_room: {} };       // Object to hold geometries for different objects in the game
+  cr_geometries = { cr_room: {} },       // Object to hold geometries for different objects in the game
+  cr_textures = [];
 
 /**
  * SECTION UTILITY FUNCTIONS
@@ -159,6 +170,10 @@ function cr_initEngine() {
     cr_gl.shaderSource(cr_shaders[I], I ? cr_f_shader : cr_v_shader);
     cr_gl.compileShader(cr_shaders[I]);  
     cr_gl.attachShader(cr_program, cr_shaders[I]);
+    if (!cr_gl.getShaderParameter(cr_shaders[I], 35713)) { // 35713 is for COMPILE_STATUS
+      const cr_info = cr_gl.getShaderInfoLog(cr_shaders[I]);
+      console.error("Error compiling shader:", cr_info);
+    }
   }
   cr_gl.linkProgram(cr_program);
   cr_gl.useProgram(cr_program);
@@ -170,6 +185,21 @@ function cr_initEngine() {
   cr_document.addEventListener("keyup", (cr_event) => 
     cr_keys[cr_event.code] = 0
   );
+}
+
+function cr_loadTextures() {
+  for (let i=0;i<1;i++){
+    cr_textures[i] = cr_gl.createTexture();
+    const cr_image = new Image();
+    const A = 3553;
+    cr_image.src = cr_img[i];
+    cr_image.onload = () => {
+      cr_gl.bindTexture(A, cr_textures[i]);
+      cr_gl.texImage2D(A, 0, 6408, 6408, 5121, cr_image);
+      cr_gl.texParameteri(A, 10240, 9728);
+      cr_gl.texParameteri(A, 10241, 9728);
+    };
+  }
 }
 
 /**
@@ -200,9 +230,12 @@ function cr_renderGeometry(cr_geometry, cr_worldMatrix) {
   cr_gl.bindBuffer(34962, cr_geometry.cr_vertexBuffer); // 34962 is for ARRAY_BUFFER
   cr_gl.bindBuffer(34963, cr_geometry.cr_indexBuffer);  // 34963 is for ELEMENT_ARRAY_BUFFER
 
-  const cr_positionLocation = cr_gl.getAttribLocation(cr_program, "a_p");
+  const cr_positionLocation = cr_gl.getAttribLocation(cr_program, "a_p"),
+  cr_uvLocation = cr_gl.getAttribLocation(cr_program, "a_uv");
   cr_gl.enableVertexAttribArray(cr_positionLocation);
-  cr_gl.vertexAttribPointer(cr_positionLocation, 3, 5126, 0, 12, 0); // 5126 is for FLOAT, 12 is stride (3 floats * 4 bytes each)
+  cr_gl.enableVertexAttribArray(cr_uvLocation);
+  cr_gl.vertexAttribPointer(cr_positionLocation, 3, 5126, 0, 20, 0);  // 5126 is for FLOAT, 20 is stride (5 floats * 4 bytes each)
+  cr_gl.vertexAttribPointer(cr_uvLocation, 2, 5126, 0, 20, 12); // 5126 is for FLOAT, 20 is stride (5 floats * 4 bytes each), 12 is the offset
 
   // Set the camera view, projection matrices and model matrix
   const cr_cameraViewLocation = cr_getUniformLocation(cr_program, "u_cw"),
@@ -212,23 +245,31 @@ function cr_renderGeometry(cr_geometry, cr_worldMatrix) {
   cr_uniformMatrix4fv(cr_cameraProjectionLocation, 0, cr_cameraProjection);
   cr_uniformMatrix4fv(cr_quadModelLocation, 0, cr_worldMatrix);
 
+  // Send the texture
+  const cr_textureLocation = cr_getUniformLocation(cr_program, "u_tex");
+  cr_gl.activeTexture(33984); // 33984 is for TEXTURE0
+  cr_gl.bindTexture(3553, cr_textures[0]);
+  cr_gl.uniform1i(cr_textureLocation, 0);
+
   cr_gl.drawElements(4, cr_geometry.cr_indices.length, 5123, 0); // 4 is for TRIANGLES, 6 is the number of indices, 5123 is for UNSIGNED_SHORT
 }
 
 function cr_buildRoomGeometry(cr_geometry, cr_room) {
   cr_geometry.cr_vertices = [];
   cr_geometry.cr_indices = [];
-  let cr_indexOffset = 0, I, X1, X2, Y1, Y2;
+  let cr_indexOffset = 0, I, X1, X2, Y1, Y2, TX, TY;
   for (I=0;I<cr_room.length-2;I+=2) {
     X1 = cr_room[I], Y1 = cr_room[I+1];
     X2 = cr_room[I+2], Y2 = cr_room[I+3];
+    TX = cr_Math.sqrt((X2 - X1) ** 2 + (Y2 - Y1) ** 2);
+    TY = 1;
 
     // Add two triangles for each rectangle defined by the coordinates
     cr_geometry.cr_vertices.push(
-      X1, 0, Y1,
-      X2, 0, Y2,
-      X1, 1, Y1,
-      X2, 1, Y2
+      X1, 0, Y1,  0, TY,
+      X2, 0, Y2, TX, TY,
+      X1, 1, Y1,  0, 0,
+      X2, 1, Y2, TX, 0
     );
 
     cr_geometry.cr_indices.push(
@@ -266,6 +307,7 @@ function cr_update() {
  */
 function cr_main() {
   cr_initEngine();
+  cr_loadTextures();
   cr_buildRoomGeometry(cr_geometries.cr_room, cr_room);
   cr_update();
 }
