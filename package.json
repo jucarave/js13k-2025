@@ -1,0 +1,16 @@
+{
+  "author": "Camilo Ramírez (@jucarave)",
+  "name": "js13k-9-lives-to-die",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "size": "wc -c dist/g.js && echo 'Remaining bytes:' && echo $((13312 - $(wc -c < dist/g.js)))"
+  },
+  "keywords": [
+    "js13k",
+    "game",
+    "javascript"
+  ],
+  "license": "MIT",
+  "description": "Black cat goes through hell and back in this js13k game."
+}
