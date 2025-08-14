@@ -37,9 +37,15 @@ cr_Mathcos = cr_Math.cos,
 cr_Mathsin = cr_Math.sin,
 cr_document = document,
 
-cr_room = [0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0], // Room coordinates set by x, y pairs
+cr_room = [0, 2, 0, 0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0], // Room coordinates set by x, y pairs, first three numbers are y1, y2, textureId
+cr_planes = [               // Planes coordinates set by y, textureId, x1, z1, x2, z2
+  0, 1, 0, 0, 14, 13,
+  2, 2, 0, 0, 14, 13
+],
 cr_img = [
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC'
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALNJREFUOI1jjMrs+M+ABh7cvsdw78J+dGEGJQNHBgVVJRQxFgxVDAwM9y7sZyhu78cQ760sJGzAvtVzGYrb+xnOn7uCYYBTaDLDvtVzGZxCk+FiTMRqRjcEwwBiNGMzhIlUzeiGMEqIqP4nVTMyYGJgYCBbMwN6IA5RA5QMHFHilRSwb/VcBiYFVSUGcgzZt3oug5KBI8QLpBoC06ygqoQIA2INQdbMgB6IhAxB18zAwMAAACcOVy5PY3YrAAAAAElFTkSuQmCC',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII='
 ];
 
 /**
@@ -65,7 +71,7 @@ let cr_canvas,      // HTMLCanvasElement
                           0, 0, -0.1, 0],
   
   cr_identityMatrix = cr_matTranslate(), // Static identity matrix for transformations
-  cr_geometries = { cr_room: {} },       // Object to hold geometries for different objects in the game
+  cr_geometries = [],       // Object to hold geometries for different objects in the game
   cr_textures = [];
 
 /**
@@ -155,7 +161,7 @@ function cr_initEngine() {
   cr_gl = cr_canvas.getContext("webgl");
   cr_gl.clearColor(0, 0, 0, 1);
   cr_gl.enable(2929);   // Enable depth testing 
-  cr_gl.enable(2884);   // Enable culling
+  //cr_gl.enable(2884);   // Enable culling
   cr_gl.depthFunc(515); // Set the depth function to gl.LEQUAL
   cr_gl.viewport(0, 0, cr_width, cr_height);
 
@@ -188,13 +194,13 @@ function cr_initEngine() {
 }
 
 function cr_loadTextures() {
-  for (let i=0;i<1;i++){
-    cr_textures[i] = cr_gl.createTexture();
+  for (let I=0;I<3;I++){
+    cr_textures[I] = cr_gl.createTexture();
     const cr_image = new Image();
     const A = 3553;
-    cr_image.src = cr_img[i];
+    cr_image.src = cr_img[I];
     cr_image.onload = () => {
-      cr_gl.bindTexture(A, cr_textures[i]);
+      cr_gl.bindTexture(A, cr_textures[I]);
       cr_gl.texImage2D(A, 0, 6408, 6408, 5121, cr_image);
       cr_gl.texParameteri(A, 10240, 9728);
       cr_gl.texParameteri(A, 10241, 9728);
@@ -216,7 +222,7 @@ function cr_linesIntersect(...A) {
 }
 
 function cr_doesCollidesWithWalls(P, X, Y) {
-  for (let I = 0; I < cr_room.length; I+=2) {
+  for (let I = 3; I < cr_room.length; I+=2) {
     if (cr_linesIntersect(-P[0], -P[2], -P[0] - X, -P[2] - Y, ...cr_room.slice(I, I+4))) return 1;
   }
 
@@ -248,28 +254,46 @@ function cr_renderGeometry(cr_geometry, cr_worldMatrix) {
   // Send the texture
   const cr_textureLocation = cr_getUniformLocation(cr_program, "u_tex");
   cr_gl.activeTexture(33984); // 33984 is for TEXTURE0
-  cr_gl.bindTexture(3553, cr_textures[0]);
+  cr_gl.bindTexture(3553, cr_textures[cr_geometry.cr_textureIndex]);
   cr_gl.uniform1i(cr_textureLocation, 0);
 
   cr_gl.drawElements(4, cr_geometry.cr_indices.length, 5123, 0); // 4 is for TRIANGLES, 6 is the number of indices, 5123 is for UNSIGNED_SHORT
 }
 
-function cr_buildRoomGeometry(cr_geometry, cr_room) {
+function cr_bindGeometry(cr_geometry) {
+  cr_geometry.cr_vertexBuffer = cr_gl.createBuffer();
+  cr_gl.bindBuffer(34962, cr_geometry.cr_vertexBuffer); // 34962 is for ARRAY_BUFFER
+  cr_gl.bufferData(34962, new Float32Array(cr_geometry.cr_vertices), 35044); // 35044 is for STATIC_DRAW
+
+  cr_geometry.cr_indexBuffer = cr_gl.createBuffer();
+  cr_gl.bindBuffer(34963, cr_geometry.cr_indexBuffer);  // 34963 is for ELEMENT_ARRAY_BUFFER
+  cr_gl.bufferData(34963, new Uint16Array(cr_geometry.cr_indices), 35044);   // 35044 is for STATIC_DRAW
+
+  cr_geometries.push(cr_geometry);
+}
+
+function cr_buildRoomGeometry(cr_room) {
+  const cr_geometry = {};
   cr_geometry.cr_vertices = [];
   cr_geometry.cr_indices = [];
-  let cr_indexOffset = 0, I, X1, X2, Y1, Y2, TX, TY;
-  for (I=0;I<cr_room.length-2;I+=2) {
-    X1 = cr_room[I], Y1 = cr_room[I+1];
-    X2 = cr_room[I+2], Y2 = cr_room[I+3];
-    TX = cr_Math.sqrt((X2 - X1) ** 2 + (Y2 - Y1) ** 2);
-    TY = 1;
+  cr_geometry.y1 = cr_room[0];
+  cr_geometry.y2 = cr_room[1];
+  cr_geometry.cr_textureIndex = cr_room[2];
+  let cr_indexOffset = 0, 
+  Y1 = cr_room[0], Y2 = cr_room[1],
+  I, X1, X2, Z1, Z2, TX, TY;
+  for (I=3;I<cr_room.length-2;I+=2) {
+    X1 = cr_room[I], Z1 = cr_room[I+1];
+    X2 = cr_room[I+2], Z2 = cr_room[I+3];
+    TX = cr_Math.sqrt((X2 - X1) ** 2 + (Z2 - Z1) ** 2);
+    TY = cr_room[1] - cr_room[0];
 
     // Add two triangles for each rectangle defined by the coordinates
     cr_geometry.cr_vertices.push(
-      X1, 0, Y1,  0, TY,
-      X2, 0, Y2, TX, TY,
-      X1, 1, Y1,  0, 0,
-      X2, 1, Y2, TX, 0
+      X1, Y1, Z1,  0, TY,
+      X2, Y1, Z2, TX, TY,
+      X1, Y2, Z1,  0, 0,
+      X2, Y2, Z2, TX, 0
     );
 
     cr_geometry.cr_indices.push(
@@ -279,13 +303,36 @@ function cr_buildRoomGeometry(cr_geometry, cr_room) {
     cr_indexOffset += 4;
   }
 
-  cr_geometry.cr_vertexBuffer = cr_gl.createBuffer();
-  cr_gl.bindBuffer(34962, cr_geometry.cr_vertexBuffer); // 34962 is for ARRAY_BUFFER
-  cr_gl.bufferData(34962, new Float32Array(cr_geometry.cr_vertices), 35044); // 35044 is for STATIC_DRAW
+  cr_bindGeometry(cr_geometry);
+}
 
-  cr_geometry.cr_indexBuffer = cr_gl.createBuffer();
-  cr_gl.bindBuffer(34963, cr_geometry.cr_indexBuffer);  // 34963 is for ELEMENT_ARRAY_BUFFER
-  cr_gl.bufferData(34963, new Uint16Array(cr_geometry.cr_indices), 35044);   // 35044 is for STATIC_DRAW
+function cr_buildPlanesGeometry() {
+  for (let I=0;I<cr_planes.length;I+=6) {
+    const cr_geometry = {};
+    cr_geometry.y = cr_planes[I];
+    cr_geometry.cr_textureIndex = cr_planes[I + 1];
+    const X1 = cr_planes[I + 2],
+    Z1 = cr_planes[I + 3],
+    X2 = cr_planes[I + 4],
+    Z2 = cr_planes[I + 5],
+    Y = cr_planes[I],
+    TX = X2 - X1,
+    TY = Z2 - Z1;
+
+    cr_geometry.cr_vertices = [
+      X1, Y, Z2,  0, TY,
+      X2, Y, Z2, TX, TY,
+      X1, Y, Z1,  0, 0,
+      X2, Y, Z1, TX, 0
+    ];
+
+    cr_geometry.cr_indices = [
+      0, 1, 2,
+      2, 1, 3
+    ];
+
+    cr_bindGeometry(cr_geometry);
+  }
 }
 
 /**
@@ -295,7 +342,8 @@ function cr_update() {
   cr_gl.clear(16640); // 16640 is for COLOR_BUFFER_BIT | DEPTH_BUFFER_BIT
 
   cr_updateCamera();
-  cr_renderGeometry(cr_geometries.cr_room, cr_identityMatrix);
+  for (let I=0;I<cr_geometries.length;I++)
+    cr_renderGeometry(cr_geometries[I], cr_identityMatrix);
 
   requestAnimationFrame(cr_update);
 }
@@ -308,7 +356,8 @@ function cr_update() {
 function cr_main() {
   cr_initEngine();
   cr_loadTextures();
-  cr_buildRoomGeometry(cr_geometries.cr_room, cr_room);
+  cr_buildRoomGeometry(cr_room);
+  cr_buildPlanesGeometry();
   cr_update();
 }
 
