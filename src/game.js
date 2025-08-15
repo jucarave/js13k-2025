@@ -57,7 +57,12 @@ cr_img = [
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC',
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALNJREFUOI1jjMrs+M+ABh7cvsdw78J+dGEGJQNHBgVVJRQxFgxVDAwM9y7sZyhu78cQ760sJGzAvtVzGYrb+xnOn7uCYYBTaDLDvtVzGZxCk+FiTMRqRjcEwwBiNGMzhIlUzeiGMEqIqP4nVTMyYGJgYCBbMwN6IA5RA5QMHFHilRSwb/VcBiYFVSUGcgzZt3oug5KBI8QLpBoC06ygqoQIA2INQdbMgB6IhAxB18zAwMAAACcOVy5PY3YrAAAAAElFTkSuQmCC',
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII='
+],
+cr_img_2d = [
+  new Image
 ];
+
+cr_img_2d[0].src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAAXNSR0IArs4c6QAAAWxJREFUOI21lLFKxEAQhv/oteGE2yLdNYYI1+Z6q4N7A0FB8THyAD6GXCCCb3AgFvZ3hU3AEBu7CCucpD7W4phlstlko+DfJJmZ/TK7MzseHApEqOi9kqXnih+5QNtoqm0xoFxgqyMQoboTJ1hMxnj6+sZiMm744+KjE9oyEszUUGjD0AXrAtug+sOEpdijkDUAgOx0BBxsQr0+WCR8AEAha3C/CebQI3NLPDN6RsJHir2OIRhlyNVoG77oaiaQ5VJDASAx/27RiLbLMzO1upxZ7TcPOfs5VCVLT2dYyBqVLL1AhCoSPrJc6oXPr5+9WWW5xDaaIgaUBh4KcLgd1zhGygrC4aboJtG5tqqcyB3AWmWoErlDJUuv0Ydg95QPhSGidb3TYyi01dg2vWzeFQBcLJe9sMf1GgBwPj/9pwxdA5T8ZpGoeK3hYGZhg96fza2Z3r5t2uPLBXRtu3d8mQF/OcPWtCHIb/qQx/4AO5LLlQv68q4AAAAASUVORK5CYII=';
 
 /**
  * SECTION VARIABLES
@@ -67,6 +72,9 @@ cr_img = [
 let cr_canvas,      // HTMLCanvasElement
   cr_gl,            // WebGLRenderingContext
   cr_program,       // WebGLProgram
+
+  cr_canvas2D,      // HTMLCanvasElement for 2D rendering
+  cr_ctx2D,         // 2D rendering context
 
   cr_keys = {},     // Object to store key states
 
@@ -82,6 +90,8 @@ let cr_canvas,      // HTMLCanvasElement
                           0, 0, -0.1, 0],
   cr_cameraTargetFloor = 0,       // Where should the camera be placed at vertically?
   
+  cr_catBobbing = 0,
+
   cr_identityMatrix = cr_matTranslate(), // Static identity matrix for transformations
   cr_geometries = [],       // Object to hold geometries for different objects in the game
   cr_textures = [],
@@ -151,14 +161,17 @@ function cr_updateCamera() {
   // Update camera position based on input
   const C = cr_Mathcos(cr_cameraRotation),
   S = cr_Mathsin(cr_cameraRotation),
-  V = 0.1,            // Velocity
-  L = V + 0.5,        // Lookahead distance
+  V = 0.06,            // Velocity
+  L = V + 0.5,         // Lookahead distance
   M = (cr_keys["ArrowUp"] ? -1 : cr_keys["ArrowDown"] ? 1 : 0);
 
   if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L)) {
     cr_cameraPosition[0] += M * S * V;
     cr_cameraPosition[2] += M * C * V;
     cr_cameraTargetFloor = cr_getHighestFloor(cr_cameraPosition, 0.5);
+    cr_catBobbing += 0.08;
+  } else {
+    cr_catBobbing = 0;
   }
 
   cr_updateGravity(cr_cameraPosition, cr_cameraTargetFloor);
@@ -210,6 +223,15 @@ function cr_initEngine() {
   cr_document.addEventListener("keyup", (cr_event) => 
     cr_keys[cr_event.code] = 0
   );
+}
+
+function cr_initEngine2D() {
+  cr_canvas2D = cr_document.getElementById("cg2");
+  cr_canvas2D.width = cr_width;
+  cr_canvas2D.height = cr_height;
+
+  cr_ctx2D = cr_canvas2D.getContext("2d");
+  cr_ctx2D.imageSmoothingEnabled = false;
 }
 
 function cr_loadTextures() {
@@ -404,6 +426,11 @@ function cr_update() {
   for (let I=0;I<cr_geometries.length;I++)
     cr_renderGeometry(cr_geometries[I], cr_identityMatrix);
 
+  // Render the HUD
+  cr_ctx2D.clearRect(0, 0, cr_width, cr_height);
+  const S = cr_Math.sin(cr_catBobbing);
+  cr_ctx2D.drawImage(cr_img_2d[0], 336+S*16, 322+cr_Math.abs(S)*8, 128, 128);
+
   requestAnimationFrame(cr_update);
 }
 
@@ -414,6 +441,7 @@ function cr_update() {
  */
 function cr_main() {
   cr_initEngine();
+  cr_initEngine2D();
   cr_loadTextures();
   cr_buildRoomGeometry();
   cr_buildPlanesGeometry();
