@@ -28,16 +28,21 @@ precision mediump float;
 uniform sampler2D u_tex;
 varying vec2 v_uv;
 void main() {
-  gl_FragColor = texture2D(u_tex, v_uv);
+  vec4 c = texture2D(u_tex, v_uv);
+  if (c.a == 0.0) discard;
+  gl_FragColor = c;
 }
 `,
 
 cr_Math = Math,
 cr_Mathcos = cr_Math.cos,
 cr_Mathsin = cr_Math.sin,
+cr_pi = cr_Math.PI,
+cr_pi_2 = cr_Math.PI / 2,
 cr_document = document,
 
 cr_gravity = 0.01,
+cr_spriteSpeed = 0.1,
 cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are y1, y2, textureId
   [0, 2, 0, 0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0],
   [0, 0.2, 0, 4, 3, 7, 3, 7, 6, 4, 6, 4, 3],
@@ -55,10 +60,17 @@ cr_e1m1Planes = [               // Planes coordinates set by y, textureId, x1, z
   2, 2, 0, 0, 14, 13
 ],
 cr_e1m1FloorsCount = 4*6,
+cr_smallUvs = [
+  [0,0,1/4,1],
+  [1/4,0,1/2,1],
+  [1/2,0,3/4,1],
+  [1/4,0,1/2,1]
+],
 cr_img = [
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC',
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALNJREFUOI1jjMrs+M+ABh7cvsdw78J+dGEGJQNHBgVVJRQxFgxVDAwM9y7sZyhu78cQ760sJGzAvtVzGYrb+xnOn7uCYYBTaDLDvtVzGZxCk+FiTMRqRjcEwwBiNGMzhIlUzeiGMEqIqP4nVTMyYGJgYCBbMwN6IA5RA5QMHFHilRSwb/VcBiYFVSUGcgzZt3oug5KBI8QLpBoC06ygqoQIA2INQdbMgB6IhAxB18zAwMAAACcOVy5PY3YrAAAAAElFTkSuQmCC',
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII='
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII=',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAYAAACm53kpAAAAAXNSR0IArs4c6QAAAWFJREFUWIXdVzFug0AQHPIBNxSn66E7KUJuLLn0G9KlcOOel7h3686FX5ASKR2yRAc9pqDxB7gU8SKQc8TsnU2UaWFmZ4fdO+HBAOEHGgCquvBM7wzxOFyXPqyLNse5bs5r3W1oDG8s16h3XuvmOLfW4hWfMIRJm++ZsAyBY/6Zzb8MPazqwpOby2jRlveZ2XiD3FwevvuDAbSwbISFJ9W8L4CF4qlzebbcEbgvgH+Mx66AzRj/hRUQfqDL3Yw9jpwDtMVCodzNMMktIPygd/1IlbBO4zJb4hCvRjdR1YUnVWL04xI3AQg/0Id4BVwb4HxF0pAqQRgpVgi4TlCZLQGArfEbegGQcTItVQIKgwMbLvHJg02QQ7iZgDBSyNPvA+i0j9nCYeTmGiMPeZo50+yi3evu6FOhPM3wtv1g/RHSVyPjHK2uDvkBwPJkQk9E+IE+7ePW9Ov7ll3IZQiuPP2EL8XdANmXmhrjAAAAAElFTkSuQmCC'
 ],
 cr_img_2d = [
   new Image,
@@ -96,6 +108,8 @@ let cr_canvas,      // HTMLCanvasElement
   cr_cameraIsJumping = 0,         // Is the camera jumping
   
   cr_catBobbing = 0,
+
+  cr_enemies = [],                      // Array to hold enemy objects
 
   cr_identityMatrix = cr_matTranslate(), // Static identity matrix for transformations
   cr_geometries = [],       // Object to hold geometries for different objects in the game
@@ -247,7 +261,7 @@ function cr_initEngine2D() {
 }
 
 function cr_loadTextures() {
-  for (let I=0;I<3;I++){
+  for (let I=0;I<4;I++){
     cr_textures[I] = cr_gl.createTexture();
     const cr_image = new Image();
     const A = 3553;
@@ -367,8 +381,6 @@ function cr_bindGeometry(cr_geometry) {
   cr_geometry.cr_indexBuffer = cr_gl.createBuffer();
   cr_gl.bindBuffer(34963, cr_geometry.cr_indexBuffer);  // 34963 is for ELEMENT_ARRAY_BUFFER
   cr_gl.bufferData(34963, new Uint16Array(cr_geometry.cr_indices), 35044);   // 35044 is for STATIC_DRAW
-
-  cr_geometries.push(cr_geometry);
 }
 
 function cr_buildRoomGeometry() {
@@ -405,6 +417,7 @@ function cr_buildRoomGeometry() {
     }
 
     cr_bindGeometry(cr_geometry);
+    cr_geometries.push(cr_geometry);
   }
 }
 
@@ -434,7 +447,46 @@ function cr_buildPlanesGeometry() {
     ];
 
     cr_bindGeometry(cr_geometry);
+    cr_geometries.push(cr_geometry);
   }
+}
+
+function cr_createBillboard(Y, T, UV) {
+  const cr_geometry = {};
+
+  cr_geometry.cr_vertices = [
+    0, 0, -0.5,  UV[0], UV[3],
+    0, 0, 0.5,  UV[2], UV[3],
+    0, Y, -0.5, UV[0], UV[1],
+    0, Y, 0.5,  UV[2], UV[1]
+  ];
+
+  cr_geometry.cr_indices = [
+    0, 1, 2,
+    2, 1, 3
+  ];
+
+  cr_geometry.cr_textureIndex = T;
+
+  cr_bindGeometry(cr_geometry);
+
+  return cr_geometry;
+}
+
+/**
+ * SECTION ENEMIES
+ */
+function cr_createEnemy(X, Y, Z, cr_texture) {
+  const cr_geometries = [];
+  for (let I of [0,1,2,3])
+    cr_geometries.push(cr_createBillboard(1, cr_texture, cr_smallUvs[I]));
+
+  cr_enemies.push({
+    cr_position: [X, Y, Z, 0], // x, y, z, vertical speed
+    cr_matriz: cr_matTranslate(X, Y, Z),
+    cr_frame: 0,
+    cr_geometries
+  });
 }
 
 /**
@@ -453,6 +505,10 @@ function cr_update() {
   (!cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[0], 320+S*16, 274+cr_Math.abs(S)*8, 160, 176);
   (cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[1], 288, 234, 224, 216);
 
+  cr_enemies[0].cr_matriz = cr_updateMatrix(cr_enemies[0].cr_position, -cr_cameraRotation+cr_pi_2, false);
+  cr_enemies[0].cr_frame = (cr_enemies[0].cr_frame + cr_spriteSpeed) % cr_enemies[0].cr_geometries.length;
+  cr_renderGeometry(cr_enemies[0].cr_geometries[cr_enemies[0].cr_frame<<0], cr_enemies[0].cr_matriz);
+
   requestAnimationFrame(cr_update);
 }
 
@@ -467,6 +523,7 @@ function cr_main() {
   cr_loadTextures();
   cr_buildRoomGeometry();
   cr_buildPlanesGeometry();
+  cr_createEnemy(9,0,9,3);
   cr_update();
 }
 
