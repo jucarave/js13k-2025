@@ -12,24 +12,24 @@
 const cr_width = 800,
 cr_height = 450,
 cr_v_shader = `
-  precision mediump float;
-  attribute vec3 a_p;
-  attribute vec2 a_uv;
-  uniform mat4 u_cw, u_cp, u_m;
-  varying vec2 v_uv;
-  void main() {
-    gl_Position = u_cp * u_cw * u_m * vec4(a_p, 1.0);
-    v_uv = a_uv;
-  }
+precision mediump float;
+attribute vec3 a_p;
+attribute vec2 a_uv;
+uniform mat4 u_cw, u_cp, u_m;
+varying vec2 v_uv;
+void main() {
+  gl_Position = u_cp * u_cw * u_m * vec4(a_p, 1.0);
+  v_uv = a_uv;
+}
 `, 
 
 cr_f_shader = `
-  precision mediump float;
-  uniform sampler2D u_tex;
-  varying vec2 v_uv;
-  void main() {
-    gl_FragColor = texture2D(u_tex, v_uv);
-  }
+precision mediump float;
+uniform sampler2D u_tex;
+varying vec2 v_uv;
+void main() {
+  gl_FragColor = texture2D(u_tex, v_uv);
+}
 `,
 
 cr_Math = Math,
@@ -37,11 +37,22 @@ cr_Mathcos = cr_Math.cos,
 cr_Mathsin = cr_Math.sin,
 cr_document = document,
 
-cr_room = [0, 2, 0, 0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0], // Room coordinates set by x, y pairs, first three numbers are y1, y2, textureId
-cr_planes = [               // Planes coordinates set by y, textureId, x1, z1, x2, z2
+cr_gravity = 0.1,
+cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are y1, y2, textureId
+  [0, 2, 0, 0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0],
+  [0, 0.2, 0, 4, 3, 7, 3, 7, 6, 4, 6, 4, 3],
+  [0, 0.4, 0, 5, 4, 6, 4, 6, 5, 5, 5, 5, 4]
+], 
+cr_e1m1Planes = [               // Planes coordinates set by y, textureId, x1, z1, x2, z2
+  // Floors
   0, 1, 0, 0, 14, 13,
+  0.2, 1, 4, 3, 7, 6,
+  0.4, 1, 5, 4, 6, 5,
+
+  // Ceilings
   2, 2, 0, 0, 14, 13
 ],
+cr_e1m1FloorsCount = 3*6,
 cr_img = [
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC',
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALNJREFUOI1jjMrs+M+ABh7cvsdw78J+dGEGJQNHBgVVJRQxFgxVDAwM9y7sZyhu78cQ760sJGzAvtVzGYrb+xnOn7uCYYBTaDLDvtVzGZxCk+FiTMRqRjcEwwBiNGMzhIlUzeiGMEqIqP4nVTMyYGJgYCBbMwN6IA5RA5QMHFHilRSwb/VcBiYFVSUGcgzZt3oug5KBI8QLpBoC06ygqoQIA2INQdbMgB6IhAxB18zAwMAAACcOVy5PY3YrAAAAAElFTkSuQmCC',
@@ -62,17 +73,22 @@ let cr_canvas,      // HTMLCanvasElement
   cr_getUniformLocation = null, // Function to get uniform locations
   cr_uniformMatrix4fv = null,   // Function to set uniform matrices
 
-  cr_cameraPosition = [-3,-0.5, -3],       // Camera position in 3D space
-  cr_cameraRotation = 0,                  // Camera rotation angle in radians
-  cr_cameraView = cr_updateMatrix(cr_cameraPosition, cr_cameraRotation),     // Camera view matrix         
+  cr_cameraPosition = [3,0,3,0],       // Camera position in 3D space + vertical speed
+  cr_cameraRotation = 0,             // Camera rotation angle in radians
+  cr_cameraView = cr_updateMatrix(cr_cameraPosition, cr_cameraRotation),     // Camera view matrix
   cr_cameraProjection  = [1, 0, 0, 0, // Camera projection matrix
                           0, 1.778, 0, 0, 
                           0, 0, -1, -1, 
                           0, 0, -0.1, 0],
+  cr_cameraTargetFloor = 0,       // Where should the camera be placed at vertically?
   
   cr_identityMatrix = cr_matTranslate(), // Static identity matrix for transformations
   cr_geometries = [],       // Object to hold geometries for different objects in the game
-  cr_textures = [];
+  cr_textures = [],
+  
+  cr_walls = cr_e1m1Walls,
+  cr_planes = cr_e1m1Planes,
+  cr_floorsCount = cr_e1m1FloorsCount;
 
 /**
  * SECTION UTILITY FUNCTIONS
@@ -137,15 +153,18 @@ function cr_updateCamera() {
   S = cr_Mathsin(cr_cameraRotation),
   V = 0.1,            // Velocity
   L = V + 0.5,        // Lookahead distance
-  M = (cr_keys["ArrowUp"] ? 1 : cr_keys["ArrowDown"] ? -1 : 0);
+  M = (cr_keys["ArrowUp"] ? -1 : cr_keys["ArrowDown"] ? 1 : 0);
 
   if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L)) {
     cr_cameraPosition[0] += M * S * V;
     cr_cameraPosition[2] += M * C * V;
+    cr_cameraTargetFloor = cr_getHighestFloor(cr_cameraPosition, 0.5);
   }
 
+  cr_updateGravity(cr_cameraPosition, cr_cameraTargetFloor);
+
   // If there was any movement, update the camera view matrix
-  (M || T) && (cr_cameraView = cr_updateMatrix(cr_cameraPosition, cr_cameraRotation));
+  cr_cameraView = cr_updateMatrix([-cr_cameraPosition[0], -cr_cameraPosition[1]-0.5, -cr_cameraPosition[2]], cr_cameraRotation);
 }
 
 /**
@@ -211,6 +230,8 @@ function cr_loadTextures() {
 /**
  * SECTION PHYSICS
  */
+// In order PlayerX1, PZ1, PX2, PZ2, WallX1, WZ1, WX2, WZ2
+//                A0,  A2,  A3, A4,      A5,  A6,  A7,  A8
 function cr_linesIntersect(...A) {
   const D = (A[2] - A[0]) * (A[7] - A[5]) - (A[3] - A[1]) * (A[6] - A[4]);
   if (D === 0) return 0;
@@ -222,11 +243,46 @@ function cr_linesIntersect(...A) {
 }
 
 function cr_doesCollidesWithWalls(P, X, Y) {
-  for (let I = 3; I < cr_room.length; I+=2) {
-    if (cr_linesIntersect(-P[0], -P[2], -P[0] - X, -P[2] - Y, ...cr_room.slice(I, I+4))) return 1;
+  for (let J=0;J<cr_walls.length;J++) {
+    if (P[1] >= cr_walls[J][1] - 0.2) continue;
+    if (P[1]+1 <= cr_walls[J][0]) continue;
+    for (let I = 3; I < cr_walls[J].length; I+=2) {
+      if (cr_linesIntersect(P[0], P[2], P[0] + X, P[2] + Y, ...cr_walls[J].slice(I, I+4))) return 1;
+    }
   }
 
   return 0;
+}
+
+// Get the highest floor for an entity to fall or to raise to
+function cr_getHighestFloor(P, S) {
+  let cr_highest = 0,
+  X1 = P[0] - S,
+  X2 = P[0] + S,
+  Z1 = P[2] - S,
+  Z2 = P[2] + S;
+  
+  for (let I=0;I<cr_floorsCount;I+=6) {
+    if (X2 < cr_planes[I+2] || X1 > cr_planes[I+4]) continue;
+    if (Z2 < cr_planes[I+3] || Z1 > cr_planes[I+5]) continue;
+    cr_highest = cr_Math.max(cr_planes[I], cr_highest);
+  }
+
+  return cr_highest;
+}
+
+// moves the entity to it's floor position
+function cr_updateGravity(P, T) {
+  if (P[1] < T) 
+    P[1] = cr_Math.min(P[1] + 0.1, T);
+  else if (P[1] > T) {
+    P[3] -= cr_gravity;
+    P[1] += P[3];
+    if (P[1] <= T) {
+      P[1] = cr_Math.min(P[1] + 0.1, T);
+      P[3] = 0;
+    }
+  }
 }
 
 /**
@@ -272,38 +328,41 @@ function cr_bindGeometry(cr_geometry) {
   cr_geometries.push(cr_geometry);
 }
 
-function cr_buildRoomGeometry(cr_room) {
-  const cr_geometry = {};
-  cr_geometry.cr_vertices = [];
-  cr_geometry.cr_indices = [];
-  cr_geometry.y1 = cr_room[0];
-  cr_geometry.y2 = cr_room[1];
-  cr_geometry.cr_textureIndex = cr_room[2];
-  let cr_indexOffset = 0, 
-  Y1 = cr_room[0], Y2 = cr_room[1],
-  I, X1, X2, Z1, Z2, TX, TY;
-  for (I=3;I<cr_room.length-2;I+=2) {
-    X1 = cr_room[I], Z1 = cr_room[I+1];
-    X2 = cr_room[I+2], Z2 = cr_room[I+3];
-    TX = cr_Math.sqrt((X2 - X1) ** 2 + (Z2 - Z1) ** 2);
-    TY = cr_room[1] - cr_room[0];
+function cr_buildRoomGeometry() {
+  for (let J=0;J<cr_walls.length;J++) {
+    const cr_roomWalls = cr_walls[J],
+    cr_geometry = {};
+    cr_geometry.cr_vertices = [];
+    cr_geometry.cr_indices = [];
+    cr_geometry.y1 = cr_roomWalls[0];
+    cr_geometry.y2 = cr_roomWalls[1];
+    cr_geometry.cr_textureIndex = cr_roomWalls[2];
+    let cr_indexOffset = 0, 
+    Y1 = cr_roomWalls[0], Y2 = cr_roomWalls[1],
+    I, X1, X2, Z1, Z2, TX, TY;
+    for (I=3;I<cr_roomWalls.length-2;I+=2) {
+      X1 = cr_roomWalls[I], Z1 = cr_roomWalls[I+1];
+      X2 = cr_roomWalls[I+2], Z2 = cr_roomWalls[I+3];
+      TX = cr_Math.sqrt((X2 - X1) ** 2 + (Z2 - Z1) ** 2);
+      TY = cr_roomWalls[1] - cr_roomWalls[0];
 
-    // Add two triangles for each rectangle defined by the coordinates
-    cr_geometry.cr_vertices.push(
-      X1, Y1, Z1,  0, TY,
-      X2, Y1, Z2, TX, TY,
-      X1, Y2, Z1,  0, 0,
-      X2, Y2, Z2, TX, 0
-    );
+      // Add two triangles for each rectangle defined by the coordinates
+      cr_geometry.cr_vertices.push(
+        X1, Y1, Z1,  0, TY,
+        X2, Y1, Z2, TX, TY,
+        X1, Y2, Z1,  0, 0,
+        X2, Y2, Z2, TX, 0
+      );
 
-    cr_geometry.cr_indices.push(
-      cr_indexOffset + 0, cr_indexOffset + 1, cr_indexOffset + 2,
-      cr_indexOffset + 2, cr_indexOffset + 1, cr_indexOffset + 3
-    );
-    cr_indexOffset += 4;
+      cr_geometry.cr_indices.push(
+        cr_indexOffset + 0, cr_indexOffset + 1, cr_indexOffset + 2,
+        cr_indexOffset + 2, cr_indexOffset + 1, cr_indexOffset + 3
+      );
+      cr_indexOffset += 4;
+    }
+
+    cr_bindGeometry(cr_geometry);
   }
-
-  cr_bindGeometry(cr_geometry);
 }
 
 function cr_buildPlanesGeometry() {
@@ -356,7 +415,7 @@ function cr_update() {
 function cr_main() {
   cr_initEngine();
   cr_loadTextures();
-  cr_buildRoomGeometry(cr_room);
+  cr_buildRoomGeometry();
   cr_buildPlanesGeometry();
   cr_update();
 }
