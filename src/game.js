@@ -41,18 +41,20 @@ cr_gravity = 0.01,
 cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are y1, y2, textureId
   [0, 2, 0, 0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0],
   [0, 0.2, 0, 4, 3, 7, 3, 7, 6, 4, 6, 4, 3],
-  [0, 0.4, 0, 5, 4, 6, 4, 6, 5, 5, 5, 5, 4]
+  [0, 0.4, 0, 5, 4, 6, 4, 6, 5, 5, 5, 5, 4],
+  [0, 1, 0, 12, 7, 13, 7, 13, 9, 12, 9, 12, 7]
 ], 
 cr_e1m1Planes = [               // Planes coordinates set by y, textureId, x1, z1, x2, z2
   // Floors
   0, 1, 0, 0, 14, 13,
   0.2, 1, 4, 3, 7, 6,
   0.4, 1, 5, 4, 6, 5,
+  1, 1, 12, 7, 13, 9,
 
   // Ceilings
   2, 2, 0, 0, 14, 13
 ],
-cr_e1m1FloorsCount = 3*6,
+cr_e1m1FloorsCount = 4*6,
 cr_img = [
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC',
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALNJREFUOI1jjMrs+M+ABh7cvsdw78J+dGEGJQNHBgVVJRQxFgxVDAwM9y7sZyhu78cQ760sJGzAvtVzGYrb+xnOn7uCYYBTaDLDvtVzGZxCk+FiTMRqRjcEwwBiNGMzhIlUzeiGMEqIqP4nVTMyYGJgYCBbMwN6IA5RA5QMHFHilRSwb/VcBiYFVSUGcgzZt3oug5KBI8QLpBoC06ygqoQIA2INQdbMgB6IhAxB18zAwMAAACcOVy5PY3YrAAAAAElFTkSuQmCC',
@@ -171,7 +173,7 @@ function cr_updateCamera() {
   if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L)) {
     cr_cameraPosition[0] += M * S * V;
     cr_cameraPosition[2] += M * C * V;
-    cr_cameraTargetFloor = cr_getHighestFloor(cr_cameraPosition, 0.5);
+    cr_cameraTargetFloor = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, false);
     cr_catBobbing += 0.08;
   } else {
     cr_catBobbing = 0;
@@ -287,20 +289,21 @@ function cr_doesCollidesWithWalls(P, X, Y) {
 }
 
 // Get the highest floor for an entity to fall or to raise to
-function cr_getHighestFloor(P, S) {
-  let cr_highest = 0,
+function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
+  let cr_result = cr_isCeiling ? Infinity : 0,
   X1 = P[0] - S,
   X2 = P[0] + S,
   Z1 = P[2] - S,
   Z2 = P[2] + S;
   
-  for (let I=0;I<cr_floorsCount;I+=6) {
+  for (let I=0;I<cr_planes.length;I+=6) {
     if (X2 < cr_planes[I+2] || X1 > cr_planes[I+4]) continue;
     if (Z2 < cr_planes[I+3] || Z1 > cr_planes[I+5]) continue;
-    cr_highest = cr_Math.max(cr_planes[I], cr_highest);
+    (cr_planes[I] >= P[1] && cr_isCeiling) && (cr_result = cr_Math.min(cr_planes[I], cr_result));
+    (cr_planes[I] <= P[1] + 0.2 && !cr_isCeiling) && (cr_result = cr_Math.max(cr_planes[I], cr_result));
   }
 
-  return cr_highest;
+  return cr_result;
 }
 
 // moves the entity to it's floor position
@@ -314,6 +317,13 @@ function cr_updateGravity(P, T) {
     if (P[1] <= T) {
       P[1] = cr_Math.min(P[1] + 0.1, T);
       P[3] = 0;
+    }
+    if (P[3] > 0) {
+      const cr_ceiling = cr_getHighestFloorOrLowestCeiling(P, 0.5, true);
+      console.log(cr_ceiling - (P[1] + 0.5));
+      if (cr_ceiling <= P[1] + 0.5) {
+        P[1] = cr_ceiling - 0.51;
+      }
     }
   }
 }
