@@ -37,7 +37,7 @@ cr_Mathcos = cr_Math.cos,
 cr_Mathsin = cr_Math.sin,
 cr_document = document,
 
-cr_gravity = 0.1,
+cr_gravity = 0.01,
 cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are y1, y2, textureId
   [0, 2, 0, 0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0],
   [0, 0.2, 0, 4, 3, 7, 3, 7, 6, 4, 6, 4, 3],
@@ -59,10 +59,12 @@ cr_img = [
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII='
 ],
 cr_img_2d = [
+  new Image,
   new Image
 ];
 
 cr_img_2d[0].src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAAXNSR0IArs4c6QAAAWxJREFUOI21lLFKxEAQhv/oteGE2yLdNYYI1+Z6q4N7A0FB8THyAD6GXCCCb3AgFvZ3hU3AEBu7CCucpD7W4phlstlko+DfJJmZ/TK7MzseHApEqOi9kqXnih+5QNtoqm0xoFxgqyMQoboTJ1hMxnj6+sZiMm744+KjE9oyEszUUGjD0AXrAtug+sOEpdijkDUAgOx0BBxsQr0+WCR8AEAha3C/CebQI3NLPDN6RsJHir2OIRhlyNVoG77oaiaQ5VJDASAx/27RiLbLMzO1upxZ7TcPOfs5VCVLT2dYyBqVLL1AhCoSPrJc6oXPr5+9WWW5xDaaIgaUBh4KcLgd1zhGygrC4aboJtG5tqqcyB3AWmWoErlDJUuv0Ydg95QPhSGidb3TYyi01dg2vWzeFQBcLJe9sMf1GgBwPj/9pwxdA5T8ZpGoeK3hYGZhg96fza2Z3r5t2uPLBXRtu3d8mQF/OcPWtCHIb/qQx/4AO5LLlQv68q4AAAAASUVORK5CYII=';
+cr_img_2d[1].src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAbCAYAAABvCO8sAAAAAXNSR0IArs4c6QAAAYtJREFUSIndlr9uwjAQxr9UWSMq4YGNBZSBNexMSLxBpXboc+QB+hxFSqW+ARLqwA5DlwxRWLqlkpGCmFE6nWsc23GAMvRbEt2d73fnf4kHR/XYsKL3guee6zhVvitoE/aFLQKqc8HWAT02rF7YPabdDpa7Pabdzok/yr5aQ43BBFN1KVQbaIKZwG2gtSAVNscRGT8AAMhOUyyDXaEnASZYyAIAQMYPkP0q2AV6Z3LIndEzZAHmOIoYglGHLtIeCznp04ghSbmAAkDslLoBSNMpd6bq9XGktT+/pVJxqGzTWuuQ1inmJUIWIEm58H18flurT1KOTdhHhF/oar2tJuOBKEAYH2azWgLqGNI6mkQ30XK3R8xLFDz35OvwfbHAZDzwPCj3pA7aRjoYqeC555u6o4AY5mJMY0y+1XpbCaepIpPPBrPl8mWDS2J1imNeOhcC28HXVapbT9XWVLT2LtVV2JTItlFaAy9RI/CaUN2OtX6Arw1D06b5CzX+05yT1Hb4b97h/wfefJf+AA4t52LL4ljBAAAAAElFTkSuQmCC';
 
 /**
  * SECTION VARIABLES
@@ -89,6 +91,7 @@ let cr_canvas,      // HTMLCanvasElement
                           0, 0, -1, -1, 
                           0, 0, -0.1, 0],
   cr_cameraTargetFloor = 0,       // Where should the camera be placed at vertically?
+  cr_cameraIsJumping = 0,         // Is the camera jumping
   
   cr_catBobbing = 0,
 
@@ -161,7 +164,7 @@ function cr_updateCamera() {
   // Update camera position based on input
   const C = cr_Mathcos(cr_cameraRotation),
   S = cr_Mathsin(cr_cameraRotation),
-  V = 0.06,            // Velocity
+  V = 0.08,            // Velocity
   L = V + 0.5,         // Lookahead distance
   M = (cr_keys["ArrowUp"] ? -1 : cr_keys["ArrowDown"] ? 1 : 0);
 
@@ -174,7 +177,14 @@ function cr_updateCamera() {
     cr_catBobbing = 0;
   }
 
+  if (cr_keys["Space"] && !cr_cameraIsJumping) {
+    cr_cameraIsJumping = 1;
+    cr_cameraPosition[1] += cr_gravity;
+    cr_cameraPosition[3] = 0.16;  // Jump speed
+  }
+
   cr_updateGravity(cr_cameraPosition, cr_cameraTargetFloor);
+  (cr_cameraPosition[1] === cr_cameraTargetFloor) && (cr_cameraIsJumping = 0);
 
   // If there was any movement, update the camera view matrix
   cr_cameraView = cr_updateMatrix([-cr_cameraPosition[0], -cr_cameraPosition[1]-0.5, -cr_cameraPosition[2]], cr_cameraRotation);
@@ -298,7 +308,8 @@ function cr_updateGravity(P, T) {
   if (P[1] < T) 
     P[1] = cr_Math.min(P[1] + 0.1, T);
   else if (P[1] > T) {
-    P[3] -= cr_gravity;
+    (P[3] >= 0) && (P[3] -= cr_gravity);
+    (P[3] < 0) && (P[3] -= cr_gravity/5);
     P[1] += P[3];
     if (P[1] <= T) {
       P[1] = cr_Math.min(P[1] + 0.1, T);
@@ -429,7 +440,8 @@ function cr_update() {
   // Render the HUD
   cr_ctx2D.clearRect(0, 0, cr_width, cr_height);
   const S = cr_Math.sin(cr_catBobbing);
-  cr_ctx2D.drawImage(cr_img_2d[0], 336+S*16, 322+cr_Math.abs(S)*8, 128, 128);
+  (!cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[0], 320+S*16, 274+cr_Math.abs(S)*8, 160, 176);
+  (cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[1], 288, 234, 224, 216);
 
   requestAnimationFrame(cr_update);
 }
