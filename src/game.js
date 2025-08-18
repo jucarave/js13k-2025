@@ -37,6 +37,7 @@ void main() {
 cr_Math = Math,
 cr_Mathcos = cr_Math.cos,
 cr_Mathsin = cr_Math.sin,
+cr_Mathabs = cr_Math.abs,
 cr_pi = cr_Math.PI,
 cr_pi_2 = cr_Math.PI / 2,
 cr_document = document,
@@ -72,6 +73,7 @@ cr_img = [
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII=',
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAYAAACm53kpAAAAAXNSR0IArs4c6QAAAWFJREFUWIXdVzFug0AQHPIBNxSn66E7KUJuLLn0G9KlcOOel7h3686FX5ASKR2yRAc9pqDxB7gU8SKQc8TsnU2UaWFmZ4fdO+HBAOEHGgCquvBM7wzxOFyXPqyLNse5bs5r3W1oDG8s16h3XuvmOLfW4hWfMIRJm++ZsAyBY/6Zzb8MPazqwpOby2jRlveZ2XiD3FwevvuDAbSwbISFJ9W8L4CF4qlzebbcEbgvgH+Mx66AzRj/hRUQfqDL3Yw9jpwDtMVCodzNMMktIPygd/1IlbBO4zJb4hCvRjdR1YUnVWL04xI3AQg/0Id4BVwb4HxF0pAqQRgpVgi4TlCZLQGArfEbegGQcTItVQIKgwMbLvHJg02QQ7iZgDBSyNPvA+i0j9nCYeTmGiMPeZo50+yi3evu6FOhPM3wtv1g/RHSVyPjHK2uDvkBwPJkQk9E+IE+7ePW9Ov7ll3IZQiuPP2EL8XdANmXmhrjAAAAAElFTkSuQmCC'
 ],
+cr_img_clamp_to_edges = [0,0,0,1],
 cr_img_2d = [
   new Image,
   new Image
@@ -182,9 +184,10 @@ function cr_updateCamera() {
   S = cr_Mathsin(cr_cameraRotation),
   V = 0.08,            // Velocity
   L = V + 0.5,         // Lookahead distance
-  M = (cr_keys["ArrowUp"] ? -1 : cr_keys["ArrowDown"] ? 1 : 0);
+  M = (cr_keys["ArrowUp"] ? -1 : cr_keys["ArrowDown"] ? 1 : 0),
+  cr_targetPosition = [cr_cameraPosition[0] + M * S * V, cr_cameraPosition[1], cr_cameraPosition[2] + M * C * V];
 
-  if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L)) {
+  if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L) && !cr_collidesWithEnemies(cr_targetPosition, 0)) {
     cr_cameraPosition[0] += M * S * V;
     cr_cameraPosition[2] += M * C * V;
     cr_cameraTargetFloor = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, false);
@@ -234,10 +237,6 @@ function cr_initEngine() {
     cr_gl.shaderSource(cr_shaders[I], I ? cr_f_shader : cr_v_shader);
     cr_gl.compileShader(cr_shaders[I]);  
     cr_gl.attachShader(cr_program, cr_shaders[I]);
-    if (!cr_gl.getShaderParameter(cr_shaders[I], 35713)) { // 35713 is for COMPILE_STATUS
-      const cr_info = cr_gl.getShaderInfoLog(cr_shaders[I]);
-      console.error("Error compiling shader:", cr_info);
-    }
   }
   cr_gl.linkProgram(cr_program);
   cr_gl.useProgram(cr_program);
@@ -271,6 +270,10 @@ function cr_loadTextures() {
       cr_gl.texImage2D(A, 0, 6408, 6408, 5121, cr_image);
       cr_gl.texParameteri(A, 10240, 9728);
       cr_gl.texParameteri(A, 10241, 9728);
+      if (cr_img_clamp_to_edges[I]) {
+        cr_gl.texParameteri(A, 10242, 33071);
+        cr_gl.texParameteri(A, 10243, 33071);
+      }
     };
   }
 }
@@ -334,12 +337,25 @@ function cr_updateGravity(P, T) {
     }
     if (P[3] > 0) {
       const cr_ceiling = cr_getHighestFloorOrLowestCeiling(P, 0.5, true);
-      console.log(cr_ceiling - (P[1] + 0.5));
       if (cr_ceiling <= P[1] + 0.5) {
         P[1] = cr_ceiling - 0.51;
       }
     }
   }
+}
+
+// Check for collisions with enemies
+function cr_collidesWithEnemies(P, cr_self) {
+  for (let I=0;I<cr_enemies.length;I++) {
+    const cr_enemy = cr_enemies[I];
+    if (cr_enemy === cr_self) continue;
+    if (P[1] > cr_enemy.cr_position[1] + 0.8) continue;
+    if (P[1]+1 < cr_enemy.cr_position[1]) continue;
+
+    const cr_distance = (P[0] - cr_enemy.cr_position[0]) ** 2 + (P[2] - cr_enemy.cr_position[2]) ** 2;
+    if (cr_distance <= 1) return 1;
+  }
+  return 0;
 }
 
 /**
@@ -451,14 +467,14 @@ function cr_buildPlanesGeometry() {
   }
 }
 
-function cr_createBillboard(Y, T, UV) {
+function cr_createBillboard(H, T, UV) {
   const cr_geometry = {};
 
   cr_geometry.cr_vertices = [
     0, 0, -0.5,  UV[0], UV[3],
     0, 0, 0.5,  UV[2], UV[3],
-    0, Y, -0.5, UV[0], UV[1],
-    0, Y, 0.5,  UV[2], UV[1]
+    0, H, -0.5, UV[0], UV[1],
+    0, H, 0.5,  UV[2], UV[1]
   ];
 
   cr_geometry.cr_indices = [
@@ -485,29 +501,70 @@ function cr_createEnemy(X, Y, Z, cr_texture) {
     cr_position: [X, Y, Z, 0], // x, y, z, vertical speed
     cr_matriz: cr_matTranslate(X, Y, Z),
     cr_frame: 0,
-    cr_geometries
+    cr_geometries,
+    cr_active: 0,
+    cr_speed: 0.03,
+    cr_targetFloor: Y
   });
 }
 
 /**
  * SECTION GAME LOOP
  */
+function cr_updateEnemy(cr_enemy) {
+  const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
+  cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
+  cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
+
+  if (cr_length > 8 && !cr_enemy.cr_active) return;
+
+  const cr_enemyEyePosition = [cr_enemy.cr_position[0], cr_enemy.cr_position[1] + 1, cr_enemy.cr_position[2]];
+  if (!cr_enemy.cr_active && cr_doesCollidesWithWalls(cr_enemyEyePosition, cr_dx, cr_dz))
+    return;
+
+  cr_enemy.cr_active = 1;
+
+  if (cr_length <= 1.2) return;
+
+  const cr_dirx = cr_dx / cr_length,
+  cr_dirz = cr_dz / cr_length;
+
+  if (!cr_doesCollidesWithWalls(cr_enemy.cr_position, cr_dirx * 0.5, cr_dirz * 0.5)){
+    cr_enemy.cr_position[0] += cr_dirx * cr_enemy.cr_speed;
+    cr_enemy.cr_position[2] += cr_dirz * cr_enemy.cr_speed;
+  } else {
+    if (!cr_doesCollidesWithWalls(cr_enemy.cr_position, cr_dirx * 0.5, 0)) {
+      cr_enemy.cr_position[0] += cr_dirx * cr_enemy.cr_speed;
+    } 
+    if (!cr_doesCollidesWithWalls(cr_enemy.cr_position, 0, cr_dirz * 0.5)) {
+      cr_enemy.cr_position[2] += cr_dirz * cr_enemy.cr_speed;
+    } 
+  }
+  
+  cr_enemy.cr_targetFloor = cr_getHighestFloorOrLowestCeiling(cr_enemy.cr_position, 0.5, false);
+  cr_updateGravity(cr_enemy.cr_position, cr_enemy.cr_targetFloor);
+}
+
 function cr_update() {
   cr_gl.clear(16640); // 16640 is for COLOR_BUFFER_BIT | DEPTH_BUFFER_BIT
 
   cr_updateCamera();
-  for (let I=0;I<cr_geometries.length;I++)
+  let I;
+  for (I=0;I<cr_geometries.length;I++)
     cr_renderGeometry(cr_geometries[I], cr_identityMatrix);
 
   // Render the HUD
   cr_ctx2D.clearRect(0, 0, cr_width, cr_height);
   const S = cr_Math.sin(cr_catBobbing);
-  (!cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[0], 320+S*16, 274+cr_Math.abs(S)*8, 160, 176);
+  (!cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[0], 320+S*16, 274+cr_Mathabs(S)*8, 160, 176);
   (cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[1], 288, 234, 224, 216);
 
-  cr_enemies[0].cr_matriz = cr_updateMatrix(cr_enemies[0].cr_position, -cr_cameraRotation+cr_pi_2, false);
-  cr_enemies[0].cr_frame = (cr_enemies[0].cr_frame + cr_spriteSpeed) % cr_enemies[0].cr_geometries.length;
-  cr_renderGeometry(cr_enemies[0].cr_geometries[cr_enemies[0].cr_frame<<0], cr_enemies[0].cr_matriz);
+  for (I=0;I<cr_enemies.length;I++) {
+    cr_updateEnemy(cr_enemies[I]);
+    cr_enemies[I].cr_matriz = cr_updateMatrix(cr_enemies[I].cr_position, -cr_cameraRotation+cr_pi_2, false);
+    cr_enemies[I].cr_frame = (cr_enemies[I].cr_frame + cr_spriteSpeed) % cr_enemies[I].cr_geometries.length;
+    cr_renderGeometry(cr_enemies[I].cr_geometries[cr_enemies[I].cr_frame<<0], cr_enemies[I].cr_matriz);
+  }
 
   requestAnimationFrame(cr_update);
 }
