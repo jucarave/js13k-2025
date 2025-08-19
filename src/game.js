@@ -62,16 +62,25 @@ cr_e1m1Planes = [               // Planes coordinates set by y, textureId, x1, z
 ],
 cr_e1m1FloorsCount = 4*6,
 cr_smallUvs = [
-  [0,0,1/4,1],
-  [1/4,0,1/2,1],
-  [1/2,0,3/4,1],
-  [1/4,0,1/2,1]
+  [0,0,1/8,1],
+  [1/8,0,2/8,1],
+  [2/8,0,3/8,1],
+  [3/8,0,4/8,1],
+  [4/8,0,5/8,1],
+  [5/8,0,6/8,1],
+  [6/8,0,7/8,1],
+  [7/8,0,8/8,1]
 ],
 cr_img = [
+  // Wall
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC',
+  // Floor
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALNJREFUOI1jjMrs+M+ABh7cvsdw78J+dGEGJQNHBgVVJRQxFgxVDAwM9y7sZyhu78cQ760sJGzAvtVzGYrb+xnOn7uCYYBTaDLDvtVzGZxCk+FiTMRqRjcEwwBiNGMzhIlUzeiGMEqIqP4nVTMyYGJgYCBbMwN6IA5RA5QMHFHilRSwb/VcBiYFVSUGcgzZt3oug5KBI8QLpBoC06ygqoQIA2INQdbMgB6IhAxB18zAwMAAACcOVy5PY3YrAAAAAElFTkSuQmCC',
+  // Ceiling
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII=',
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAYAAACm53kpAAAAAXNSR0IArs4c6QAAAWFJREFUWIXdVzFug0AQHPIBNxSn66E7KUJuLLn0G9KlcOOel7h3686FX5ASKR2yRAc9pqDxB7gU8SKQc8TsnU2UaWFmZ4fdO+HBAOEHGgCquvBM7wzxOFyXPqyLNse5bs5r3W1oDG8s16h3XuvmOLfW4hWfMIRJm++ZsAyBY/6Zzb8MPazqwpOby2jRlveZ2XiD3FwevvuDAbSwbISFJ9W8L4CF4qlzebbcEbgvgH+Mx66AzRj/hRUQfqDL3Yw9jpwDtMVCodzNMMktIPygd/1IlbBO4zJb4hCvRjdR1YUnVWL04xI3AQg/0Id4BVwb4HxF0pAqQRgpVgi4TlCZLQGArfEbegGQcTItVQIKgwMbLvHJg02QQ7iZgDBSyNPvA+i0j9nCYeTmGiMPeZo50+yi3evu6FOhPM3wtv1g/RHSVyPjHK2uDvkBwPJkQk9E+IE+7ePW9Ov7ll3IZQiuPP2EL8XdANmXmhrjAAAAAElFTkSuQmCC',
+  // Broom
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAQCAYAAADeWHeIAAAAAXNSR0IArs4c6QAAAuVJREFUaIHdWDGL4kAU/jyuuEoXLkVIIxyMVoFDbBbSCHL/YO2uEME+rT9gW/sF7wo7D/wBItgEthERUq2BhW1ciwirP8C5Ql8Ys8Ykk7irfiBCMu/Ne/N9895kMgiAqjAOAAvXyQSNOWYnY5tmHGnjXOL4EKgK45t+mW9e61wkNI5dXNtAf691vumXE/tKHEe\/\/OlxfCg+WwRJyVcVlipZXjwpCPuc8CXoxcJ1MlpzBTzamNsGoiYt2slCVRif2wbwaENrrqTa0LiYx7iYT00IC9fJaLqV1M3ZIVAAEMmMiTREACAR+YPlCoPlCvfKjSeERMFcKb5GGpWQSClIzCmS33Lf9t6Ni3mUAS57iFMVxucPOVxbFThaATzc6nLeZe0kbFWF8XvlxiN/4ToZ+rXcNwyWq8iVwD+GyCdc05dAtApwQSDyxWcL18m0sCU1rBIcJN82AACabl0V+Th5C0jSOmLaEslBBIkiCIK407Xm1tf28IervQM42gK8BZEs5TIHSA+3OuYPuViHt2MEUYv49T0XNMQ7vPrjJiFEjv2CcLAC+BddtvTNbQPWn2+oteMdvmjX0W5Mcgvnz6X89BLqR4xbjCnu3JeAdxVAVRjvmVVgtxAyu5h8aLqFQklHz6xKfYZpzRWo/8r4UBXGO0YD2PV+/5dB4Ly6hVp7iGnXRM+sSsd/CdgTABFHpGm6BRKDDJLYkj3FEFdIRH6FrdExGig/vYDEEGXenlnFbGKjUNK9Z9cogncVoFDSMZtsD2DTrintmBYuKSgGkYyoqLA1Rk4WAPBcv4tsR/P4/6OIgG4ew36xEjkhvL4mln5KeDaxUWsPpW7jaNcScTK+RD8UD4BQP2Lpr7A1AGDkZNGwOpHm968F5fDzdzvQnkidds09sYq22LVV2SvuU2AvAFVhXEzgWMJhSFMEMjGpCuPP9TuMnCwqbI0ff/9Jia/WHnrPwkQ3tw1ounVQBIRaewgadw4C+A9VsCpTonZwTgAAAABJRU5ErkJggg==',
+  // Projectile
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAGVJREFUGJWFj7ENgDAQA+9RKkSfJcI0jME8GYNpYAi+J7SmQEGkQFxlyX7Lb1SyizdzNIBQzTQNjb/hukPZlfYiSUp7aTTZFerF6Cdr7B9d6fjhCayxZ/SzaQKwz5HLAXM0+3vzAjWqNnUS9G+2AAAAAElFTkSuQmCC'
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
@@ -360,7 +369,7 @@ function cr_updateGravity(P, T) {
 function cr_doesCollidesWithEnemy(P, cr_self) {
   for (let I=0;I<cr_enemies.length;I++) {
     const cr_enemy = cr_enemies[I];
-    if (cr_enemy === cr_self) continue;
+    if (cr_enemy === cr_self || cr_enemy.cr_state === 3) continue;
     if (P[1] > cr_enemy.cr_position[1] + 0.8) continue;
     if (P[1]+1 < cr_enemy.cr_position[1]) continue;
 
@@ -505,24 +514,54 @@ function cr_createBillboard(W, H, T, UV) {
 /**
  * SECTION ENEMIES
  */
-function cr_createEnemy(X, Y, Z, cr_texture) {
-  const cr_geometries = [];
-  for (let I of [0,1,2,3])
-    cr_geometries.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
-
+function cr_createEnemy(X, Y, Z, cr_texture, cr_hp) {
+  const cr_geometryWalk = [],
+  cr_geometryDeath = [];
+  let I;
+  for (I of [0,1,2,1])
+    cr_geometryWalk.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
+  for (I of [4,5])
+    cr_geometryDeath.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
+  
   cr_enemies.push({
     cr_position: [X, Y, Z, 0], // x, y, z, vertical speed
     cr_matriz: cr_matTranslate(X, Y, Z),
     cr_frame: 0,
-    cr_geometries,
+    cr_geometry: null,
+    cr_geometryWalk,
+    cr_geometryDeath,
+    cr_geometryHurt: cr_createBillboard(1, 1, cr_texture, cr_smallUvs[3]),
+    cr_state: 0,                // 0: Idle/Walk, 1: Hurt, 2: Dying, 3: Dead
+    cr_hurt: 0,                 // How long the enemy is hurt
     cr_active: 0,
     cr_speed: 0.03,
     cr_targetFloor: Y,
-    cr_destroy: 0
+    cr_destroy: 0,
+    cr_hp
   });
 }
 
 function cr_updateEnemy(cr_enemy) {
+  // Update geometry
+  if (cr_enemy.cr_state === 0) {
+    cr_enemy.cr_frame = (cr_enemy.cr_frame + cr_spriteSpeed) % 4; // Cycle through frames
+    cr_enemy.cr_geometry = cr_enemy.cr_geometryWalk[cr_enemy.cr_frame << 0];
+  } else if (cr_enemy.cr_state === 1) {
+    cr_enemy.cr_geometry = cr_enemy.cr_geometryHurt;
+    if (--cr_enemy.cr_hurt <= 0) {
+      cr_enemy.cr_state = 0;
+    } else return;
+  } else if (cr_enemy.cr_state === 2) {
+    cr_enemy.cr_frame += cr_spriteSpeed;
+    cr_enemy.cr_geometry = cr_enemy.cr_geometryDeath[cr_enemy.cr_frame << 0];
+    if (cr_enemy.cr_frame >= 2) {
+      cr_enemy.cr_geometry = cr_enemy.cr_geometryDeath[1];
+      cr_enemy.cr_state = 3;
+    }
+    return;
+  }
+
+  // Update movement
   const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
   cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
   cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
@@ -585,7 +624,13 @@ function cr_updateProjectile(cr_projectile) {
   const cr_enemy = cr_doesCollidesWithEnemy(cr_projectile.cr_position, 0);
   if (cr_enemy) {
     cr_projectile.cr_destroy = 1;
-    cr_enemy.cr_destroy = 1;
+    if (--cr_enemy.cr_hp <= 0) {
+      cr_enemy.cr_state = 2;
+      cr_enemy.cr_frame = 0;
+    } else {
+      cr_enemy.cr_state = 1;
+      cr_enemy.cr_hurt = 10;
+    }
   }
 
   if (--cr_projectile.cr_timeToLive <= 0) {
@@ -618,10 +663,9 @@ function cr_update() {
 
   // Update the enemies
   for (I=0;I<cr_enemies.length;I++) {
-    cr_updateEnemy(cr_enemies[I]);
+    (cr_enemies[I].cr_state !== 3) && cr_updateEnemy(cr_enemies[I]);
     cr_enemies[I].cr_matriz = cr_updateMatrix(cr_enemies[I].cr_position, -cr_cameraRotation+cr_pi_2, 0);
-    cr_enemies[I].cr_frame = (cr_enemies[I].cr_frame + cr_spriteSpeed) % cr_enemies[I].cr_geometries.length;
-    cr_renderGeometry(cr_enemies[I].cr_geometries[cr_enemies[I].cr_frame<<0], cr_enemies[I].cr_matriz);
+    cr_renderGeometry(cr_enemies[I].cr_geometry, cr_enemies[I].cr_matriz);
   }
 
   // Update the projectiles
@@ -648,7 +692,7 @@ function cr_main() {
   cr_loadTextures();
   cr_buildRoomGeometry();
   cr_buildPlanesGeometry();
-  cr_createEnemy(9,0,9,3);
+  cr_createEnemy(9,0,9,3,3);
   cr_update();
 }
 
