@@ -24,15 +24,44 @@ function minifyGame() {
     const names = [];
     const chars = 'abcdefghijklmnopqrstuvwxyz';
     
+    // JavaScript reserved words to avoid
+    const reservedWords = new Set([
+      'do', 'if', 'in', 'for', 'let', 'new', 'try', 'var', 'case', 'else', 'enum', 
+      'eval', 'null', 'this', 'true', 'void', 'with', 'await', 'break', 'catch', 
+      'class', 'const', 'false', 'super', 'throw', 'while', 'yield', 'delete', 
+      'export', 'import', 'public', 'return', 'static', 'switch', 'typeof', 
+      'default', 'extends', 'finally', 'package', 'private', 'continue', 
+      'debugger', 'function', 'arguments', 'interface', 'protected', 'implements', 
+      'instanceof'
+    ]);
+    
     // Single letter names
     for (let i = 0; i < chars.length && names.length < count; i++) {
-      names.push(chars[i]);
+      const name = chars[i];
+      if (!reservedWords.has(name)) {
+        names.push(name);
+      }
     }
     
     // Two letter names
     for (let i = 0; i < chars.length && names.length < count; i++) {
       for (let j = 0; j < chars.length && names.length < count; j++) {
-        names.push(chars[i] + chars[j]);
+        const name = chars[i] + chars[j];
+        if (!reservedWords.has(name)) {
+          names.push(name);
+        }
+      }
+    }
+    
+    // Three letter names if needed
+    for (let i = 0; i < chars.length && names.length < count; i++) {
+      for (let j = 0; j < chars.length && names.length < count; j++) {
+        for (let k = 0; k < chars.length && names.length < count; k++) {
+          const name = chars[i] + chars[j] + chars[k];
+          if (!reservedWords.has(name)) {
+            names.push(name);
+          }
+        }
       }
     }
     
