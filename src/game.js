@@ -126,16 +126,17 @@ cr_newImage = (cr_src) => {
   img.src = cr_src;
   return img;
 },
-cr_img_2d = [
+cr_img2D = [
   // Cat Idle 0
-  cr_newImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAAXNSR0IArs4c6QAAAWxJREFUOI21lLFKxEAQhv/oteGE2yLdNYYI1+Z6q4N7A0FB8THyAD6GXCCCb3AgFvZ3hU3AEBu7CCucpD7W4phlstlko+DfJJmZ/TK7MzseHApEqOi9kqXnih+5QNtoqm0xoFxgqyMQoboTJ1hMxnj6+sZiMm744+KjE9oyEszUUGjD0AXrAtug+sOEpdijkDUAgOx0BBxsQr0+WCR8AEAha3C/CebQI3NLPDN6RsJHir2OIRhlyNVoG77oaiaQ5VJDASAx/27RiLbLMzO1upxZ7TcPOfs5VCVLT2dYyBqVLL1AhCoSPrJc6oXPr5+9WWW5xDaaIgaUBh4KcLgd1zhGygrC4aboJtG5tqqcyB3AWmWoErlDJUuv0Ydg95QPhSGidb3TYyi01dg2vWzeFQBcLJe9sMf1GgBwPj/9pwxdA5T8ZpGoeK3hYGZhg96fza2Z3r5t2uPLBXRtu3d8mQF/OcPWtCHIb/qQx/4AO5LLlQv68q4AAAAASUVORK5CYII='),
+  [20, 22, "        qqq               qq888qq            q7878888q          q777778888q        q77777777888q      q7776qq7787788q    q7776q66q7778778q   q776qqq66677777qq   q766q5qqqqqqqqqqq  q76qqq5qq444444qq5q q7q q6qqq555555qqq8qq76qq766qqqqqqqq887q q77qq777777777777q   qq  qqqqqqqqqqqq         qqqqqqqqqq         kkqqqqqqqqkk         qqqqqqqqqq   qqq     qq7777qq    qqqq     777777     qqqq    qqqqqqqq      qq   qqqqqqqqqq     qqq qqqqqqqqqqqq  "],
   // Cat Jump 1
-  cr_newImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAbCAYAAABvCO8sAAAAAXNSR0IArs4c6QAAAYtJREFUSIndlr9uwjAQxr9UWSMq4YGNBZSBNexMSLxBpXboc+QB+hxFSqW+ARLqwA5DlwxRWLqlkpGCmFE6nWsc23GAMvRbEt2d73fnf4kHR/XYsKL3guee6zhVvitoE/aFLQKqc8HWAT02rF7YPabdDpa7Pabdzok/yr5aQ43BBFN1KVQbaIKZwG2gtSAVNscRGT8AAMhOUyyDXaEnASZYyAIAQMYPkP0q2AV6Z3LIndEzZAHmOIoYglGHLtIeCznp04ghSbmAAkDslLoBSNMpd6bq9XGktT+/pVJxqGzTWuuQ1inmJUIWIEm58H18flurT1KOTdhHhF/oar2tJuOBKEAYH2azWgLqGNI6mkQ30XK3R8xLFDz35OvwfbHAZDzwPCj3pA7aRjoYqeC555u6o4AY5mJMY0y+1XpbCaepIpPPBrPl8mWDS2J1imNeOhcC28HXVapbT9XWVLT2LtVV2JTItlFaAy9RI/CaUN2OtX6Arw1D06b5CzX+05yT1Hb4b97h/wfefJf+AA4t52LL4ljBAAAAAElFTkSuQmCC'),
+  [28, 27, "          qqq                       qq888qq                    q7878888q                  q777778888q                q77777777888q              q7776qq7787788q            q7776q66q7778778q           q776qqq66677777qq           q766q5qqqqqqqqqqq          q76qqq5qq444444qq5q         q7q7q6qqq555555qqq8q  k    kqqqqq766qqqqqqqq887q qqqk  qqqqqqq777777777777q qqqqq kqqqqqq qqqqqqqqqqqq  qqqqqk  qqqqq  qqqqqqqqqq  qqqqq     qqqq  qqq7777qqq  qqqq      qqqqq qq777777qq qqqqq       qqqqq qqqqqqqq qqqqq        qqqqqqqqqqqqqqqqqqqq         qqqqqqqqqqqqqqqqqq           qqqqqqqqqqqqqqqq            qqqqqqqqqqqqqqqq             qqqqqqqqqqqqqq              qqqqqqqqqqqqqq              qqqqqqqqqqqqqq              qqqqqqqqqqqqqq             qqqqqqqqqqqqqqqq      "],
   // Cat Attack 2
-  cr_newImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAAAAXNSR0IArs4c6QAAAeZJREFUSImtlq1vwkAYxh+2OiAjWQWusqKVBIWYWoLGLIFk/AnTGFLD38ESSGbQJAsCUbVUIFqBnCtJl7AActkM7+3uev2ER7W9j9897/veXSvIkB2efuVvfrNayRqXJS0L6C+OqYspuwgl2A5PvwRsjjuxdh+u2LcEPAYmKAE904gNanGL8eEq4XKK5PZYZ4JO9AYe7+8yV97afiJ0XNi9GgPwEWNz92oCnD3wUM808P71nQkljaI9Qsf9ByyOWLcPeOp2AQBvyyUePuoCvKJyWgQoixYg1wZFhcA3uSkp0IGlwzMNeKahLEYAWLcP8BdHlnstze0rfoT3bXRgz9O+heE8AADMgggvZjU1PXKoE/cxOTL1OoNO+xZrX212GFg6ZkHEaoLPNS85zIlg3im5JOhqs2MuAWCiNwQoFVeWEh3jnDsCDOeB8E5pURVYHinB5JIgpFkQpQKb445wqhUGT/RGLMfPuE0EllEMPIr2zFXouMC52lVAeRdQn6QtlQgmKA8JHRcjxUQ8lO+fBwoAGjtb4bJBPNzu1Vje+HYZWFQa+IMdanfsAjgv7hp5ZqHm4ZBCRhtfjswlil3g/J8Hf9rI93RRyadXrKoF0BX+rZKUa+JL3ZJ416WvxUuV6fhabknk+g9WxEHCe7GpzwAAAABJRU5ErkJggg=='),
+  [30, 24, "        iiiii                       iihhhhhiii                   ihhqqqqqhhhi                 ihqq88888qqqhi    iiii       ihq7888888888qhii ihhhhi     ihq877777777777qhhihkqqkhi   ihq77777777777qqqqqhhqqqqhi   ihq7777777777qqq588qhqqqqkhi ihq77776666qqq4qqq87qhqqqqhi  ihq777qq66q44455q87qhhqqqhi   ihq776qqqq4455qq77qhihqqqhi   ihq776q5qqq5qq77qqqhihqqqhi   ihq77qqqqqqq77qqqqqqhhqqqhi   ihq777qq6677qqqqqqqqhhqqqhi   ihq7q7qhq7qqqqq7777qhqqqqhi   ihqq7qqhhqqqqq777qqqqqqqqhi    ihq77qhihhqq77qqqqqqqqqqhi     ihqqqhiiihqqqqqqqqqqqqqhi      ihhqhi  ihqqqqqqqqqqqqhi       iihi  ihqqqqqqqqqqqqqqhi        i   ihqqqqqqqqqqqqqqhi           ihqqqqqqqqqqqqqqqqhi          ihqqqqqqqqqqqqqqqqhi         ihqqqqqqqqqqqqqqqqqqhi"],
   // Cat Life 3
-  cr_newImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAANCAYAAAB2HjRBAAAAAXNSR0IArs4c6QAAAIJJREFUKJFjYCABSIio/kfmM5Kj8cWb24wMDAwMTPhMRgYwDciACV2AGANgapiI0YQLMME0qpUqk6qXgRGbjW0iAgxVbz7g1fjizW1GJvSAIEYjDLAwoIekiCnRfscIbWJtxdAM8z+yS7DFL0wtSVH14s1tRmTD4FGFrADZBeiGIvMBhzU+ZZwq1+QAAAAASUVORK5CYII=')
-];
+  [15, 13, "           q             qqq     q       qq     qq       qq   qqq       qq  qdqq       qq qqqqq7qqqqqqqq  qqq7qqqqqqqqq     7qqqqqqqqq     qqqqqqqqqq    qq qq qqqqqq  qqq qq qq  qq qqq qq qqq qqq"]
+],
+cr_textures2D = [];
 
 /**
  * SECTION VARIABLES
@@ -325,34 +326,47 @@ function cr_initEngine() {
 
 function cr_initEngine2D() {
   cr_canvas2D = cr_document.getElementById("cg2");
-  cr_canvas2D.width = cr_width;
-  cr_canvas2D.height = cr_height;
+  cr_canvas2D.width = cr_width/4;
+  cr_canvas2D.height = cr_height/4;
 
   cr_ctx2D = cr_canvas2D.getContext("2d");
   cr_ctx2D.imageSmoothingEnabled = 0;
 }
 
+function cr_parsePixels(cr_sprite) {
+  const cr_pixels = [];
+
+  for (let I=0;I<cr_sprite[2].length;I++) {
+    if (cr_sprite[2][I] === ' ') 
+      cr_pixels.push(0, 0, 0, 0);
+    else 
+      cr_pixels.push(...cr_palette[cr_paletteAscii.indexOf(cr_sprite[2][I])], 255);
+  }
+
+  return new Uint8ClampedArray(cr_pixels);
+}
+
 function cr_loadTextures() {
   for (let J=0;J<5;J++) {
-    const cr_pixels = [],
+    const cr_pixels = cr_parsePixels(cr_img[J]),
     A = 3553;
-
-    for (let I=0;I<cr_img[J][2].length;I++) {
-      if (cr_img[J][2][I] === ' ') 
-        cr_pixels.push(0, 0, 0, 0);
-      else 
-        cr_pixels.push(...cr_palette[cr_paletteAscii.indexOf(cr_img[J][2][I])], 255);
-    }
 
     cr_textures[J] = cr_gl.createTexture();
     cr_gl.bindTexture(A, cr_textures[J]);
-    cr_gl.texImage2D(A, 0, 6408, cr_img[J][0], cr_img[J][1], 0, 6408, 5121, new Uint8Array(cr_pixels));
+    cr_gl.texImage2D(A, 0, 6408, cr_img[J][0], cr_img[J][1], 0, 6408, 5121, cr_pixels);
     cr_gl.texParameteri(A, 10240, 9728);
     cr_gl.texParameteri(A, 10241, 9728);
     if (cr_img_clamp_to_edges[J]) {
       cr_gl.texParameteri(A, 10242, 33071);
       cr_gl.texParameteri(A, 10243, 33071);
     }
+  }
+}
+
+function cr_loadTextures2D() {
+  for (let I=0;I<4;I++) {
+    const cr_pixels = cr_parsePixels(cr_img2D[I]);
+    cr_textures2D.push(new ImageData(cr_pixels, cr_img2D[I][0], cr_img2D[I][1]));
   }
 }
 
@@ -751,12 +765,12 @@ function cr_update() {
   if (cr_cameraState === 0){
     const S = cr_Math.sin(cr_catBobbing);
     if (cr_cameraAttackDelay) { 
-      cr_ctx2D.drawImage(cr_img_2d[2], 280, 258 + cr_cameraAttackDelay, 240, 192); 
+      cr_ctx2D.putImageData(cr_textures2D[2], 85, 89); 
       cr_cameraAttackDelay--;
     } 
     else {
-      (!cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[0], 320+S*16, 274+cr_Mathabs(S)*8, 160, 176);
-      (cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[1], 288, 234, 224, 216);
+      (!cr_cameraIsJumping) && cr_ctx2D.putImageData(cr_textures2D[0], 90+S*8, 90+cr_Mathabs(S)*4);
+      (cr_cameraIsJumping) && cr_ctx2D.putImageData(cr_textures2D[1], 86, 86);
     }
     if (--cr_cameraHurt > 0){
       cr_ctx2D.fillStyle="rgba(255,0,0,0.5)";
@@ -764,7 +778,7 @@ function cr_update() {
       cr_ctx2D.fillStyle="white";
     }
     for (I=0;I<cr_cameraHealth;I++) {
-      cr_ctx2D.drawImage(cr_img_2d[3], 8 + I * 31, 8, 30, 26);
+      cr_ctx2D.putImageData(cr_textures2D[3], 1 + I * 16, 1);
     }
   }
 
@@ -797,6 +811,7 @@ function cr_main() {
   cr_initEngine();
   cr_initEngine2D();
   cr_loadTextures();
+  cr_loadTextures2D();
   cr_buildRoomGeometry();
   cr_buildPlanesGeometry();
   cr_createEnemy(9,0,9,3,3);
