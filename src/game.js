@@ -34,6 +34,43 @@ void main() {
 }
 `,
 
+cr_palette = [
+  [190, 74, 47],
+  [216, 118, 68],
+  [234, 212, 170],
+  [228, 166, 114],
+  [184, 111, 80],
+  [116, 63, 57],
+  [63, 40, 50],
+  [158, 40, 53],
+  [228, 59, 68],
+  [247, 118, 34],
+  [254, 174, 52],
+  [254, 231, 97],
+  [99, 199, 77],
+  [62, 137, 72],
+  [38, 92, 66],
+  [25, 60, 62],
+  [18, 78, 137],
+  [0, 149, 233],
+  [44, 232, 245],
+  [255, 255, 255],
+  [192, 203, 220],
+  [139, 155, 180],
+  [90, 105, 136],
+  [58, 68, 102],
+  [38, 43, 68],
+  [255, 0, 68],
+  [24, 20, 37],
+  [104, 56, 108],
+  [181, 80, 136],
+  [246, 117, 122],
+  [232, 183, 150],
+  [194, 133, 105]
+],
+
+cr_paletteAscii = '0123456789abcdefghijklmnopqrstuvw',
+
 cr_Math = Math,
 cr_Mathcos = cr_Math.cos,
 cr_Mathsin = cr_Math.sin,
@@ -73,15 +110,15 @@ cr_smallUvs = [
 ],
 cr_img = [
   // Wall 0
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC',
+  [16, 16, "qqqqqqqqqqqqqqqq44454q4444454q4455455q5445455q5455555q5555555q55qqqqqqqqqqqqqqqqq5444544q4444554q4554555q4455455q5555555q5555555qqqqqqqqqqqqqqqq44545q5445544q5454454q4545454q4455555q5555555q55qqqqqqqqqqqqqqqqq4445444q5444445q4544545q4445544q5555555q5555455"],
   // Floor 1
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALNJREFUOI1jjMrs+M+ABh7cvsdw78J+dGEGJQNHBgVVJRQxFgxVDAwM9y7sZyhu78cQ760sJGzAvtVzGYrb+xnOn7uCYYBTaDLDvtVzGZxCk+FiTMRqRjcEwwBiNGMzhIlUzeiGMEqIqP4nVTMyYGJgYCBbMwN6IA5RA5QMHFHilRSwb/VcBiYFVSUGcgzZt3oug5KBI8QLpBoC06ygqoQIA2INQdbMgB6IhAxB18zAwMAAACcOVy5PY3YrAAAAAElFTkSuQmCC',
+  [16, 16, "mmmmmnqqqqqnmmmmmmmmmqlllllqmmmmmmmmqlmmmmmmqmmmmmmqlmmmmmmmmqmmmmqlmmmmmmmmmmqmmqlmmmmmmmmmmmmqqlmmmmmmmmmmmmmmqmmmmmmmmmmmmmmmqmmmmmmmmmmmmmmmqmmmmmmmmmmmmmmmqmmmmmmmmmmmmmmmnqmmmmmmmmmmmmmqmnqmmmmmmmmmmmqnmmnqmmmmmmmmmqnmmmmnqmmmmmmmqnmmmmmmnqmmmmmqnmmm"],
   // Ceiling 2
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII=',
+  [16, 16, "oooooooooooooooooooonoooonooooooonoooooooooonooooooooooonoooooooooooonoooonoooooooooooooooooooonoonoooonooooonooooooonoooonoooooooooooooooooooooooooooooonooooooononooooooonoonooooooooooooooooooooooonoooooooooooooooooooonooooonoooooonoooooonoooonooooooooooo"],
   // Broom 3
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAQCAYAAADeWHeIAAAAAXNSR0IArs4c6QAAA25JREFUaIHVWb1q40AQ/nRcHQdOhVCTSkm1EIIbEzcBc29w7lL4DOnV+gHSqg+4SuciDxAMaQRpQgioSgQHgeCoUCDOA1hXWLO3kiV5dyXHuQ+Mjdbf7Pzu7NgGSmCZTgIAURwaZd+p4ulwm9SjaXwVPZrG96KHlukks4sW0GGwGRJZo0UeACVuqbygC9wGsM+cWrLqgNsFbFUPWYhFSCjTudSQbBL40pm/mgTy3BU5PPhz7ZOoqWBxfWrYpLOnyj5ks+h/ANyHUPWHZTrJ4qqdLF4HSVFWNc3L8F8HyeKqrc1/Oe4lL8e9xDIdLRlVejUlb+1eCvaLPl+8DhIR9KxI929VQqM4NChzVMB5t4EyV4Ru5d8d7OH6bY7rtznOzV3cHewVHotfHmkVK+me+jyJfvNXfk1E4R2gTOinQmNPMfij+D2zdnewhzb07yTU2mzm69A3jmXRUQsIpFuAXAJ0GAANw3V5GlzLdJJzc5cHXzR0hKVjZJMg33vFSyC2MAnMLlpSl09aXyaCX7iWR2UL+B+RDz5S40fxO67f5mvbQX6NX/46TKslbQOkI11aq3TebAuo0zoUuVEcGiOUVwmtV8koGveiODRshu38BpD6QDvxJHxYeQLkRzpV6FwgOToMs4uW0gWoyknUIn7+aJV9hV9e83pTIkjr3hC0RrcCfhUKEyA/OunOvbOgi4nbU76BL6vuXw+rM8rlue3H57W2iHo3OUbKggpvFnSVi0CVv5IAlukkE7cHpI7QqWKSYTMf+0dMKwmQZjD1MR0Zlukk4+4QSC+A+cmgdF/mo+9N8XDpYuL2tPXXAffd2Rw282GfzZX2V+V/KyJT0Gzmg5JBB3W4xCcdVBOJgn/ifGDcHaL9+AxKBpl9J24PT/cB9o8Yf/aZJwEl38Olu1H+ygmwf8TwdB9wIbogx9UF6SAGQxYnzgduwh0AwJ/BL2ke7ZN/l0kCsW1UvZQM2SAysy5VLBn8dB+g7021fo2jqqXA6cgS5ZA+ANbKEY/+E+cDAHAT7mDoj6X2z/uCbDg89Ur5FNSHSzeTrCIXNJqV/L9R5jdZ/+nw+QkQxaHR96aZE0An+KKsvBKqxyjJgeBIGZ2iODSG/jhzAsgGP7/v4amHvjetDD5hFnRxeOplfEifqa3YzK+cqsqCJ3v6qfL/AjiZ9HvKw9auAAAAAElFTkSuQmCC',
+  [128, 16, "      qq            qqq                 qq                                qq                                                         qabq          qabbq               qbaq                              qaaq                                        qqqqq            qabq          qabbq             qbaq            qq                  qbbq                         q           qqabbbaqq           qabq          qabq            qbaq            q88qq                 qbq                        qaq         qabbjjjbbbq           qbq           qaq            qbq            q87778q                qbq                        qbqq        qaabbbbbbaq           qaq           qaq            qaq           q87qqq78q              qaqq                        qbqq         qqabbbaqq            qbq           qbq            qbq          q77q   q78q        q   qaaq                         qbqaq          qqqqq              qbq           qbq            qbq          q7q     q78q      qq  qbbq                          qbqaq           qbq               qaq           qaq            qaq           q       q7q     qaaq  qq                           qaqq            qaq              qabq           qqq            qbaq                 q78q      qqq                               qqq             qqq            qqqaq            qbvq            qaqqq             qqq7q       qbvqqq                           qabaq           qabaq          qvqbqq           qvquvq           qqbqvq           qsq8qq       qqquvvq                         qvqqqvq         qvqqqvq        qvuvqvq           qvvuvq           qvqvuvq         qstsqsq       qvvvuvvq                        qvuvuvq         qvuvuvq        quvvuvq           quvuvq           qvuvvuq         qtsstsq       quvuuuvvq       qqqqqqqqqq      qvuvuvq         qvuvuvq       qvvuuvq            qvuvuvq           qvuuvvq       qssttsq         qvvuvuq      qquvuuvuqqbaq    qvuvuvuvq       qvuvuvuvq       quvuq              qvuvuvq           quvuq         qtstq           qvqqq       qbquvuuvvvqbq    quvuvuvuq       quvuvuvuq    "],
   // Projectile 4
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAGVJREFUGJWFj7ENgDAQA+9RKkSfJcI0jME8GYNpYAi+J7SmQEGkQFxlyX7Lb1SyizdzNIBQzTQNjb/hukPZlfYiSUp7aTTZFerF6Cdr7B9d6fjhCayxZ/SzaQKwz5HLAXM0+3vzAjWqNnUS9G+2AAAAAElFTkSuQmCC'
+  [8, 8, "  hhhh   hiiiih hijiijihhiijjiihhiijjiihhijiijih hiiiih   hhhh  "]
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
 cr_newImage = (cr_src) => {
@@ -296,21 +333,26 @@ function cr_initEngine2D() {
 }
 
 function cr_loadTextures() {
-  for (let I=0;I<5;I++){
-    cr_textures[I] = cr_gl.createTexture();
-    const cr_image = new Image();
-    const A = 3553;
-    cr_image.src = cr_img[I];
-    cr_image.onload = () => {
-      cr_gl.bindTexture(A, cr_textures[I]);
-      cr_gl.texImage2D(A, 0, 6408, 6408, 5121, cr_image);
-      cr_gl.texParameteri(A, 10240, 9728);
-      cr_gl.texParameteri(A, 10241, 9728);
-      if (cr_img_clamp_to_edges[I]) {
-        cr_gl.texParameteri(A, 10242, 33071);
-        cr_gl.texParameteri(A, 10243, 33071);
-      }
-    };
+  for (let J=0;J<5;J++) {
+    const cr_pixels = [],
+    A = 3553;
+
+    for (let I=0;I<cr_img[J][2].length;I++) {
+      if (cr_img[J][2][I] === ' ') 
+        cr_pixels.push(0, 0, 0, 0);
+      else 
+        cr_pixels.push(...cr_palette[cr_paletteAscii.indexOf(cr_img[J][2][I])], 255);
+    }
+
+    cr_textures[J] = cr_gl.createTexture();
+    cr_gl.bindTexture(A, cr_textures[J]);
+    cr_gl.texImage2D(A, 0, 6408, cr_img[J][0], cr_img[J][1], 0, 6408, 5121, new Uint8Array(cr_pixels));
+    cr_gl.texParameteri(A, 10240, 9728);
+    cr_gl.texParameteri(A, 10241, 9728);
+    if (cr_img_clamp_to_edges[J]) {
+      cr_gl.texParameteri(A, 10242, 33071);
+      cr_gl.texParameteri(A, 10243, 33071);
+    }
   }
 }
 

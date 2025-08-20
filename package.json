@@ -12,5 +12,8 @@
     "javascript"
   ],
   "license": "MIT",
-  "description": "Black cat goes through hell and back in this js13k game."
+  "description": "Black cat goes through hell and back in this js13k game.",
+  "dependencies": {
+    "pngjs": "^7.0.0"
+  }
 }

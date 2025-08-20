@@ -87,19 +87,29 @@ function minifyGame() {
     minifiedCode = minifiedCode.replace(regex, replacement);
   }
   
-  // Preserve template literals (shaders) by temporarily replacing them with placeholders
+  // Preserve template literals and string literals by temporarily replacing them with placeholders
   const templateLiterals = [];
+  const stringLiterals = [];
+  
+  // Preserve template literals (backticks)
   minifiedCode = minifiedCode.replace(/`([^`]*)`/g, (match, content) => {
     const index = templateLiterals.length;
     templateLiterals.push(match);
     return `__TEMPLATE_LITERAL_${index}__`;
   });
   
+  // Preserve string literals (single and double quotes) to maintain internal spacing
+  minifiedCode = minifiedCode.replace(/(["'])(?:(?=(\\?))\2.)*?\1/g, (match) => {
+    const index = stringLiterals.length;
+    stringLiterals.push(match);
+    return `__STRING_LITERAL_${index}__`;
+  });
+  
   // Remove comments (both single line and multi-line)
   minifiedCode = minifiedCode.replace(/\/\*[\s\S]*?\*\//g, '');
   minifiedCode = minifiedCode.replace(/\/\/.*$/gm, '');
   
-  // Remove unnecessary whitespace and newlines
+  // Remove unnecessary whitespace and newlines (now safe since strings are preserved)
   minifiedCode = minifiedCode
     .replace(/\s+/g, ' ') // Replace multiple whitespace with single space
     .replace(/\s*([{}();,=+\-*\/&|!<>?:])\s*/g, '$1') // Remove spaces around operators and punctuation
@@ -108,6 +118,11 @@ function minifyGame() {
     .replace(/^\s+|\s+$/g, '') // Trim leading and trailing whitespace
     .replace(/;\s*}/g, '}') // Remove semicolon before closing brace
     .replace(/\s*\n\s*/g, ''); // Remove all newlines and surrounding spaces
+  
+  // Restore string literals with their original spacing
+  stringLiterals.forEach((literal, index) => {
+    minifiedCode = minifiedCode.replace(`__STRING_LITERAL_${index}__`, literal);
+  });
   
   // Restore template literals (shaders) with their original formatting
   templateLiterals.forEach((literal, index) => {
