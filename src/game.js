@@ -79,7 +79,7 @@ cr_img = [
   // Ceiling
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII=',
   // Broom
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAQCAYAAADeWHeIAAAAAXNSR0IArs4c6QAAAuVJREFUaIHdWDGL4kAU/jyuuEoXLkVIIxyMVoFDbBbSCHL/YO2uEME+rT9gW/sF7wo7D/wBItgEthERUq2BhW1ciwirP8C5Ql8Ys8Ykk7irfiBCMu/Ne/N9895kMgiAqjAOAAvXyQSNOWYnY5tmHGnjXOL4EKgK45t+mW9e61wkNI5dXNtAf691vumXE/tKHEe\/\/OlxfCg+WwRJyVcVlipZXjwpCPuc8CXoxcJ1MlpzBTzamNsGoiYt2slCVRif2wbwaENrrqTa0LiYx7iYT00IC9fJaLqV1M3ZIVAAEMmMiTREACAR+YPlCoPlCvfKjSeERMFcKb5GGpWQSClIzCmS33Lf9t6Ni3mUAS57iFMVxucPOVxbFThaATzc6nLeZe0kbFWF8XvlxiN/4ToZ+rXcNwyWq8iVwD+GyCdc05dAtApwQSDyxWcL18m0sCU1rBIcJN82AACabl0V+Th5C0jSOmLaEslBBIkiCIK407Xm1tf28IervQM42gK8BZEs5TIHSA+3OuYPuViHt2MEUYv49T0XNMQ7vPrjJiFEjv2CcLAC+BddtvTNbQPWn2+oteMdvmjX0W5Mcgvnz6X89BLqR4xbjCnu3JeAdxVAVRjvmVVgtxAyu5h8aLqFQklHz6xKfYZpzRWo/8r4UBXGO0YD2PV+/5dB4Ly6hVp7iGnXRM+sSsd/CdgTABFHpGm6BRKDDJLYkj3FEFdIRH6FrdExGig/vYDEEGXenlnFbGKjUNK9Z9cogncVoFDSMZtsD2DTrintmBYuKSgGkYyoqLA1Rk4WAPBcv4tsR/P4/6OIgG4ew36xEjkhvL4mln5KeDaxUWsPpW7jaNcScTK+RD8UD4BQP2Lpr7A1AGDkZNGwOpHm968F5fDzdzvQnkidds09sYq22LVV2SvuU2AvAFVhXEzgWMJhSFMEMjGpCuPP9TuMnCwqbI0ff/9Jia/WHnrPwkQ3tw1ounVQBIRaewgadw4C+A9VsCpTonZwTgAAAABJRU5ErkJggg==',
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAQCAYAAADeWHeIAAAAAXNSR0IArs4c6QAAA25JREFUaIHVWb1q40AQ/nRcHQdOhVCTSkm1EIIbEzcBc29w7lL4DOnV+gHSqg+4SuciDxAMaQRpQgioSgQHgeCoUCDOA1hXWLO3kiV5dyXHuQ+Mjdbf7Pzu7NgGSmCZTgIAURwaZd+p4ulwm9SjaXwVPZrG96KHlukks4sW0GGwGRJZo0UeACVuqbygC9wGsM+cWrLqgNsFbFUPWYhFSCjTudSQbBL40pm/mgTy3BU5PPhz7ZOoqWBxfWrYpLOnyj5ks+h/ANyHUPWHZTrJ4qqdLF4HSVFWNc3L8F8HyeKqrc1/Oe4lL8e9xDIdLRlVejUlb+1eCvaLPl+8DhIR9KxI929VQqM4NChzVMB5t4EyV4Ru5d8d7OH6bY7rtznOzV3cHewVHotfHmkVK+me+jyJfvNXfk1E4R2gTOinQmNPMfij+D2zdnewhzb07yTU2mzm69A3jmXRUQsIpFuAXAJ0GAANw3V5GlzLdJJzc5cHXzR0hKVjZJMg33vFSyC2MAnMLlpSl09aXyaCX7iWR2UL+B+RDz5S40fxO67f5mvbQX6NX/46TKslbQOkI11aq3TebAuo0zoUuVEcGiOUVwmtV8koGveiODRshu38BpD6QDvxJHxYeQLkRzpV6FwgOToMs4uW0gWoyknUIn7+aJV9hV9e83pTIkjr3hC0RrcCfhUKEyA/OunOvbOgi4nbU76BL6vuXw+rM8rlue3H57W2iHo3OUbKggpvFnSVi0CVv5IAlukkE7cHpI7QqWKSYTMf+0dMKwmQZjD1MR0Zlukk4+4QSC+A+cmgdF/mo+9N8XDpYuL2tPXXAffd2Rw282GfzZX2V+V/KyJT0Gzmg5JBB3W4xCcdVBOJgn/ifGDcHaL9+AxKBpl9J24PT/cB9o8Yf/aZJwEl38Olu1H+ygmwf8TwdB9wIbogx9UF6SAGQxYnzgduwh0AwJ/BL2ke7ZN/l0kCsW1UvZQM2SAysy5VLBn8dB+g7021fo2jqqXA6cgS5ZA+ANbKEY/+E+cDAHAT7mDoj6X2z/uCbDg89Ur5FNSHSzeTrCIXNJqV/L9R5jdZ/+nw+QkQxaHR96aZE0An+KKsvBKqxyjJgeBIGZ2iODSG/jhzAsgGP7/v4amHvjetDD5hFnRxeOplfEifqa3YzK+cqsqCJ3v6qfL/AjiZ9HvKw9auAAAAAElFTkSuQmCC',
   // Projectile
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAGVJREFUGJWFj7ENgDAQA+9RKkSfJcI0jME8GYNpYAi+J7SmQEGkQFxlyX7Lb1SyizdzNIBQzTQNjb/hukPZlfYiSUp7aTTZFerF6Cdr7B9d6fjhCayxZ/SzaQKwz5HLAXM0+3vzAjWqNnUS9G+2AAAAAElFTkSuQmCC'
 ],
@@ -122,6 +122,8 @@ let cr_canvas,      // HTMLCanvasElement
   cr_cameraTargetFloor = 0,       // Where should the camera be placed at vertically?
   cr_cameraIsJumping = 0,         // Is the camera jumping
   cr_cameraAttackDelay = 0,       // Delay between attacks
+  cr_cameraHealth = 5,            // Player's health
+  cr_cameraState = 0,             // 0: Alive, 1: Dead
 
   cr_catBobbing = 0,
 
@@ -189,6 +191,8 @@ function cr_updateMatrix(cr_position, cr_rotation, cr_transMat = 1) {
  * SECTION CAMERA FUNCTIONS
  */
 function cr_updateCamera() {
+  if (cr_cameraState === 1) return;
+  
   // Update camera rotation based on input
   const R = 0.05,
   T = cr_keys["ArrowLeft"] ? 1 : cr_keys["ArrowRight"] ? -1 : 0;
@@ -516,12 +520,15 @@ function cr_createBillboard(W, H, T, UV) {
  */
 function cr_createEnemy(X, Y, Z, cr_texture, cr_hp) {
   const cr_geometryWalk = [],
-  cr_geometryDeath = [];
+  cr_geometryDeath = [],
+  cr_geometryAttack = [];
   let I;
   for (I of [0,1,2,1])
     cr_geometryWalk.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
   for (I of [4,5])
     cr_geometryDeath.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
+  for (I of [6,7,6,1])
+    cr_geometryAttack.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
   
   cr_enemies.push({
     cr_position: [X, Y, Z, 0], // x, y, z, vertical speed
@@ -530,9 +537,11 @@ function cr_createEnemy(X, Y, Z, cr_texture, cr_hp) {
     cr_geometry: null,
     cr_geometryWalk,
     cr_geometryDeath,
+    cr_geometryAttack,
     cr_geometryHurt: cr_createBillboard(1, 1, cr_texture, cr_smallUvs[3]),
-    cr_state: 0,                // 0: Idle/Walk, 1: Hurt, 2: Dying, 3: Dead
+    cr_state: 0,                // 0: Idle/Walk, 1: Hurt, 2: Dying, 3: Dead, 4: Attack
     cr_hurt: 0,                 // How long the enemy is hurt
+    cr_attackCooldown: 0,       // How long until the enemy can attack again
     cr_active: 0,
     cr_speed: 0.03,
     cr_targetFloor: Y,
@@ -541,25 +550,51 @@ function cr_createEnemy(X, Y, Z, cr_texture, cr_hp) {
   });
 }
 
+function cr_enemyMeleeAttack(cr_enemy) {
+  const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
+  cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
+  cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
+  (cr_length <= 1.5) && cr_cameraHealth--;
+  if (cr_cameraHealth <= 0) cr_cameraState = 1;
+}
+
 function cr_updateEnemy(cr_enemy) {
+  cr_enemy.cr_attackCooldown = cr_Math.max(cr_enemy.cr_attackCooldown - 1, 0);
+
   // Update geometry
-  if (cr_enemy.cr_state === 0) {
-    cr_enemy.cr_frame = (cr_enemy.cr_frame + cr_spriteSpeed) % 4; // Cycle through frames
-    cr_enemy.cr_geometry = cr_enemy.cr_geometryWalk[cr_enemy.cr_frame << 0];
-  } else if (cr_enemy.cr_state === 1) {
-    cr_enemy.cr_geometry = cr_enemy.cr_geometryHurt;
-    if (--cr_enemy.cr_hurt <= 0) {
-      cr_enemy.cr_state = 0;
-    } else return;
-  } else if (cr_enemy.cr_state === 2) {
-    cr_enemy.cr_frame += cr_spriteSpeed;
-    cr_enemy.cr_geometry = cr_enemy.cr_geometryDeath[cr_enemy.cr_frame << 0];
-    if (cr_enemy.cr_frame >= 2) {
-      cr_enemy.cr_geometry = cr_enemy.cr_geometryDeath[1];
-      cr_enemy.cr_state = 3;
-    }
-    return;
+  switch (cr_enemy.cr_state) {
+    case 0:
+      cr_enemy.cr_frame = (cr_enemy.cr_frame + cr_spriteSpeed) % 4; // Cycle through frames
+      cr_enemy.cr_geometry = cr_enemy.cr_geometryWalk[cr_enemy.cr_frame << 0];
+      break;
+    case 1:
+      cr_enemy.cr_geometry = cr_enemy.cr_geometryHurt;
+      if (--cr_enemy.cr_hurt <= 0) {
+        cr_enemy.cr_state = 0;
+      }
+      return;
+    case 2:
+      cr_enemy.cr_frame += cr_spriteSpeed;
+      cr_enemy.cr_geometry = cr_enemy.cr_geometryDeath[cr_enemy.cr_frame << 0];
+      if (cr_enemy.cr_frame >= 2) {
+        cr_enemy.cr_geometry = cr_enemy.cr_geometryDeath[1];
+        cr_enemy.cr_state = 3;
+      }
+      return;
+    case 4:
+      const cr_previousFrame = cr_enemy.cr_frame << 0;
+      cr_enemy.cr_frame += cr_spriteSpeed;
+      cr_enemy.cr_geometry = cr_enemy.cr_geometryAttack[cr_enemy.cr_frame << 0];
+      if ((cr_enemy.cr_frame<<0) === 3 && cr_previousFrame == 2) {
+        cr_enemyMeleeAttack(cr_enemy);  
+      }
+      if (cr_enemy.cr_frame+cr_spriteSpeed >= 4) {
+        cr_enemy.cr_state = 0;
+      }
+      return;
   }
+
+  if (cr_cameraState) return;
 
   // Update movement
   const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
@@ -574,7 +609,14 @@ function cr_updateEnemy(cr_enemy) {
 
   cr_enemy.cr_active = 1;
 
-  if (cr_length <= 1.2) return;
+  if (cr_length <= 1.2) {
+    if (cr_enemy.cr_attackCooldown <= 0){
+      cr_enemy.cr_state = 4;
+      cr_enemy.cr_frame = 0;
+      cr_enemy.cr_attackCooldown = 120;
+    }  
+    return;
+  }
 
   const cr_dirx = cr_dx / cr_length,
   cr_dirz = cr_dz / cr_length;
@@ -651,14 +693,16 @@ function cr_update() {
 
   // Render the HUD
   cr_ctx2D.clearRect(0, 0, cr_width, cr_height);
-  const S = cr_Math.sin(cr_catBobbing);
-  if (cr_cameraAttackDelay) { 
-    cr_ctx2D.drawImage(cr_img_2d[2], 280, 258 + cr_cameraAttackDelay, 240, 192); 
-    cr_cameraAttackDelay--;
-  } 
-  else {
-    (!cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[0], 320+S*16, 274+cr_Mathabs(S)*8, 160, 176);
-    (cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[1], 288, 234, 224, 216);
+  if (cr_cameraState === 0){
+    const S = cr_Math.sin(cr_catBobbing);
+    if (cr_cameraAttackDelay) { 
+      cr_ctx2D.drawImage(cr_img_2d[2], 280, 258 + cr_cameraAttackDelay, 240, 192); 
+      cr_cameraAttackDelay--;
+    } 
+    else {
+      (!cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[0], 320+S*16, 274+cr_Mathabs(S)*8, 160, 176);
+      (cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[1], 288, 234, 224, 216);
+    }
   }
 
   // Update the enemies
