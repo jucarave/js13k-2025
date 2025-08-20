@@ -72,15 +72,15 @@ cr_smallUvs = [
   [7/8,0,8/8,1]
 ],
 cr_img = [
-  // Wall
+  // Wall 0
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAANpJREFUOI2tkz0OgjAYht8ik2GTpFyAiaWrk0tvoQOH8AAexUFu0UM0JqzONrjqCA7mw68V0ATfpf1++vO8aUWW5h1mKD5uiz4w1kEribKqwfNT9chYB2Od18THsTmN8VDT1MKwLmZ7AAC7IoVW0tuZ4iE/6DZaydcGWkkv+Q2J+o11WCTL1SFp3xSX691bdG4eSNrOy/P5fA+Ij7iNdTjVN8+XEK+s6r4ehVzUxH0ZiwFA7DfrDwS6wZh4/T/vYOg/kDhvKGMdIh4gYA3NoxzPiyzNu195SfyQJ39emVAdUBVcAAAAAElFTkSuQmCC',
-  // Floor
+  // Floor 1
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALNJREFUOI1jjMrs+M+ABh7cvsdw78J+dGEGJQNHBgVVJRQxFgxVDAwM9y7sZyhu78cQ760sJGzAvtVzGYrb+xnOn7uCYYBTaDLDvtVzGZxCk+FiTMRqRjcEwwBiNGMzhIlUzeiGMEqIqP4nVTMyYGJgYCBbMwN6IA5RA5QMHFHilRSwb/VcBiYFVSUGcgzZt3oug5KBI8QLpBoC06ygqoQIA2INQdbMgB6IhAxB18zAwMAAACcOVy5PY3YrAAAAAElFTkSuQmCC',
-  // Ceiling
+  // Ceiling 2
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAIVJREFUOI21U7ENwCAMA27IkjVDF97o/yewsvBDOyFoEqNWqJmQ5Vi2gXjk8wobkzRALIbkYQ+BmdBqMaQZ02IJLaEFzTURkCMUI+6USCzDwZfyOt5qGQJeUai8Gd+KEFCJyDIU6ARE9G6in/+LsLL9SsB7nZ6o+QurJS1KLLYDYln+DT03Q44yZR0Yw90AAAAASUVORK5CYII=',
-  // Broom
+  // Broom 3
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAQCAYAAADeWHeIAAAAAXNSR0IArs4c6QAAA25JREFUaIHVWb1q40AQ/nRcHQdOhVCTSkm1EIIbEzcBc29w7lL4DOnV+gHSqg+4SuciDxAMaQRpQgioSgQHgeCoUCDOA1hXWLO3kiV5dyXHuQ+Mjdbf7Pzu7NgGSmCZTgIAURwaZd+p4ulwm9SjaXwVPZrG96KHlukks4sW0GGwGRJZo0UeACVuqbygC9wGsM+cWrLqgNsFbFUPWYhFSCjTudSQbBL40pm/mgTy3BU5PPhz7ZOoqWBxfWrYpLOnyj5ks+h/ANyHUPWHZTrJ4qqdLF4HSVFWNc3L8F8HyeKqrc1/Oe4lL8e9xDIdLRlVejUlb+1eCvaLPl+8DhIR9KxI929VQqM4NChzVMB5t4EyV4Ru5d8d7OH6bY7rtznOzV3cHewVHotfHmkVK+me+jyJfvNXfk1E4R2gTOinQmNPMfij+D2zdnewhzb07yTU2mzm69A3jmXRUQsIpFuAXAJ0GAANw3V5GlzLdJJzc5cHXzR0hKVjZJMg33vFSyC2MAnMLlpSl09aXyaCX7iWR2UL+B+RDz5S40fxO67f5mvbQX6NX/46TKslbQOkI11aq3TebAuo0zoUuVEcGiOUVwmtV8koGveiODRshu38BpD6QDvxJHxYeQLkRzpV6FwgOToMs4uW0gWoyknUIn7+aJV9hV9e83pTIkjr3hC0RrcCfhUKEyA/OunOvbOgi4nbU76BL6vuXw+rM8rlue3H57W2iHo3OUbKggpvFnSVi0CVv5IAlukkE7cHpI7QqWKSYTMf+0dMKwmQZjD1MR0Zlukk4+4QSC+A+cmgdF/mo+9N8XDpYuL2tPXXAffd2Rw282GfzZX2V+V/KyJT0Gzmg5JBB3W4xCcdVBOJgn/ifGDcHaL9+AxKBpl9J24PT/cB9o8Yf/aZJwEl38Olu1H+ygmwf8TwdB9wIbogx9UF6SAGQxYnzgduwh0AwJ/BL2ke7ZN/l0kCsW1UvZQM2SAysy5VLBn8dB+g7021fo2jqqXA6cgS5ZA+ANbKEY/+E+cDAHAT7mDoj6X2z/uCbDg89Ur5FNSHSzeTrCIXNJqV/L9R5jdZ/+nw+QkQxaHR96aZE0An+KKsvBKqxyjJgeBIGZ2iODSG/jhzAsgGP7/v4amHvjetDD5hFnRxeOplfEifqa3YzK+cqsqCJ3v6qfL/AjiZ9HvKw9auAAAAAElFTkSuQmCC',
-  // Projectile
+  // Projectile 4
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAGVJREFUGJWFj7ENgDAQA+9RKkSfJcI0jME8GYNpYAi+J7SmQEGkQFxlyX7Lb1SyizdzNIBQzTQNjb/hukPZlfYiSUp7aTTZFerF6Cdr7B9d6fjhCayxZ/SzaQKwz5HLAXM0+3vzAjWqNnUS9G+2AAAAAElFTkSuQmCC'
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
@@ -90,9 +90,14 @@ cr_newImage = (cr_src) => {
   return img;
 },
 cr_img_2d = [
+  // Cat Idle 0
   cr_newImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAAXNSR0IArs4c6QAAAWxJREFUOI21lLFKxEAQhv/oteGE2yLdNYYI1+Z6q4N7A0FB8THyAD6GXCCCb3AgFvZ3hU3AEBu7CCucpD7W4phlstlko+DfJJmZ/TK7MzseHApEqOi9kqXnih+5QNtoqm0xoFxgqyMQoboTJ1hMxnj6+sZiMm744+KjE9oyEszUUGjD0AXrAtug+sOEpdijkDUAgOx0BBxsQr0+WCR8AEAha3C/CebQI3NLPDN6RsJHir2OIRhlyNVoG77oaiaQ5VJDASAx/27RiLbLMzO1upxZ7TcPOfs5VCVLT2dYyBqVLL1AhCoSPrJc6oXPr5+9WWW5xDaaIgaUBh4KcLgd1zhGygrC4aboJtG5tqqcyB3AWmWoErlDJUuv0Ydg95QPhSGidb3TYyi01dg2vWzeFQBcLJe9sMf1GgBwPj/9pwxdA5T8ZpGoeK3hYGZhg96fza2Z3r5t2uPLBXRtu3d8mQF/OcPWtCHIb/qQx/4AO5LLlQv68q4AAAAASUVORK5CYII='),
+  // Cat Jump 1
   cr_newImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAbCAYAAABvCO8sAAAAAXNSR0IArs4c6QAAAYtJREFUSIndlr9uwjAQxr9UWSMq4YGNBZSBNexMSLxBpXboc+QB+hxFSqW+ARLqwA5DlwxRWLqlkpGCmFE6nWsc23GAMvRbEt2d73fnf4kHR/XYsKL3guee6zhVvitoE/aFLQKqc8HWAT02rF7YPabdDpa7Pabdzok/yr5aQ43BBFN1KVQbaIKZwG2gtSAVNscRGT8AAMhOUyyDXaEnASZYyAIAQMYPkP0q2AV6Z3LIndEzZAHmOIoYglGHLtIeCznp04ghSbmAAkDslLoBSNMpd6bq9XGktT+/pVJxqGzTWuuQ1inmJUIWIEm58H18flurT1KOTdhHhF/oar2tJuOBKEAYH2azWgLqGNI6mkQ30XK3R8xLFDz35OvwfbHAZDzwPCj3pA7aRjoYqeC555u6o4AY5mJMY0y+1XpbCaepIpPPBrPl8mWDS2J1imNeOhcC28HXVapbT9XWVLT2LtVV2JTItlFaAy9RI/CaUN2OtX6Arw1D06b5CzX+05yT1Hb4b97h/wfefJf+AA4t52LL4ljBAAAAAElFTkSuQmCC'),
-  cr_newImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAAAAXNSR0IArs4c6QAAAeZJREFUSImtlq1vwkAYxh+2OiAjWQWusqKVBIWYWoLGLIFk/AnTGFLD38ESSGbQJAsCUbVUIFqBnCtJl7AActkM7+3uev2ER7W9j9897/veXSvIkB2efuVvfrNayRqXJS0L6C+OqYspuwgl2A5PvwRsjjuxdh+u2LcEPAYmKAE904gNanGL8eEq4XKK5PZYZ4JO9AYe7+8yV97afiJ0XNi9GgPwEWNz92oCnD3wUM808P71nQkljaI9Qsf9ByyOWLcPeOp2AQBvyyUePuoCvKJyWgQoixYg1wZFhcA3uSkp0IGlwzMNeKahLEYAWLcP8BdHlnstze0rfoT3bXRgz9O+heE8AADMgggvZjU1PXKoE/cxOTL1OoNO+xZrX212GFg6ZkHEaoLPNS85zIlg3im5JOhqs2MuAWCiNwQoFVeWEh3jnDsCDOeB8E5pURVYHinB5JIgpFkQpQKb445wqhUGT/RGLMfPuE0EllEMPIr2zFXouMC52lVAeRdQn6QtlQgmKA8JHRcjxUQ8lO+fBwoAGjtb4bJBPNzu1Vje+HYZWFQa+IMdanfsAjgv7hp5ZqHm4ZBCRhtfjswlil3g/J8Hf9rI93RRyadXrKoF0BX+rZKUa+JL3ZJ416WvxUuV6fhabknk+g9WxEHCe7GpzwAAAABJRU5ErkJggg==')
+  // Cat Attack 2
+  cr_newImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAAAAXNSR0IArs4c6QAAAeZJREFUSImtlq1vwkAYxh+2OiAjWQWusqKVBIWYWoLGLIFk/AnTGFLD38ESSGbQJAsCUbVUIFqBnCtJl7AActkM7+3uev2ER7W9j9897/veXSvIkB2efuVvfrNayRqXJS0L6C+OqYspuwgl2A5PvwRsjjuxdh+u2LcEPAYmKAE904gNanGL8eEq4XKK5PZYZ4JO9AYe7+8yV97afiJ0XNi9GgPwEWNz92oCnD3wUM808P71nQkljaI9Qsf9ByyOWLcPeOp2AQBvyyUePuoCvKJyWgQoixYg1wZFhcA3uSkp0IGlwzMNeKahLEYAWLcP8BdHlnstze0rfoT3bXRgz9O+heE8AADMgggvZjU1PXKoE/cxOTL1OoNO+xZrX212GFg6ZkHEaoLPNS85zIlg3im5JOhqs2MuAWCiNwQoFVeWEh3jnDsCDOeB8E5pURVYHinB5JIgpFkQpQKb445wqhUGT/RGLMfPuE0EllEMPIr2zFXouMC52lVAeRdQn6QtlQgmKA8JHRcjxUQ8lO+fBwoAGjtb4bJBPNzu1Vje+HYZWFQa+IMdanfsAjgv7hp5ZqHm4ZBCRhtfjswlil3g/J8Hf9rI93RRyadXrKoF0BX+rZKUa+JL3ZJ416WvxUuV6fhabknk+g9WxEHCe7GpzwAAAABJRU5ErkJggg=='),
+  // Cat Life 3
+  cr_newImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAANCAYAAAB2HjRBAAAAAXNSR0IArs4c6QAAAIJJREFUKJFjYCABSIio/kfmM5Kj8cWb24wMDAwMTPhMRgYwDciACV2AGANgapiI0YQLMME0qpUqk6qXgRGbjW0iAgxVbz7g1fjizW1GJvSAIEYjDLAwoIekiCnRfscIbWJtxdAM8z+yS7DFL0wtSVH14s1tRmTD4FGFrADZBeiGIvMBhzU+ZZwq1+QAAAAASUVORK5CYII=')
 ];
 
 /**
@@ -124,6 +129,8 @@ let cr_canvas,      // HTMLCanvasElement
   cr_cameraAttackDelay = 0,       // Delay between attacks
   cr_cameraHealth = 5,            // Player's health
   cr_cameraState = 0,             // 0: Alive, 1: Dead
+  cr_cameraHurt = 0,              // Cooldown for camera red flash, in frames
+  cr_cameraHeight = 0.5,
 
   cr_catBobbing = 0,
 
@@ -191,8 +198,12 @@ function cr_updateMatrix(cr_position, cr_rotation, cr_transMat = 1) {
  * SECTION CAMERA FUNCTIONS
  */
 function cr_updateCamera() {
-  if (cr_cameraState === 1) return;
-  
+  if (cr_cameraState === 1) {
+    cr_cameraHeight = cr_Math.max(cr_cameraHeight - 0.008, 0.1);
+    cr_cameraView = cr_updateMatrix([-cr_cameraPosition[0], -cr_cameraPosition[1]-cr_cameraHeight, -cr_cameraPosition[2]], cr_cameraRotation);
+    return;
+  }
+
   // Update camera rotation based on input
   const R = 0.05,
   T = cr_keys["ArrowLeft"] ? 1 : cr_keys["ArrowRight"] ? -1 : 0;
@@ -225,7 +236,7 @@ function cr_updateCamera() {
   (cr_cameraPosition[1] === cr_cameraTargetFloor) && (cr_cameraIsJumping = 0);
 
   // If there was any movement, update the camera view matrix
-  cr_cameraView = cr_updateMatrix([-cr_cameraPosition[0], -cr_cameraPosition[1]-0.5, -cr_cameraPosition[2]], cr_cameraRotation);
+  cr_cameraView = cr_updateMatrix([-cr_cameraPosition[0], -cr_cameraPosition[1]-cr_cameraHeight, -cr_cameraPosition[2]], cr_cameraRotation);
 
   if (cr_keys["KeyZ"] === 1 && !cr_cameraAttackDelay) {
     cr_cameraAttackDelay = 10;
@@ -554,8 +565,10 @@ function cr_enemyMeleeAttack(cr_enemy) {
   const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
   cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
   cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
-  (cr_length <= 1.5) && cr_cameraHealth--;
-  if (cr_cameraHealth <= 0) cr_cameraState = 1;
+  if (cr_length <= 1.5) {
+    cr_cameraHurt = 10;
+    if (--cr_cameraHealth <= 0) cr_cameraState = 1;
+  }
 }
 
 function cr_updateEnemy(cr_enemy) {
@@ -585,7 +598,7 @@ function cr_updateEnemy(cr_enemy) {
       const cr_previousFrame = cr_enemy.cr_frame << 0;
       cr_enemy.cr_frame += cr_spriteSpeed;
       cr_enemy.cr_geometry = cr_enemy.cr_geometryAttack[cr_enemy.cr_frame << 0];
-      if ((cr_enemy.cr_frame<<0) === 3 && cr_previousFrame == 2) {
+      if ((cr_enemy.cr_frame<<0) === 2 && cr_previousFrame == 1) {
         cr_enemyMeleeAttack(cr_enemy);  
       }
       if (cr_enemy.cr_frame+cr_spriteSpeed >= 4) {
@@ -664,7 +677,7 @@ function cr_updateProjectile(cr_projectile) {
   cr_projectile.cr_position[2] += cr_zTo;
 
   const cr_enemy = cr_doesCollidesWithEnemy(cr_projectile.cr_position, 0);
-  if (cr_enemy) {
+  if (cr_enemy && cr_enemy.cr_state != 2) {
     cr_projectile.cr_destroy = 1;
     if (--cr_enemy.cr_hp <= 0) {
       cr_enemy.cr_state = 2;
@@ -702,6 +715,14 @@ function cr_update() {
     else {
       (!cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[0], 320+S*16, 274+cr_Mathabs(S)*8, 160, 176);
       (cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_img_2d[1], 288, 234, 224, 216);
+    }
+    if (--cr_cameraHurt > 0){
+      cr_ctx2D.fillStyle="rgba(255,0,0,0.5)";
+      cr_ctx2D.fillRect(0, 0, cr_width, cr_height);
+      cr_ctx2D.fillStyle="white";
+    }
+    for (I=0;I<cr_cameraHealth;I++) {
+      cr_ctx2D.drawImage(cr_img_2d[3], 8 + I * 31, 8, 30, 26);
     }
   }
 
