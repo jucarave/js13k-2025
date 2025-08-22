@@ -82,22 +82,116 @@ cr_document = document,
 cr_gravity = 0.01,
 cr_spriteSpeed = 0.1,
 cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are y1, y2, textureId
-  [0, 2, 0, 0, 0, 9, 0, 13, 7, 13, 12, 6, 12, 6, 8, 0, 8, 0, 0],
-  [0, 0.2, 0, 4, 3, 7, 3, 7, 6, 4, 6, 4, 3],
-  [0, 0.4, 0, 5, 4, 6, 4, 6, 5, 5, 5, 5, 4],
-  [0, 1, 0, 12, 7, 13, 7, 13, 9, 12, 9, 12, 7]
-], 
-cr_e1m1Planes = [               // Planes coordinates set by y, textureId, x1, z1, x2, z2
-  // Floors
-  0, 1, 0, 0, 14, 13,
-  0.2, 1, 4, 3, 7, 6,
-  0.4, 1, 5, 4, 6, 5,
-  1, 1, 12, 7, 13, 9,
-
-  // Ceilings
-  2, 2, 0, 0, 14, 13
+  // Dungeon entry
+  [0, 1.2, 0, 15, 20, 13, 20, 13, 21, 12, 21, 12, 22, 11, 22, 11, 21, 9, 21, 9, 22, 8, 22, 8, 21, 7, 21, 7, 17, 9, 17, 9, 15, 7, 11, 5, 11, 3, 10, 3, 11, 0, 11, 0, 7, 3, 7, 3, 9, 6, 9, 9, 11, 11, 15, 11, 17, 13, 17, 13, 18, 15, 18],
+  // Cave section
+  [0, 2.2, 0, 15, 18, 15, 17, 14, 16, 14, 14, 15, 13, 15, 12, 13, 10, 13, 8, 17, 6, 19, 9, 22, 7, 22, 5, 20, 3, 19, 3, 18, 4, 15, 4, 14, 3, 14, 1, 15, 0, 18, 0, 19, 1, 28, 1, 29, 2, 29, 4, 28, 5, 27, 5, 25, 3, 24, 3, 24, 7, 25, 8, 25, 9, 24, 10, 22, 10, 21, 11, 18, 11, 16, 9, 15, 9, 15, 10, 18, 12, 23, 12, 24, 15, 23, 18, 22, 19, 23, 20, 24, 24, 21, 25, 20, 25],
+  [0, 2.2, 0, 18, 25, 17, 25, 14, 24, 14, 22, 15, 21, 15, 20],
+  [0, 0.2, 0, 20, 25, 18, 25],
+  [1.2, 2.2, 0, 20, 25, 18, 25],
+  [1.2, 2.2, 0, 15, 20, 15, 18],
+  [0, 0.2, 0, 15, 20, 15, 18, 23, 18, 23, 20, 15, 20],
+  [0, 0.2, 0, 14, 15, 24, 15],
+  [0.2, 0.7, 0, 18, 7, 18, 11, 21, 11, 21, 7, 18, 7],
+  [0.2, 0.7, 0, 23, 8, 24, 8, 24, 9, 23, 9, 23, 8],
+  [0.2, 0.7, 0, 22.5, 5, 23.5, 5, 23.5, 6, 22.5, 6, 22.5, 5],
+  [0.2, 0.7, 0, 21, 4, 24, 4, 24, 2, 29, 2],
+  [0.2, 0.7, 0, 27, 4, 28, 4, 28, 5, 27, 5, 27, 4],
+  // Library
+  [0.2, 3.2, 0, 20, 25, 20, 28, 23, 28, 23, 33],
+  [0.2, 3.2, 0, 23, 34, 23, 40, 15, 40, 15, 28, 18, 28, 18, 25],
+  [0.2, 2.2, 0, 23, 33, 23, 34],
+  [1.2, 3.2, 0, 18, 28, 20, 28],
+  // Bookshelves
+  [0.2, 2.2, 0, 22.5, 33, 23, 33, 23, 37, 22.5, 37, 22.5, 33],
+  [0.2, 1.7, 0, 17, 34, 21, 34, 21, 34.5, 17, 34.5, 17, 34],
+  [0.2, 1.7, 0, 17, 32, 21, 32, 21, 32.5, 17, 32.5, 17, 32],
+  [0.2, 1.7, 0, 17, 36, 21, 36, 21, 36.5, 17, 36.5, 17, 36],
+  [0.2, 1.7, 0, 17, 38, 21, 38, 21, 38.5, 17, 38.5, 17, 38],
+  [0.2, 1.7, 0, 15, 33, 15.5, 33, 15.5, 37, 15, 37, 15, 33],
+  [0.2, 1.2, 0, 15, 29, 15.5, 29, 15.5, 32, 15, 32, 15, 29],
+  // Pathway
+  [2.2, 3.2, 0, 23, 33, 26, 33, 32, 28, 33, 25, 32, 21],
+  [2.2, 3.2, 0, 23, 34, 26, 34, 33, 28, 34, 25, 33, 21],
+  // Climax room
+  [0, 4, 0, 32, 21, 29, 20, 28, 18, 27, 16, 27, 15, 28, 12, 30, 11, 32, 11],
+  [0, 4, 0, 33, 11, 35, 11, 37, 12, 38, 15, 38, 16, 37, 19, 33, 21],
+  [0, 2.2, 0, 33, 21, 32, 21],
+  [3.2, 4, 0, 33, 21, 32, 21],
+  [1, 4, 0, 32, 11, 33, 11],
+  // Columns
+  [0, 4, 0, 30.3, 14, 30.6, 14, 31, 14.3, 31, 14.6, 30.6, 15, 30.3, 15, 30, 14.6, 30, 14.3, 30.3, 14],
+  [0, 4, 0, 35.3, 14, 35.6, 14, 36, 14.3, 36, 14.6, 35.6, 15, 35.3, 15, 35, 14.6, 35, 14.3, 35.3, 14],
+  [0, 4, 0, 30.3, 18, 30.6, 18, 31, 18.3, 31, 18.6, 30.6, 19, 30.3, 19, 30, 18.6, 30, 18.3, 30.3, 18],
+  [0, 4, 0, 35.3, 18, 35.6, 18, 36, 18.3, 36, 18.6, 35.6, 19, 35.3, 19, 35, 18.6, 35, 18.3, 35.3, 18],
+  // Exit room
+  [0, 1, 0, 32, 11, 32, 10.7, 31, 10.7, 31, 8, 34, 8, 34, 10.7, 33, 10.7, 33, 11]
 ],
-cr_e1m1FloorsCount = 4*6,
+cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2
+  // Dungeon entry floors
+  0.2, 1, 0, 7, 11, 22,
+  0.2, 1, 11, 17, 15, 21,
+  0.2, 1, 11, 21, 12, 22,
+
+  // Cave floors
+  0, 1, 14, 15, 24, 25,
+  0.2, 1, 15, 18, 23, 20,
+  0.2, 1, 21, 0, 29, 11,
+  0.2, 1, 13, 0, 20, 15,
+  0.2, 1, 20, 12, 24, 15,
+  0.7, 1, 18, 7, 21, 11,
+  0.7, 1, 14, 0, 24, 4,
+  0.7, 1, 24, 1, 29, 2,
+  0.7, 1, 23, 8, 24, 9,
+  0.7, 1, 22.5, 5, 23.5, 6,
+  0.7, 1, 27, 4, 28, 5,
+
+  // Library floors
+  0.2, 1, 15, 25, 23, 40, 
+
+  // Bookshelves floors
+  2.2, 1, 22.5, 33, 23, 37,
+  1.7, 1, 17, 34, 21, 34.5,
+  1.7, 1, 17, 32, 21, 32.5,
+  1.7, 1, 17, 36, 21, 36.5,
+  1.7, 1, 17, 38, 21, 38.5,
+  1.7, 1, 15, 33, 15.5, 37,
+  1.2, 1, 15, 29, 15.5, 32,
+
+  // Pathway floors
+  2.2, 1, 28, 21, 36, 35, 
+  2.2, 1, 23, 31, 28, 35, 
+
+  // Climax room floors
+  0, 1, 27, 11, 38, 21,
+
+  // Exit room floors
+  0, 1, 31, 8, 34, 11,
+
+  // Dungeon entry ceilings
+  1.2, 2, 0, 7, 11, 22,
+  1.2, 2, 11, 17, 15, 21,
+  1.2, 2, 11, 21, 12, 22,
+
+  // Cave ceilings
+  2.2, 2, 13, 0, 25, 25,
+  2.2, 2, 25, 0, 29, 5,
+
+  // Library ceilings
+  1.2, 2, 18, 25, 20, 28,
+  3.2, 2, 15, 28, 23, 40,
+
+  // Pathway ceilings
+  3.2, 2, 28, 21, 36, 35, 
+  3.2, 2, 23, 31, 28, 35, 
+
+  // Climax room ceilings
+  4, 2, 27, 11, 38, 21,
+
+  // Exit room ceilings
+  1, 2, 31, 8, 34, 11,
+],
+cr_e1m1FloorsCount = 26*6,
 cr_smallUvs = [
   [0,0,1/8,1],
   [1/8,0,2/8,1],
@@ -155,14 +249,14 @@ let cr_canvas,      // HTMLCanvasElement
   cr_getUniformLocation = null, // Function to get uniform locations
   cr_uniformMatrix4fv = null,   // Function to set uniform matrices
 
-  cr_cameraPosition = [3,0,3,0],       // Camera position in 3D space + vertical speed
+  cr_cameraPosition = [2,0.2,9,0],       // Camera position in 3D space + vertical speed
   cr_cameraRotation = 0,             // Camera rotation angle in radians
   cr_cameraView = cr_updateMatrix(cr_cameraPosition, cr_cameraRotation),     // Camera view matrix
   cr_cameraProjection  = [1, 0, 0, 0, // Camera projection matrix
                           0, 1.778, 0, 0, 
                           0, 0, -1, -1, 
                           0, 0, -0.1, 0],
-  cr_cameraTargetFloor = 0,       // Where should the camera be placed at vertically?
+  cr_cameraTargetFloor = 0.2,       // Where should the camera be placed at vertically?
   cr_cameraIsJumping = 0,         // Is the camera jumping
   cr_cameraAttackDelay = 0,       // Delay between attacks
   cr_cameraHealth = 5,            // Player's health
@@ -277,7 +371,7 @@ function cr_updateCamera() {
   cr_cameraView = cr_updateMatrix([-cr_cameraPosition[0], -cr_cameraPosition[1]-cr_cameraHeight, -cr_cameraPosition[2]], cr_cameraRotation);
 
   if (cr_keys["KeyZ"] === 1 && !cr_cameraAttackDelay) {
-    cr_cameraAttackDelay = 10;
+    cr_cameraAttackDelay = 20;
     cr_keys["KeyZ"] = 2;
     cr_createProjectile(cr_cameraPosition[0], cr_cameraPosition[1]+0.4, cr_cameraPosition[2], [-S, -C], 4);
   }
@@ -326,8 +420,8 @@ function cr_initEngine() {
 
 function cr_initEngine2D() {
   cr_canvas2D = cr_document.getElementById("cg2");
-  cr_canvas2D.width = cr_width/4;
-  cr_canvas2D.height = cr_height/4;
+  cr_canvas2D.width = cr_Math.floor(cr_width/4);
+  cr_canvas2D.height = cr_Math.floor(cr_height/4);
 
   cr_ctx2D = cr_canvas2D.getContext("2d");
   cr_ctx2D.imageSmoothingEnabled = 0;
@@ -403,8 +497,14 @@ function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
   X1 = P[0] - S,
   X2 = P[0] + S,
   Z1 = P[2] - S,
-  Z2 = P[2] + S;
+  Z2 = P[2] + S,
   
+  cr_enemy = cr_doesCollidesWithEnemy(P, 0, 1);
+
+  if (!cr_isCeiling && cr_enemy && cr_enemy.cr_position[1] + 0.8 <= P[1]) {
+    cr_result = cr_enemy.cr_position[1] + 0.8;
+  }
+
   for (let I=0;I<cr_planes.length;I+=6) {
     if (X2 < cr_planes[I+2] || X1 > cr_planes[I+4]) continue;
     if (Z2 < cr_planes[I+3] || Z1 > cr_planes[I+5]) continue;
@@ -437,12 +537,12 @@ function cr_updateGravity(P, T) {
 }
 
 // Check for collisions with enemies
-function cr_doesCollidesWithEnemy(P, cr_self) {
+function cr_doesCollidesWithEnemy(P, cr_self, cr_2d = 0) {
   for (let I=0;I<cr_enemies.length;I++) {
     const cr_enemy = cr_enemies[I];
     if (cr_enemy === cr_self || cr_enemy.cr_state === 3) continue;
-    if (P[1] > cr_enemy.cr_position[1] + 0.8) continue;
-    if (P[1]+1 < cr_enemy.cr_position[1]) continue;
+    if (!cr_2d && P[1] >= cr_enemy.cr_position[1] + 0.8) continue;
+    if (!cr_2d && P[1]+1 < cr_enemy.cr_position[1]) continue;
 
     const cr_distance = (P[0] - cr_enemy.cr_position[0]) ** 2 + (P[2] - cr_enemy.cr_position[2]) ** 2;
     if (cr_distance <= 1) return cr_enemy;
@@ -682,7 +782,7 @@ function cr_updateEnemy(cr_enemy) {
     if (cr_enemy.cr_attackCooldown <= 0){
       cr_enemy.cr_state = 4;
       cr_enemy.cr_frame = 0;
-      cr_enemy.cr_attackCooldown = 120;
+      cr_enemy.cr_attackCooldown = 60;
     }  
     return;
   }
@@ -773,7 +873,7 @@ function cr_update() {
       (cr_cameraIsJumping) && cr_ctx2D.putImageData(cr_textures2D[1], 86, 86);
     }
     if (--cr_cameraHurt > 0){
-      cr_ctx2D.fillStyle="rgba(255,0,0,0.5)";
+      cr_ctx2D.fillStyle="rgba(255,0,68,0.5)";
       cr_ctx2D.fillRect(0, 0, cr_width, cr_height);
       cr_ctx2D.fillStyle="white";
     }
@@ -814,7 +914,7 @@ function cr_main() {
   cr_loadTextures2D();
   cr_buildRoomGeometry();
   cr_buildPlanesGeometry();
-  cr_createEnemy(9,0,9,3,3);
+  //cr_createEnemy(9,0,9,3,3);
   cr_update();
 }
 
