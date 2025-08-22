@@ -26,9 +26,10 @@ void main() {
 cr_f_shader = `
 precision mediump float;
 uniform sampler2D u_tex;
+uniform vec2 u_tm;
 varying vec2 v_uv;
 void main() {
-  vec4 c = texture2D(u_tex, v_uv);
+  vec4 c = texture2D(u_tex, v_uv + u_tm.x);
   if (c.a == 0.0) discard;
   gl_FragColor = c;
 }
@@ -83,36 +84,43 @@ cr_gravity = 0.01,
 cr_spriteSpeed = 0.1,
 cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are y1, y2, textureId
   // Dungeon entry
-  [0, 1.2, 0, 15, 20, 13, 20, 13, 21, 12, 21, 12, 22, 11, 22, 11, 21, 9, 21, 9, 22, 8, 22, 8, 21, 7, 21, 7, 17, 9, 17, 9, 15, 7, 11, 5, 11, 3, 10, 3, 11, 0, 11, 0, 7, 3, 7, 3, 9, 6, 9, 9, 11, 11, 15, 11, 17, 13, 17, 13, 18, 15, 18],
+  [0, 1.2, 5, 15, 20, 13, 20, 13, 21, 12, 21, 12, 22, 11, 22, 11, 21, 9, 21, 9, 22, 8, 22, 8, 21, 7, 21, 7, 17, 9, 17, 9, 15, 7, 11, 5, 11, 3, 10, 3, 11, 0, 11, 0, 7, 3, 7, 3, 9, 6, 9, 9, 11, 11, 15, 11, 17, 13, 17, 13, 18, 15, 18],
   // Cave section
-  [0, 2.2, 0, 15, 18, 15, 17, 14, 16, 14, 14, 15, 13, 15, 12, 13, 10, 13, 8, 17, 6, 19, 9, 22, 7, 22, 5, 20, 3, 19, 3, 18, 4, 15, 4, 14, 3, 14, 1, 15, 0, 18, 0, 19, 1, 28, 1, 29, 2, 29, 4, 28, 5, 27, 5, 25, 3, 24, 3, 24, 7, 25, 8, 25, 9, 24, 10, 22, 10, 21, 11, 18, 11, 16, 9, 15, 9, 15, 10, 18, 12, 23, 12, 24, 15, 23, 18, 22, 19, 23, 20, 24, 24, 21, 25, 20, 25],
-  [0, 2.2, 0, 18, 25, 17, 25, 14, 24, 14, 22, 15, 21, 15, 20],
-  [0, 0.2, 0, 20, 25, 18, 25],
-  [1.2, 2.2, 0, 20, 25, 18, 25],
-  [1.2, 2.2, 0, 15, 20, 15, 18],
-  [0, 0.2, 0, 15, 20, 15, 18, 23, 18, 23, 20, 15, 20],
-  [0, 0.2, 0, 14, 15, 24, 15],
-  [0.2, 0.7, 0, 18, 7, 18, 11, 21, 11, 21, 7, 18, 7],
-  [0.2, 0.7, 0, 23, 8, 24, 8, 24, 9, 23, 9, 23, 8],
-  [0.2, 0.7, 0, 22.5, 5, 23.5, 5, 23.5, 6, 22.5, 6, 22.5, 5],
-  [0.2, 0.7, 0, 21, 4, 24, 4, 24, 2, 29, 2],
-  [0.2, 0.7, 0, 27, 4, 28, 4, 28, 5, 27, 5, 27, 4],
+  [0, 2.2, 7, 15, 18, 15, 17, 14, 16, 14, 14, 15, 13, 15, 12, 13, 10, 13, 8, 17, 6, 19, 9, 22, 7, 22, 5, 20, 3, 19, 3, 18, 4, 15, 4, 14, 3, 14, 1, 15, 0, 18, 0, 19, 1, 28, 1, 29, 2, 29, 4, 28, 5, 27, 5, 25, 3, 24, 3, 24, 7, 25, 8, 25, 9, 24, 10, 22, 10, 21, 11, 18, 11, 16, 9, 15, 9, 15, 10, 18, 12, 23, 12, 24, 15, 23, 18, 22, 19, 23, 20, 24, 24, 21, 25, 20, 25],
+  [0, 2.2, 7, 18, 25, 17, 25, 14, 24, 14, 22, 15, 21, 15, 20],
+  [0, 0.2, 7, 20, 25, 18, 25],
+  [1.2, 2.2, 7, 20, 25, 18, 25],
+  [1.2, 2.2, 7, 15, 20, 15, 18],
+  [0, 0.2, 7, 15, 20, 15, 18, 23, 18, 23, 20, 15, 20],
+  [0, 0.2, 7, 14, 15, 24, 15],
+  [0, 0.7, 7, 18, 7, 18, 11, 21, 11, 21, 7, 18, 7],
+  [0, 0.7, 7, 23, 8, 24, 8, 24, 9, 23, 9, 23, 8],
+  [0, 0.7, 7, 22.5, 5, 23.5, 5, 23.5, 6, 22.5, 6, 22.5, 5],
+  [0, 0.7, 7, 21, 4, 24, 4, 24, 2, 29, 2],
+  [0, 0.7, 7, 27, 4, 28, 4, 28, 5, 27, 5, 27, 4],
   // Library
-  [0.2, 3.2, 0, 20, 25, 20, 28, 23, 28, 23, 33],
-  [0.2, 3.2, 0, 23, 34, 23, 40, 15, 40, 15, 28, 18, 28, 18, 25],
-  [0.2, 2.2, 0, 23, 33, 23, 34],
-  [1.2, 3.2, 0, 18, 28, 20, 28],
+  [0.2, 3.2, 9, 20, 25, 20, 28, 23, 28, 23, 33],
+  [0.2, 3.2, 9, 23, 34, 23, 40, 15, 40, 15, 28, 18, 28, 18, 25],
+  [0.2, 2.2, 9, 23, 33, 23, 34],
+  [1.2, 3.2, 9, 18, 28, 20, 28],
   // Bookshelves
-  [0.2, 2.2, 0, 22.5, 33, 23, 33, 23, 37, 22.5, 37, 22.5, 33],
-  [0.2, 1.7, 0, 17, 34, 21, 34, 21, 34.5, 17, 34.5, 17, 34],
-  [0.2, 1.7, 0, 17, 32, 21, 32, 21, 32.5, 17, 32.5, 17, 32],
-  [0.2, 1.7, 0, 17, 36, 21, 36, 21, 36.5, 17, 36.5, 17, 36],
-  [0.2, 1.7, 0, 17, 38, 21, 38, 21, 38.5, 17, 38.5, 17, 38],
-  [0.2, 1.7, 0, 15, 33, 15.5, 33, 15.5, 37, 15, 37, 15, 33],
-  [0.2, 1.2, 0, 15, 29, 15.5, 29, 15.5, 32, 15, 32, 15, 29],
+  [0.2, 2.2, 11, 22.5, 33, 22.5, 37],
+  [0.2, 2.2, 12, 22.5, 33, 23, 33, 23, 37, 22.5, 37],
+  [0.2, 1.7, 11, 17, 34, 21, 34, 17, 34.5, 21, 34.5],
+  [0.2, 1.7, 12, 17, 34, 17, 34.5, 21, 34, 21, 34.5],
+  [0.2, 1.7, 11, 17, 32, 21, 32, 17, 32.5, 21, 32.5],
+  [0.2, 1.7, 12, 17, 32, 17, 32.5, 21, 32, 21, 32.5],
+  [0.2, 1.7, 11, 17, 36, 21, 36, 17, 36.5, 21, 36.5],
+  [0.2, 1.7, 12, 17, 36, 17, 36.5, 21, 36, 21, 36.5],
+  [0.2, 1.7, 11, 17, 38, 21, 38, 17, 38.5, 21, 38.5],
+  [0.2, 1.7, 12, 17, 38, 17, 38.5, 21, 38, 21, 38.5],
+  [0.2, 1.7, 11, 15.5, 33, 15.5, 37],
+  [0.2, 1.7, 12, 15.5, 37, 15, 37, 15, 33, 15.5, 33],
+  [0.2, 1.2, 11, 15.5, 38, 15.5, 40],
+  [0.2, 1.2, 12, 15.5, 40, 15, 40, 15, 38, 15.5, 38],
   // Pathway
-  [2.2, 3.2, 0, 23, 33, 26, 33, 32, 28, 33, 25, 32, 21],
-  [2.2, 3.2, 0, 23, 34, 26, 34, 33, 28, 34, 25, 33, 21],
+  [2.2, 3.2, 2, 23, 33, 26, 33, 32, 28, 33, 25, 32, 21],
+  [2.2, 3.2, 2, 23, 34, 26, 34, 33, 28, 34, 25, 33, 21],
   // Climax room
   [0, 4, 0, 32, 21, 29, 20, 28, 18, 27, 16, 27, 15, 28, 12, 30, 11, 32, 11],
   [0, 4, 0, 33, 11, 35, 11, 37, 12, 38, 15, 38, 16, 37, 19, 33, 21],
@@ -129,14 +137,14 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
 ],
 cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2
   // Dungeon entry floors
-  0.2, 1, 0, 7, 11, 22,
-  0.2, 1, 11, 17, 15, 21,
-  0.2, 1, 11, 21, 12, 22,
+  0.2, 5, 0, 7, 11, 22,
+  0.2, 5, 11, 17, 15, 21,
+  0.2, 5, 11, 21, 12, 22,
 
   // Cave floors
-  0, 1, 14, 15, 24, 25,
+  0, 8, 14, 15, 24, 25,
   0.2, 1, 15, 18, 23, 20,
-  0.2, 1, 21, 0, 29, 11,
+  0, 8, 21, 0, 29, 11,
   0.2, 1, 13, 0, 20, 15,
   0.2, 1, 20, 12, 24, 15,
   0.7, 1, 18, 7, 21, 11,
@@ -147,20 +155,20 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2
   0.7, 1, 27, 4, 28, 5,
 
   // Library floors
-  0.2, 1, 15, 25, 23, 40, 
+  0.2, 10, 15, 25, 23, 40, 
 
   // Bookshelves floors
-  2.2, 1, 22.5, 33, 23, 37,
-  1.7, 1, 17, 34, 21, 34.5,
-  1.7, 1, 17, 32, 21, 32.5,
-  1.7, 1, 17, 36, 21, 36.5,
-  1.7, 1, 17, 38, 21, 38.5,
-  1.7, 1, 15, 33, 15.5, 37,
-  1.2, 1, 15, 29, 15.5, 32,
+  2.2, 12, 22.5, 33, 23, 37,
+  1.7, 12, 17, 34, 21, 34.5,
+  1.7, 12, 17, 32, 21, 32.5,
+  1.7, 12, 17, 36, 21, 36.5,
+  1.7, 12, 17, 38, 21, 38.5,
+  1.7, 12, 15, 33, 15.5, 37,
+  1.2, 12, 15, 38, 15.5, 40,
 
   // Pathway floors
-  2.2, 1, 28, 21, 36, 35, 
-  2.2, 1, 23, 31, 28, 35, 
+  2.2, 2, 28, 21, 36, 35, 
+  2.2, 2, 23, 31, 28, 35, 
 
   // Climax room floors
   0, 1, 27, 11, 38, 21,
@@ -174,8 +182,8 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2
   1.2, 2, 11, 21, 12, 22,
 
   // Cave ceilings
-  2.2, 2, 13, 0, 25, 25,
-  2.2, 2, 25, 0, 29, 5,
+  2.2, 6, 13, 0, 25, 25,
+  2.2, 6, 25, 0, 29, 5,
 
   // Library ceilings
   1.2, 2, 18, 25, 20, 28,
@@ -212,7 +220,23 @@ cr_img = [
   // Broom 3
   [128, 16, "      qq            qqq                 qq                                qq                                                         qabq          qabbq               qbaq                              qaaq                                        qqqqq            qabq          qabbq             qbaq            qq                  qbbq                         q           qqabbbaqq           qabq          qabq            qbaq            q88qq                 qbq                        qaq         qabbjjjbbbq           qbq           qaq            qbq            q87778q                qbq                        qbqq        qaabbbbbbaq           qaq           qaq            qaq           q87qqq78q              qaqq                        qbqq         qqabbbaqq            qbq           qbq            qbq          q77q   q78q        q   qaaq                         qbqaq          qqqqq              qbq           qbq            qbq          q7q     q78q      qq  qbbq                          qbqaq           qbq               qaq           qaq            qaq           q       q7q     qaaq  qq                           qaqq            qaq              qabq           qqq            qbaq                 q78q      qqq                               qqq             qqq            qqqaq            qbvq            qaqqq             qqq7q       qbvqqq                           qabaq           qabaq          qvqbqq           qvquvq           qqbqvq           qsq8qq       qqquvvq                         qvqqqvq         qvqqqvq        qvuvqvq           qvvuvq           qvqvuvq         qstsqsq       qvvvuvvq                        qvuvuvq         qvuvuvq        quvvuvq           quvuvq           qvuvvuq         qtsstsq       quvuuuvvq       qqqqqqqqqq      qvuvuvq         qvuvuvq       qvvuuvq            qvuvuvq           qvuuvvq       qssttsq         qvvuvuq      qquvuuvuqqbaq    qvuvuvuvq       qvuvuvuvq       quvuq              qvuvuvq           quvuq         qtstq           qvqqq       qbquvuuvvvqbq    quvuvuvuq       quvuvuvuq    "],
   // Projectile 4
-  [8, 8, "  hhhh   hiiiih hijiijihhiijjiihhiijjiihhijiijih hiiiih   hhhh  "]
+  [8, 8, "  hhhh   hiiiih hijiijihhiijjiihhiijjiihhijiijih hiiiih   hhhh  "],
+  // WallStones 5
+  [16, 16, "mmmmmmmmmmooooonmmmmmmmnnnooooonmmmmmmnoooooooonmmmmmnoooommnoonmmmmnooonmmmmnonnnnnoooonmmmmmooooooooooonmmmmoooooonmooonmmmnooooonmmmooonnnooomnonmmmnoooooonmmmoonnnooonnmmmmmnoooooooonmmmmmmooooooooonmmmmmooooonmnooonmmnnoonmmmmmmoonnnoonmmmmmmmmnoooooo"],
+  // Dirt Ceiling 6
+  [16, 16, "6656666566666656666666666666666666666664666666666666666666656666664666666666666666666656666666665666666666666656666666666566666666666666666646666666566666666666666666666666666666646666666566666666666566666666665666666666656666666666666666666666666666466666"],
+  // Cave Wall 7
+  [16, 16, "5556555446666465656465445544445664445656565444456444565545544545554555654565544455544454445654456444445544455565544445544446655456444455454654444544546544554444565545566656545455655565556655456446655544445555444456665444655645455644554446644455664465555565"],
+  // Water 8
+  [16, 16, "ggggoohoooooggihgggoohhhhiihhihgggoohiggghhggggggghihggghhggggggghhggggghooggggghggggggghooogghhgggggggghohhhhigggggooogiihgoohigggoooohhhggooohggoooohhggggggohgihhhiigggggggghihgggghgggggggghhggggghgggggggghgggggghgggggggghgggggghgooggggghgggggohooooggggh"],
+  // Wall_2 9
+  [16, 16, "qqqqqqqqqqqqqqqqqnnnqnnnqnnnqnnnqnnnqnmnqnnnqnmnqmmmqmmmqmmmqmmmqqqqqqqqqqqqqqqqnnqnnnqnnnqnnnqnnnqnnnqnnnqnnnqnnmqmnmqmnmqmnmqmqqqqqqqqqqqqqqqqqnnnqnnnqnnnqnnnqnnnqnmnqnnnqnmnqmmmqmmmqmmmqmmmqqqqqqqqqqqqqqqqnnqnnnqnnnqnnnqnnnqnnnqnnnqnnnqnnmqmnmqmnmqmnmqm"],
+  // Wood floor 10
+  [16, 16, "qqqqq645q665q566q566q656q665q466q545q656q656qqqqq545q656q646q566q554qqqqq646q466q555q656q646q446q555q655q656q646qqqqq645q656q644q554q664qqqqq664q564q664q656qqqqq564q655q646q656q564qqqqq556q656q565q656q546q656q565q556q544q456q565q655q564q565q566q645qqqqq564"],
+  // Bookshelves 11
+  [16, 16, "5555555555555555q5qqqqqqqqqqqqqqq5q77qddqmqrq7qgq5q77qddqmqrq7qgq5qqqqqqqqqqqqqqq5q5555555555555q5qqqqqqqqqqqqqqq5qddqmq77qddqggq5qddqmq77qddqggq5qddqmq77qddqggq5qqqqqqqqqqqqqqq5q5555555555555q5qqqqqqqqqqqqqqq5qrq77qdqmmq7q7q5qrq77qdqmmq7q7q5qqqqqqqqqqqqqq"],
+  // Bookshelves sides 12
+  [16, 16, "5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555"],
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
 cr_newImage = (cr_src) => {
@@ -245,6 +269,8 @@ let cr_canvas,      // HTMLCanvasElement
   cr_ctx2D,         // 2D rendering context
 
   cr_keys = {},     // Object to store key states
+  cr_lastTime = 0,
+  cr_time = 0,
 
   cr_getUniformLocation = null, // Function to get uniform locations
   cr_uniformMatrix4fv = null,   // Function to set uniform matrices
@@ -441,7 +467,7 @@ function cr_parsePixels(cr_sprite) {
 }
 
 function cr_loadTextures() {
-  for (let J=0;J<5;J++) {
+  for (let J=0;J<13;J++) {
     const cr_pixels = cr_parsePixels(cr_img[J]),
     A = 3553;
 
@@ -577,6 +603,9 @@ function cr_renderGeometry(cr_geometry, cr_worldMatrix) {
   cr_gl.activeTexture(33984); // 33984 is for TEXTURE0
   cr_gl.bindTexture(3553, cr_textures[cr_geometry.cr_textureIndex]);
   cr_gl.uniform1i(cr_textureLocation, 0);
+
+  const cr_uniformTime = cr_getUniformLocation(cr_program, "u_tm");
+  cr_gl.uniform2f(cr_uniformTime, cr_geometry.cr_textureIndex === 8 ? cr_time * 0.3 : 0, 0);
 
   cr_gl.drawElements(4, cr_geometry.cr_indices.length, 5123, 0); // 4 is for TRIANGLES, 6 is the number of indices, 5123 is for UNSIGNED_SHORT
 }
@@ -853,6 +882,12 @@ function cr_updateProjectile(cr_projectile) {
  * SECTION GAME LOOP
  */
 function cr_update() {
+  const cr_now = Date.now() - cr_lastTime,
+  cr_delta = cr_now / 1000;
+  cr_lastTime = Date.now();
+
+  cr_time += cr_delta;
+
   cr_gl.clear(16640); // 16640 is for COLOR_BUFFER_BIT | DEPTH_BUFFER_BIT
 
   cr_updateCamera();
@@ -908,6 +943,8 @@ function cr_update() {
  * This is the main function that initializes the engine and starts the game.
  */
 function cr_main() {
+  cr_lastTime = Date.now();
+
   cr_initEngine();
   cr_initEngine2D();
   cr_loadTextures();
