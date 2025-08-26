@@ -83,123 +83,90 @@ cr_document = document,
 cr_gravity = 0.01,
 cr_spriteSpeed = 0.1,
 cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are y1, y2, textureId
-  // Dungeon entry
-  [0, 1.2, 5, 15, 20, 13, 20, 13, 21, 12, 21, 12, 22, 11, 22, 11, 21, 9, 21, 9, 22, 8, 22, 8, 21, 7, 21, 7, 17, 9, 17, 9, 15, 7, 11, 5, 11, 3, 10, 3, 11, 0, 11, 0, 7, 3, 7, 3, 9, 6, 9, 9, 11, 11, 15, 11, 17, 13, 17, 13, 18, 15, 18],
-  // Cave section
-  [0, 2.2, 7, 15, 18, 15, 17, 14, 16, 14, 14, 15, 13, 15, 12, 13, 10, 13, 8, 17, 6, 19, 9, 22, 7, 22, 5, 20, 3, 19, 3, 18, 4, 15, 4, 14, 3, 14, 1, 15, 0, 18, 0, 19, 1, 28, 1, 29, 2, 29, 4, 28, 5, 27, 5, 25, 3, 24, 3, 24, 7, 25, 8, 25, 9, 24, 10, 22, 10, 21, 11, 18, 11, 16, 9, 15, 9, 15, 10, 18, 12, 23, 12, 24, 15, 23, 18, 22, 19, 23, 20, 24, 24, 21, 25, 20, 25],
-  [0, 2.2, 7, 18, 25, 17, 25, 14, 24, 14, 22, 15, 21, 15, 20],
-  [0, 0.2, 7, 20, 25, 18, 25],
-  [1.2, 2.2, 7, 20, 25, 18, 25],
-  [1.2, 2.2, 7, 15, 20, 15, 18],
-  [0, 0.2, 7, 15, 20, 15, 18, 23, 18, 23, 20, 15, 20],
-  [0, 0.2, 7, 14, 15, 24, 15],
-  [0, 0.7, 7, 18, 7, 18, 11, 21, 11, 21, 7, 18, 7],
-  [0, 0.7, 7, 23, 8, 24, 8, 24, 9, 23, 9, 23, 8],
-  [0, 0.7, 7, 22.5, 5, 23.5, 5, 23.5, 6, 22.5, 6, 22.5, 5],
-  [0, 0.7, 7, 21, 4, 24, 4, 24, 2, 29, 2],
-  [0, 0.7, 7, 27, 4, 28, 4, 28, 5, 27, 5, 27, 4],
-  // Library
-  [0.2, 3.2, 9, 20, 25, 20, 28, 23, 28, 23, 33],
-  [0.2, 3.2, 9, 23, 34, 23, 40, 15, 40, 15, 28, 18, 28, 18, 25],
-  [0.2, 2.2, 9, 23, 33, 23, 34],
-  [1.2, 3.2, 9, 18, 28, 20, 28],
-  // Bookshelves
-  [0.2, 2.2, 11, 22.5, 33, 22.5, 37],
-  [0.2, 2.2, 12, 22.5, 33, 23, 33, 23, 37, 22.5, 37],
-  [0.2, 1.7, 11, 17, 34, 21, 34, 17, 34.5, 21, 34.5],
-  [0.2, 1.7, 12, 17, 34, 17, 34.5, 21, 34, 21, 34.5],
-  [0.2, 1.7, 11, 17, 32, 21, 32, 17, 32.5, 21, 32.5],
-  [0.2, 1.7, 12, 17, 32, 17, 32.5, 21, 32, 21, 32.5],
-  [0.2, 1.7, 11, 17, 36, 21, 36, 17, 36.5, 21, 36.5],
-  [0.2, 1.7, 12, 17, 36, 17, 36.5, 21, 36, 21, 36.5],
-  [0.2, 1.7, 11, 17, 38, 21, 38, 17, 38.5, 21, 38.5],
-  [0.2, 1.7, 12, 17, 38, 17, 38.5, 21, 38, 21, 38.5],
-  [0.2, 1.7, 11, 15.5, 33, 15.5, 37],
-  [0.2, 1.7, 12, 15.5, 37, 15, 37, 15, 33, 15.5, 33],
-  [0.2, 1.2, 11, 15.5, 38, 15.5, 40],
-  [0.2, 1.2, 12, 15.5, 40, 15, 40, 15, 38, 15.5, 38],
-  // Pathway
-  [2.2, 3.2, 2, 23, 33, 26, 33, 32, 28, 33, 25, 32, 21],
-  [2.2, 3.2, 2, 23, 34, 26, 34, 33, 28, 34, 25, 33, 21],
-  // Climax room
-  [0, 4, 0, 32, 21, 29, 20, 28, 18, 27, 16, 27, 15, 28, 12, 30, 11, 32, 11],
-  [0, 4, 0, 33, 11, 35, 11, 37, 12, 38, 15, 38, 16, 37, 19, 33, 21],
-  [0, 2.2, 0, 33, 21, 32, 21],
-  [3.2, 4, 0, 33, 21, 32, 21],
-  [1, 4, 0, 32, 11, 33, 11],
-  // Columns
-  [0, 4, 0, 30.3, 14, 30.6, 14, 31, 14.3, 31, 14.6, 30.6, 15, 30.3, 15, 30, 14.6, 30, 14.3, 30.3, 14],
-  [0, 4, 0, 35.3, 14, 35.6, 14, 36, 14.3, 36, 14.6, 35.6, 15, 35.3, 15, 35, 14.6, 35, 14.3, 35.3, 14],
-  [0, 4, 0, 30.3, 18, 30.6, 18, 31, 18.3, 31, 18.6, 30.6, 19, 30.3, 19, 30, 18.6, 30, 18.3, 30.3, 18],
-  [0, 4, 0, 35.3, 18, 35.6, 18, 36, 18.3, 36, 18.6, 35.6, 19, 35.3, 19, 35, 18.6, 35, 18.3, 35.3, 18],
-  // Exit room
-  [0, 1, 0, 32, 11, 32, 10.7, 31, 10.7, 31, 8, 34, 8, 34, 10.7, 33, 10.7, 33, 11]
+  // Kitchen
+  [0, 2, 0, 8.8, 12, 9, 12, 9, 4, 17, 4, 17, 9, 17.2, 9, 17.2, 4],
+  [0, 2, 0, 9, 15, 9, 13, 8.8, 13],
+  [1.5, 2, 0, 9, 13, 9, 12],
+  // Kitchen countertops
+  [0, 0.8, 7, 10, 5, 15, 5],
+  [0, 0.8, 8, 10, 4, 10, 5],
+  [0, 0.8, 8, 15, 5, 15, 4],
+  // Kitchen fridge
+  [0, 1.5, 10, 15, 5, 16, 5],
+  [0, 1.5, 11, 15, 5, 15, 4],
+  [0, 1.5, 11, 16, 5, 16, 4],
+  // Dining table
+  [0.6, 0.8, 15, 10, 7, 10, 8, 12.2, 8, 12.2, 7, 10, 7],
+  [0, 0.6, 15, 10, 7, 10, 7.1, 10.1, 7.1, 10.1, 7, 10, 7],
+  [0, 0.6, 15, 10, 7.9, 10, 8, 10.1, 8, 10.1, 7.9, 10, 7.9],
+  [0, 0.6, 15, 12.1, 7, 12.1, 7.1, 12.2, 7.1, 12.2, 7, 12.1, 7],
+  [0, 0.6, 15, 12.1, 7.9, 12.1, 8, 12.2, 8, 12.2, 7.9, 12.1, 7.9],
+  // Dining table chairs
+  [0.5, 1, 15, 10.2, 6.7, 10.2, 6.8, 10.8, 6.8, 10.8, 6.7, 10.2, 6.7],      // Chair 1
+  [0, 0.5, 15, 10.2, 6.7, 10.2, 6.8, 10.3, 6.8, 10.3, 6.7, 10.2, 6.7],
+  [0, 0.5, 15, 10.7, 6.7, 10.7, 6.8, 10.8, 6.8, 10.8, 6.7, 10.7, 6.7],
+  [0, 0.5, 15, 10.2, 7.2, 10.2, 7.3, 10.3, 7.3, 10.3, 7.2, 10.2, 7.2],
+  [0, 0.5, 15, 10.7, 7.2, 10.7, 7.3, 10.8, 7.3, 10.8, 7.2, 10.7, 7.2],
+  [0.4, 0.5, 15, 10.2, 6.8, 10.2, 7.3, 10.8, 7.3, 10.8, 6.8, 10.2, 6.8],
+  [0.5, 1, 15, 11.4, 6.7, 11.4, 6.8, 12, 6.8, 12, 6.7, 11.4, 6.7],          // Chair 2
+  [0, 0.5, 15, 11.4, 6.7, 11.4, 6.8, 11.5, 6.8, 11.5, 6.7, 11.4, 6.7],
+  [0, 0.5, 15, 11.9, 6.7, 11.9, 6.8, 12, 6.8, 12, 6.7, 11.9, 6.7],
+  [0, 0.5, 15, 11.4, 7.2, 11.4, 7.3, 11.5, 7.3, 11.5, 7.2, 11.4, 7.2],
+  [0, 0.5, 15, 11.9, 7.2, 11.9, 7.3, 12, 7.3, 12, 7.2, 11.9, 7.2],
+  [0.4, 0.5, 15, 11.4, 6.8, 11.4, 7.3, 12, 7.3, 12, 6.8, 11.4, 6.8],
+  [0.5, 1, 15, 10.2, 8.2, 10.2, 8.3, 10.8, 8.3, 10.8, 8.2, 10.2, 8.2],      // Chair 3
+  [0, 0.5, 15, 10.2, 7.7, 10.2, 7.8, 10.3, 7.8, 10.3, 7.7, 10.2, 7.7],
+  [0, 0.5, 15, 10.7, 7.7, 10.7, 7.8, 10.8, 7.8, 10.8, 7.7, 10.7, 7.7],
+  [0, 0.5, 15, 10.2, 8.2, 10.2, 8.3, 10.3, 8.3, 10.3, 8.2, 10.2, 8.2],
+  [0, 0.5, 15, 10.7, 8.2, 10.7, 8.3, 10.8, 8.3, 10.8, 8.2, 10.7, 8.2],
+  [0.4, 0.5, 15, 10.2, 7.8, 10.2, 8.3, 10.8, 8.3, 10.8, 7.8, 10.2, 7.8],
+  [0.5, 1, 15, 11.4, 8.2, 11.4, 8.3, 12, 8.3, 12, 8.2, 11.4, 8.2],          // Chair 4
+  [0, 0.5, 15, 11.4, 7.7, 11.4, 7.8, 11.5, 7.8, 11.5, 7.7, 11.4, 7.7],
+  [0, 0.5, 15, 11.9, 7.7, 11.9, 7.8, 12, 7.8, 12, 7.7, 11.9, 7.7],
+  [0, 0.5, 15, 11.4, 8.2, 11.4, 8.3, 11.5, 8.3, 11.5, 8.2, 11.4, 8.2],
+  [0, 0.5, 15, 11.9, 8.2, 11.9, 8.3, 12, 8.3, 12, 8.2, 11.9, 8.2],
+  [0.4, 0.5, 15, 11.4, 7.8, 11.4, 8.3, 12, 8.3, 12, 7.8, 11.4, 7.8],
+  // Stove
+  [0, 0.8, 13, 9, 5, 10, 5],
+  // Main House
+  [0, 2, 1, 17, 4, 20, 4, 20, 0, 23, 0, 23, 1, 23.2, 1],
+  [0, 2, 1, 23.2, 2, 23, 2, 23, 4, 27, 4, 27, 12, 25, 14, 22, 14, 20, 12, 19.5, 12, 19.5, 18, 18.5, 18, 18.5, 18.2],
+  [0, 2, 1, 17.5, 18.2, 17.5, 18, 16, 18, 16, 15, 9, 15],
+  [1.5, 2, 1, 23, 1, 23, 2],
+  [1.5, 2, 1, 18.5, 18, 17.5, 18],
+  // Bathroom
+  [0, 2, 2, 23.2, 1, 23.2, 0, 27, 0, 27, 3.8, 23.2, 3.8, 23.2, 2],
+  [1.5, 2, 2, 23.2, 1, 23.2, 2],
+  // Garage
+  [0, 2, 5, 8.8, 13, 8.8, 16, 7, 16, 7, 16.2],
+  [0, 2, 5, 2, 16.2, 2, 16, 0, 16, 0, 4, 8.8, 4, 8.8, 12],
+  [1.5, 2, 5, 8.8, 12, 8.8, 13],
 ],
 cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2
-  // Dungeon entry floors
-  0.2, 5, 0, 7, 11, 22,
-  0.2, 5, 11, 17, 15, 21,
-  0.2, 5, 11, 21, 12, 22,
+  // Floors
+  // Kitchen
+  0, 6, 9, 4, 17, 9,       // Floor
+  0.8, 9, 10, 4, 15, 5,    // Countertop
+  1.5, 12, 15, 4, 16, 5,   // Fridgetop
+  0.8, 14, 9, 4, 10, 5,    // Stovetop
+  // Dining table
+  0.8, 15, 10, 7, 12.2, 8,
+  0.6, 15, 10, 7, 12.2, 8, 
+  // Dining table chairs
+  1, 15, 10.2, 6.7, 10.8, 6.8,    // Chair 1
+  0.5, 1, 10.2, 6.8, 10.8, 7.3,
+  1, 15, 11.4, 6.7, 12, 6.8,      // Chair 2
+  0.5, 1, 11.4, 6.8, 12, 7.3,
+  1, 15, 10.2, 8.2, 10.8, 8.3,    // Chair 3
+  0.5, 1, 10.2, 7.6, 10.8, 8.2,
+  1, 15, 11.4, 8.2, 12, 8.3,      // Chair 4
+  0.5, 1, 11.4, 7.6, 12, 8.2,
 
-  // Cave floors
-  0, 8, 14, 15, 24, 25,
-  0.2, 1, 15, 18, 23, 20,
-  0, 8, 21, 0, 29, 11,
-  0.2, 1, 13, 0, 20, 15,
-  0.2, 1, 20, 12, 24, 15,
-  0.7, 1, 18, 7, 21, 11,
-  0.7, 1, 14, 0, 24, 4,
-  0.7, 1, 24, 1, 29, 2,
-  0.7, 1, 23, 8, 24, 9,
-  0.7, 1, 22.5, 5, 23.5, 6,
-  0.7, 1, 27, 4, 28, 5,
-
-  // Library floors
-  0.2, 10, 15, 25, 23, 40, 
-
-  // Bookshelves floors
-  2.2, 12, 22.5, 33, 23, 37,
-  1.7, 12, 17, 34, 21, 34.5,
-  1.7, 12, 17, 32, 21, 32.5,
-  1.7, 12, 17, 36, 21, 36.5,
-  1.7, 12, 17, 38, 21, 38.5,
-  1.7, 12, 15, 33, 15.5, 37,
-  1.2, 12, 15, 38, 15.5, 40,
-
-  // Pathway floors
-  2.2, 2, 28, 21, 36, 35, 
-  2.2, 2, 23, 31, 28, 35, 
-
-  // Climax room floors
-  0, 1, 27, 11, 38, 21,
-
-  // Exit room floors
-  0, 1, 31, 8, 34, 11,
-
-  // Dungeon entry ceilings
-  1.2, 2, 0, 7, 11, 22,
-  1.2, 2, 11, 17, 15, 21,
-  1.2, 2, 11, 21, 12, 22,
-
-  // Cave ceilings
-  2.2, 6, 13, 0, 25, 25,
-  2.2, 6, 25, 0, 29, 5,
-
-  // Library ceilings
-  1.2, 2, 18, 25, 20, 28,
-  3.2, 2, 15, 28, 23, 40,
-
-  // Pathway ceilings
-  3.2, 2, 28, 21, 36, 35, 
-  3.2, 2, 23, 31, 28, 35, 
-
-  // Climax room ceilings
-  4, 2, 27, 11, 38, 21,
-
-  // Exit room ceilings
-  1, 2, 31, 8, 34, 11,
+  // Ceilings
+  // Kitchen
+  2, 16, 9, 4, 17, 9,       // Floor
 ],
-cr_e1m1FloorsCount = 26*6,
+cr_e1m1FloorsCount = 1*6,
 cr_smallUvs = [
   [0,0,1/8,1],
   [1/8,0,2/8,1],
@@ -211,32 +178,40 @@ cr_smallUvs = [
   [7/8,0,8/8,1]
 ],
 cr_img = [
-  // Wall 0
-  [16, 16, "qqqqqqqqqqqqqqqq44454q4444454q4455455q5445455q5455555q5555555q55qqqqqqqqqqqqqqqqq5444544q4444554q4554555q4455455q5555555q5555555qqqqqqqqqqqqqqqq44545q5445544q5454454q4545454q4455555q5555555q55qqqqqqqqqqqqqqqqq4445444q5444445q4544545q4445544q5555555q5555455"],
-  // Floor 1
-  [16, 16, "mmmmmnqqqqqnmmmmmmmmmqlllllqmmmmmmmmqlmmmmmmqmmmmmmqlmmmmmmmmqmmmmqlmmmmmmmmmmqmmqlmmmmmmmmmmmmqqlmmmmmmmmmmmmmmqmmmmmmmmmmmmmmmqmmmmmmmmmmmmmmmqmmmmmmmmmmmmmmmqmmmmmmmmmmmmmmmnqmmmmmmmmmmmmmqmnqmmmmmmmmmmmqnmmnqmmmmmmmmmqnmmmmnqmmmmmmmqnmmmmmmnqmmmmmqnmmm"],
-  // Ceiling 2
-  [16, 16, "oooooooooooooooooooonoooonooooooonoooooooooonooooooooooonoooooooooooonoooonoooooooooooooooooooonoonoooonooooonooooooonoooonoooooooooooooooooooooooooooooonooooooononooooooonoonooooooooooooooooooooooonoooooooooooooooooooonooooonoooooonoooooonoooonooooooooooo"],
+  // Kitchen Wall 0
+  [16, 16, "mmmmmmmmmmmmmmmmmlkkklmlkklmlkklmmmmmmmmmmmmmmmmkklmlkkklmlkklmlmmmmmmmmmmmmmmmmmlkkklmlkklmlkklmmmmmmmmmmmmmmmmkklmlkkklmlkklmlmmmmmmmmmmmmmmmmmlkkklmlkklmlkklmmmmmmmmmmmmmmmmkklmlkkklmlkklmlmmmmmmmmmmmmmmmmmlkkklmlkklmlkklmmmmmmmmmmmmmmmmkklmlkkklmlkklml"],
+  // Main House Wall 1
+  [16, 32, "66666666666666666677677667667767777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777776666666666666666qqqqqqqqqqqqqqqqkkkkkkkkkkkkkkkkllllllllllllllll"],
+  // Bathroom Wall 2
+  [16, 16, "mmmmmmmmmmmmmmmmmkkkmkkkmkkkmkkkmlllmlllmlllmlllmlllmlllmlllmlllmmmmmmmmmmmmmmmmmkkkmkkkmkkkmkkkmlllmlllmlllmlllmlllmlllmlllmlllmmmmmmmmmmmmmmmmmkkkmkkkmkkkmkkkmlllmlllmlllmlllmlllmlllmlllmlllmmmmmmmmmmmmmmmmmkkkmkkkmkkkmkkkmlllmlllmlllmlllmlllmlllmlllmlll"],
   // Broom 3
   [128, 16, "      qq            qqq                 qq                                qq                                                         qabq          qabbq               qbaq                              qaaq                                        qqqqq            qabq          qabbq             qbaq            qq                  qbbq                         q           qqabbbaqq           qabq          qabq            qbaq            q88qq                 qbq                        qaq         qabbjjjbbbq           qbq           qaq            qbq            q87778q                qbq                        qbqq        qaabbbbbbaq           qaq           qaq            qaq           q87qqq78q              qaqq                        qbqq         qqabbbaqq            qbq           qbq            qbq          q77q   q78q        q   qaaq                         qbqaq          qqqqq              qbq           qbq            qbq          q7q     q78q      qq  qbbq                          qbqaq           qbq               qaq           qaq            qaq           q       q7q     qaaq  qq                           qaqq            qaq              qabq           qqq            qbaq                 q78q      qqq                               qqq             qqq            qqqaq            qbvq            qaqqq             qqq7q       qbvqqq                           qabaq           qabaq          qvqbqq           qvquvq           qqbqvq           qsq8qq       qqquvvq                         qvqqqvq         qvqqqvq        qvuvqvq           qvvuvq           qvqvuvq         qstsqsq       qvvvuvvq                        qvuvuvq         qvuvuvq        quvvuvq           quvuvq           qvuvvuq         qtsstsq       quvuuuvvq       qqqqqqqqqq      qvuvuvq         qvuvuvq       qvvuuvq            qvuvuvq           qvuuvvq       qssttsq         qvvuvuq      qquvuuvuqqbaq    qvuvuvuvq       qvuvuvuvq       quvuq              qvuvuvq           quvuq         qtstq           qvqqq       qbquvuuvvvqbq    quvuvuvuq       quvuvuvuq    "],
   // Projectile 4
   [8, 8, "  hhhh   hiiiih hijiijihhiijjiihhiijjiihhijiijih hiiiih   hhhh  "],
-  // WallStones 5
-  [16, 16, "mmmmmmmmmmooooonmmmmmmmnnnooooonmmmmmmnoooooooonmmmmmnoooommnoonmmmmnooonmmmmnonnnnnoooonmmmmmooooooooooonmmmmoooooonmooonmmmnooooonmmmooonnnooomnonmmmnoooooonmmmoonnnooonnmmmmmnoooooooonmmmmmmooooooooonmmmmmooooonmnooonmmnnoonmmmmmmoonnnoonmmmmmmmmnoooooo"],
-  // Dirt Ceiling 6
-  [16, 16, "6656666566666656666666666666666666666664666666666666666666656666664666666666666666666656666666665666666666666656666666666566666666666666666646666666566666666666666666666666666666646666666566666666666566666666665666666666656666666666666666666666666666466666"],
-  // Cave Wall 7
-  [16, 16, "5556555446666465656465445544445664445656565444456444565545544545554555654565544455544454445654456444445544455565544445544446655456444455454654444544546544554444565545566656545455655565556655456446655544445555444456665444655645455644554446644455664465555565"],
-  // Water 8
-  [16, 16, "ggggoohoooooggihgggoohhhhiihhihgggoohiggghhggggggghihggghhggggggghhggggghooggggghggggggghooogghhgggggggghohhhhigggggooogiihgoohigggoooohhhggooohggoooohhggggggohgihhhiigggggggghihgggghgggggggghhggggghgggggggghgggggghgggggggghgggggghgooggggghgggggohooooggggh"],
-  // Wall_2 9
-  [16, 16, "qqqqqqqqqqqqqqqqqnnnqnnnqnnnqnnnqnnnqnmnqnnnqnmnqmmmqmmmqmmmqmmmqqqqqqqqqqqqqqqqnnqnnnqnnnqnnnqnnnqnnnqnnnqnnnqnnmqmnmqmnmqmnmqmqqqqqqqqqqqqqqqqqnnnqnnnqnnnqnnnqnnnqnmnqnnnqnmnqmmmqmmmqmmmqmmmqqqqqqqqqqqqqqqqnnqnnnqnnnqnnnqnnnqnnnqnnnqnnnqnnmqmnmqmnmqmnmqm"],
-  // Wood floor 10
-  [16, 16, "qqqqq645q665q566q566q656q665q466q545q656q656qqqqq545q656q646q566q554qqqqq646q466q555q656q646q446q555q655q656q646qqqqq645q656q644q554q664qqqqq664q564q664q656qqqqq564q655q646q656q564qqqqq556q656q565q656q546q656q565q556q544q456q565q655q564q565q566q645qqqqq564"],
-  // Bookshelves 11
-  [16, 16, "5555555555555555q5qqqqqqqqqqqqqqq5q77qddqmqrq7qgq5q77qddqmqrq7qgq5qqqqqqqqqqqqqqq5q5555555555555q5qqqqqqqqqqqqqqq5qddqmq77qddqggq5qddqmq77qddqggq5qddqmq77qddqggq5qqqqqqqqqqqqqqq5q5555555555555q5qqqqqqqqqqqqqqq5qrq77qdqmmq7q7q5qrq77qdqmmq7q7q5qqqqqqqqqqqqqq"],
-  // Bookshelves sides 12
-  [16, 16, "5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555"],
+  // Garage Wall 5
+  [16, 16, "6454644464446444654464446444644465446544644465446444654565446544644465456444654464456445644464456454654564546445644464446454644564456444645464456445645464546444654564546554645465456554655464546544655464546454644465546454644464546544645464456454644464446445"],
+  // Kitchen Floor 6
+  [16, 16, "kkkkkkkkkkkkkkkkkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmmklllllllkkkkkkkkkkkkkkkkklllllllkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmmklllllllkmmmmmmm"],
+  // Countertop Front 7
+  [16, 16, "qqqqqqqqqqqqqqqqnnnnnnnnnnnnnnnnmqqqqqqqqqqqqqqmmqlllllqqlllllqmmqmmmmmqqmmmmmqmmqmmmmmqqmmmmmqmmqmmmqmqqmqmmmqmmqmmmqmqqmqmmmqmmqmmmqmqqmqmmmqmmqmmmlmqqmlmmmqmmqmmmmmqqmmmmmqmmqmmmmmqqmmmmmqmmqqqqqqqqqqqqqqmmmmmmmmmmmmmmmmmllllllllllllllllqqqqqqqqqqqqqqqq"],
+  // Countertop Sides 8
+  [16, 16, "qqqqqqqqqqqqqqqqnnnnnnnnnnnnnnnnmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmllllllllllllllllqqqqqqqqqqqqqqqq"],
+  // Countertop 9
+  [16, 16, "nonnnnnnnnnonnnnnnnnonnnnnnnnnnnnnnnnnnnnnnnnonnnnnnnnnnnnonnnnnnnnonnnnonnnnnnonnnnnnnnnnnnnnnnonnnnnnnnnnnnnnnnnnnonnnnnnnonnnnnnnnnnnonnnnnnnnnnnnonnnnnnnnnnnonnnnnnnnnnnnnnnnnnnnnnnnnonnnnnnnnnnnonnnnnnnnnnnonnnnnnnnnnnnnnnnnonnnonnnnonnnnnnnnnnnnnnnnn"],
+  // Fridge Front 10
+  [16, 32, "qqqqqqqqqqqqqqqqqllllllllllllllqqkkkkkkkkkkkkklqqkqkkkkkkkkkkllqqkqkkkkkkkkkkklqqkqkkkkkkkkkkllqqkqkkkkkkkkkkklqqklkkkkkkkkkkllqqllllllllllllllqqqqqqqqqqqqqqqqqqllllllllllllllqqkqkkkkkkkkkkklqqkqkkkkkkkkkkllqqkqkkkkkkkkkkklqqkqkkkkkkkkkkllqqklkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqllllllllllllllqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
+  // Fridge Side 11
+  [16, 32, "qqqqqqqqqqqqqqqqqllllllllllllllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqkkkkkkkkkkkkllqqkkkkkkkkkkkkklqqllllllllllllllqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
+  // Fridge Top 12
+  [16, 16, "qqqqqqqqqqqqqqqqqllllllllllllllqqlklklklklklkllqqllkkkkkkkkkkklqqlkkkkkkkkkkkllqqllkkkkkkkkkkklqqlkkkkkkkkkkkllqqllkkkkkkkkkkklqqlkkkkkkkkkkkllqqllkkkkkkkkkkklqqlkkkkkkkkkkkllqqllkkkkkkkkkkklqqlkkkkkkkkkkkllqqllklklklklklklqqllllllllllllllqqqqqqqqqqqqqqqqq"],
+  // Stove front 13
+  [16, 16, "kkqkkkkqkkkkqkkkkqqqkkqqqkkqqqkkklqlkklqlkklqlkkkklkkkklkkkklkkkqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqnnqnqnnqqqqqqqqqqqqqqqqqqqqllllllllllllllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"],
+  // Stove top 14
+  [16, 16, "qqqqqqqqqqqqqqqqqnnnnnnnnnnnnnnqqnnqqqnnnnqqqnnqqnqnmqqnnqnmqqnqqnqmqqqnnqmqqqnqqnqnmnqnnqnmnqnqqnnqqqnnnnqqqnnqqnnnnnnnnnnnnnnqqnnnnnnnnnnnnnnqqnnqqqnnnnqqqnnqqnqnmqqnnqnmqqnqqnqmqqqnnqmqqqnqqnqnmnqnnqnmnqnqqnnqqqnnnnqqqnnqqnnnnnnnnnnnnnnqqqqqqqqqqqqqqqqq"],
+  // Wood 15
+  [1, 1, "5"],
+  // Ceiling 16
+  [16, 16, "llllllllllllllklllklllllklllllklllklllllkllllllllllllllllllklllllllllklllllklllllllllklllllllllllllllllllllllllllllklllllllllllllllklllklllllklllllllllklllllklllklllllllllllllllkllllllllklllllllllllklllkllllkllllllkllllllllkllllklllllllklllllllklllllllklll"],
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
 cr_newImage = (cr_src) => {
@@ -467,7 +442,7 @@ function cr_parsePixels(cr_sprite) {
 }
 
 function cr_loadTextures() {
-  for (let J=0;J<13;J++) {
+  for (let J=0;J<17;J++) {
     const cr_pixels = cr_parsePixels(cr_img[J]),
     A = 3553;
 
@@ -605,7 +580,8 @@ function cr_renderGeometry(cr_geometry, cr_worldMatrix) {
   cr_gl.uniform1i(cr_textureLocation, 0);
 
   const cr_uniformTime = cr_getUniformLocation(cr_program, "u_tm");
-  cr_gl.uniform2f(cr_uniformTime, cr_geometry.cr_textureIndex === 8 ? cr_time * 0.3 : 0, 0);
+  //cr_gl.uniform2f(cr_uniformTime, cr_geometry.cr_textureIndex === 8 ? cr_time * 0.3 : 0, 0);
+  cr_gl.uniform2f(cr_uniformTime, 0, 0);
 
   cr_gl.drawElements(4, cr_geometry.cr_indices.length, 5123, 0); // 4 is for TRIANGLES, 6 is the number of indices, 5123 is for UNSIGNED_SHORT
 }
@@ -623,6 +599,7 @@ function cr_bindGeometry(cr_geometry) {
 function cr_buildRoomGeometry() {
   for (let J=0;J<cr_walls.length;J++) {
     const cr_roomWalls = cr_walls[J],
+    cr_texHeight = cr_img[cr_roomWalls[2]][1],
     cr_geometry = {};
     cr_geometry.cr_vertices = [];
     cr_geometry.cr_indices = [];
@@ -636,7 +613,7 @@ function cr_buildRoomGeometry() {
       X1 = cr_roomWalls[I], Z1 = cr_roomWalls[I+1];
       X2 = cr_roomWalls[I+2], Z2 = cr_roomWalls[I+3];
       TX = cr_Math.sqrt((X2 - X1) ** 2 + (Z2 - Z1) ** 2);
-      TY = cr_roomWalls[1] - cr_roomWalls[0];
+      TY = (cr_roomWalls[1] - cr_roomWalls[0]) / (cr_texHeight / 16);
 
       // Add two triangles for each rectangle defined by the coordinates
       cr_geometry.cr_vertices.push(
