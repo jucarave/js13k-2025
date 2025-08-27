@@ -126,6 +126,20 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [0, 0.5, 15, 11.4, 8.2, 11.4, 8.3, 11.5, 8.3, 11.5, 8.2, 11.4, 8.2],
   [0, 0.5, 15, 11.9, 8.2, 11.9, 8.3, 12, 8.3, 12, 8.2, 11.9, 8.2],
   [0.4, 0.5, 15, 11.4, 7.8, 11.4, 8.3, 12, 8.3, 12, 7.8, 11.4, 7.8],
+  // Living Room
+  // Drawer
+  [0, 0.7, 18, 10, 9.5, 10, 11.5],
+  [0, 0.7, 19, 9, 9.5, 10, 9.5],
+  [0, 0.7, 19, 9, 11.5, 10, 11.5],
+  // Small Drawer
+  [0, 0.7, 18, 10, 14, 11, 14],
+  [0, 0.7, 19, 10, 14, 10, 15],
+  [0, 0.7, 19, 11, 14, 11, 15],
+  // Sofa
+  [0, 0.3, 20, 11.3, 14, 13.7, 14],
+  [0, 1, 20, 11.3, 15, 11.3, 14.9, 13.7, 14.9, 13.7, 15],
+  [0, 0.6, 20, 11, 14, 11.3, 14, 11.3, 15, 11, 15, 11, 14],
+  [0, 0.6, 20, 13.7, 14, 14, 14, 14, 15, 13.7, 15, 13.7, 14],
   // Stove
   [0, 0.8, 13, 9, 5, 10, 5],
   // Main House
@@ -161,10 +175,24 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2
   0.5, 1, 10.2, 7.6, 10.8, 8.2,
   1, 15, 11.4, 8.2, 12, 8.3,      // Chair 4
   0.5, 1, 11.4, 7.6, 12, 8.2,
+  // Living Room
+  0, 17, 9, 9, 20, 15,            // Floors
+  0, 17, 16, 15, 20, 18, 
+  0.7, 19, 9, 9.5, 10, 11.5,      // Drawer Top
+  0.7, 19, 10, 14, 11, 15,      // Drawer Top
+  // Sofa
+  0.3, 20, 11.3, 14, 13.7, 14.9,
+  1, 20, 11.3, 14.9, 13.7, 15,
+  0.6, 20, 11, 14, 11.3, 15,
+  0.6, 20, 13.7, 14, 14, 15,
 
   // Ceilings
   // Kitchen
   2, 16, 9, 4, 17, 9,       // Floor
+  // Living Room
+  2, 16, 9, 9, 20, 15,
+  2, 16, 16, 15, 20, 18, 
+
 ],
 cr_e1m1FloorsCount = 1*6,
 cr_smallUvs = [
@@ -212,6 +240,14 @@ cr_img = [
   [1, 1, "5"],
   // Ceiling 16
   [16, 16, "llllllllllllllklllklllllklllllklllklllllkllllllllllllllllllklllllllllklllllklllllllllklllllllllllllllllllllllllllllklllllllllllllllklllklllllklllllllllklllllklllklllllllllllllllkllllllllklllllllllllklllkllllkllllllkllllllllkllllklllllllklllllllklllllllklll"],
+  // Wooden floor 17
+  [16, 16, "6456v666666644446444464v5446455464v5464v546645v46v454644v45645v46v464644656656446456v644545666666454v65454466444646456545446545666666655v46654456464v6v5v466v4456454v6v5v466444564v4v6445446544464v4464454565444644546445456544564454644v45654446446v65444565444"],
+  // Drawer front 18
+  [16, 16, "qqqqqqqqqqqqqqqqq6655566q6655566q65qqq56q65qqq56q6655566q6655566qqqqqqqqqqqqqqqqq655555555555556q55556qqqqq65555q655556666655556qqqqqqqqqqqqqqqqq65556qqqqq65556q655556666655556qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
+  // Drawer side 19
+  [16, 16, "q66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556q"],
+  // Sofa 20
+  [16, 16, "eeefccdeeeefccdeeeffedddeeffedddddfeeedddffeeeddcceeeeedcceeeeedccdeeeefccdeeeefedddeeffedddeeffeedddffeeedddffeeeedcceeeeedcceeeeefccdeeeefccdeeeffedddeeffeddddffeeedddffeeeddcceeeeedcceeeeedccdeeeefccdeeeefedddeeffedddeeffeedddffeeedddffeeeedcceeeeedccee"]
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
 cr_newImage = (cr_src) => {
@@ -442,7 +478,7 @@ function cr_parsePixels(cr_sprite) {
 }
 
 function cr_loadTextures() {
-  for (let J=0;J<17;J++) {
+  for (let J=0;J<cr_img.length;J++) {
     const cr_pixels = cr_parsePixels(cr_img[J]),
     A = 3553;
 
