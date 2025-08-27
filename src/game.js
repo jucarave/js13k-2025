@@ -87,14 +87,6 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [0, 2, 0, 8.8, 12, 9, 12, 9, 4, 17, 4, 17, 9, 17.2, 9, 17.2, 4],
   [0, 2, 0, 9, 15, 9, 13, 8.8, 13],
   [1.5, 2, 0, 9, 13, 9, 12],
-  // Kitchen countertops
-  [0, 0.8, 7, 10, 5, 15, 5],
-  [0, 0.8, 8, 10, 4, 10, 5],
-  [0, 0.8, 8, 15, 5, 15, 4],
-  // Kitchen fridge
-  [0, 1.5, 10, 15, 5, 16, 5],
-  [0, 1.5, 11, 15, 5, 15, 4],
-  [0, 1.5, 11, 16, 5, 16, 4],
   // Dining table
   [0.6, 0.8, 15, 10, 7, 10, 8, 12.2, 8, 12.2, 7, 10, 7],
   [0, 0.6, 15, 10, 7, 10, 7.1, 10.1, 7.1, 10.1, 7, 10, 7],
@@ -126,22 +118,6 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [0, 0.5, 15, 11.4, 8.2, 11.4, 8.3, 11.5, 8.3, 11.5, 8.2, 11.4, 8.2],
   [0, 0.5, 15, 11.9, 8.2, 11.9, 8.3, 12, 8.3, 12, 8.2, 11.9, 8.2],
   [0.4, 0.5, 15, 11.4, 7.8, 11.4, 8.3, 12, 8.3, 12, 7.8, 11.4, 7.8],
-  // Living Room
-  // Drawer
-  [0, 0.7, 18, 10, 9.5, 10, 11.5],
-  [0, 0.7, 19, 9, 9.5, 10, 9.5],
-  [0, 0.7, 19, 9, 11.5, 10, 11.5],
-  // Small Drawer
-  [0, 0.7, 18, 10, 14, 11, 14],
-  [0, 0.7, 19, 10, 14, 10, 15],
-  [0, 0.7, 19, 11, 14, 11, 15],
-  // Sofa
-  [0, 0.3, 20, 11.3, 14, 13.7, 14],
-  [0, 1, 20, 11.3, 15, 11.3, 14.9, 13.7, 14.9, 13.7, 15],
-  [0, 0.6, 20, 11, 14, 11.3, 14, 11.3, 15, 11, 15, 11, 14],
-  [0, 0.6, 20, 13.7, 14, 14, 14, 14, 15, 13.7, 15, 13.7, 14],
-  // Stove
-  [0, 0.8, 13, 9, 5, 10, 5],
   // Main House
   [0, 2, 1, 17, 4, 20, 4, 20, 0, 23, 0, 23, 1, 23.2, 1],
   [0, 2, 1, 23.2, 2, 23, 2, 23, 4, 27, 4, 27, 12, 25, 14, 22, 14, 20, 12, 19.5, 12, 19.5, 18, 18.5, 18, 18.5, 18.2],
@@ -160,9 +136,6 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2
   // Floors
   // Kitchen
   0, 6, 9, 4, 17, 9,       // Floor
-  0.8, 9, 10, 4, 15, 5,    // Countertop
-  1.5, 12, 15, 4, 16, 5,   // Fridgetop
-  0.8, 14, 9, 4, 10, 5,    // Stovetop
   // Dining table
   0.8, 15, 10, 7, 12.2, 8,
   0.6, 15, 10, 7, 12.2, 8, 
@@ -178,13 +151,6 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2
   // Living Room
   0, 17, 9, 9, 20, 15,            // Floors
   0, 17, 16, 15, 20, 18, 
-  0.7, 19, 9, 9.5, 10, 11.5,      // Drawer Top
-  0.7, 19, 10, 14, 11, 15,      // Drawer Top
-  // Sofa
-  0.3, 20, 11.3, 14, 13.7, 14.9,
-  1, 20, 11.3, 14.9, 13.7, 15,
-  0.6, 20, 11, 14, 11.3, 15,
-  0.6, 20, 13.7, 14, 14, 15,
 
   // Ceilings
   // Kitchen
@@ -313,6 +279,46 @@ let cr_canvas,      // HTMLCanvasElement
   cr_walls = cr_e1m1Walls,
   cr_planes = cr_e1m1Planes,
   cr_floorsCount = cr_e1m1FloorsCount;
+
+
+/**
+ * SECTION MAP BUILDING
+ */
+function cr_addBlock(X1, Y1, Z1, W, H, L, cr_textures, cr_walls, cr_planes, cr_addBottom) {
+  cr_textures = (cr_textures.length === 1) ? [cr_textures,cr_textures,cr_textures,cr_textures,cr_textures,cr_textures] : cr_textures;
+  const X2 = X1 + W,
+    Y2 = Y1 + H,
+    Z2 = Z1 + L;
+
+  // Textures are top:0, right:1, bottom:2, left:3, ceiling:4 and floor:5
+  cr_walls.push(
+    [Y1, Y2, cr_textures[0], X1, Z1, X2, Z1],
+    [Y1, Y2, cr_textures[1], X2, Z1, X2, Z2],
+    [Y1, Y2, cr_textures[2], X2, Z2, X1, Z2],
+    [Y1, Y2, cr_textures[3], X1, Z2, X1, Z1],
+  );
+  cr_planes.push(Y2, cr_textures[4], X1, Z1, X2, Z2); // Ceiling
+  if (cr_addBottom) {
+    cr_planes.push(Y1, cr_textures[5], X1, Z1, X2, Z2); // Floor
+  }
+}
+
+// E1M1 Furniture
+// Kitchen
+cr_addBlock(9, 0, 4, 1, 0.8, 1, [8, 8, 7, 8, 9, 8], cr_e1m1Walls, cr_e1m1Planes, 0); // Countertops
+cr_addBlock(10, 0, 4, 1, 0.8, 1, [8, 8, 13, 8, 14, 8], cr_e1m1Walls, cr_e1m1Planes, 0); // Stove
+cr_addBlock(11, 0, 4, 4, 0.8, 1, [8, 8, 7, 8, 9, 8], cr_e1m1Walls, cr_e1m1Planes, 0); // Countertops
+cr_addBlock(15, 0, 4, 1, 1.5, 1, [11, 11, 10, 11, 12, 0], cr_e1m1Walls, cr_e1m1Planes, 0); // Fridge
+// Living Room
+// Drawers
+cr_addBlock(9, 0, 9.5, 1, 0.7, 2, [19,18,19,19,19,19], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(10, 0, 14, 1, 0.7, 1, [18,19,19,19,19,19], cr_e1m1Walls, cr_e1m1Planes, 1); 
+cr_addBlock(18.5, 0, 13, 1, 0.7, 3, [19,19,19,18,19,19], cr_e1m1Walls, cr_e1m1Planes, 0); 
+// Sofa
+cr_addBlock(11, 0, 14, 0.3, 0.7, 1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(11, 0, 14.9, 3, 1, 0.1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(13.7, 0, 14, 0.3, 0.7, 1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(11.3, 0, 14, 2.4, 0.3, 0.9, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 
 /**
  * SECTION UTILITY FUNCTIONS
