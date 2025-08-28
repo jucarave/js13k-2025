@@ -119,7 +119,7 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [0, 0.5, 15, 11.9, 8.2, 11.9, 8.3, 12, 8.3, 12, 8.2, 11.9, 8.2],
   [0.4, 0.5, 15, 11.4, 7.8, 11.4, 8.3, 12, 8.3, 12, 7.8, 11.4, 7.8],
   // Main House
-  [0, 2, 1, 17, 4, 20, 4, 20, 0, 23, 0, 23, 1, 23.2, 1],
+  [0, 2, 1, 17, 4, 20.6, 4, 20.6, 0, 23, 0, 23, 1, 23.2, 1],
   [0, 2, 1, 23.2, 2, 23, 2, 23, 4, 27, 4, 27, 12, 25, 14, 22, 14, 20, 12, 19.5, 12, 19.5, 18, 18.5, 18, 18.5, 18.2],
   [0, 2, 1, 17.5, 18.2, 17.5, 18, 16, 18, 16, 15, 9, 15],
   [1.5, 2, 1, 23, 1, 23, 2],
@@ -319,6 +319,16 @@ cr_addBlock(11, 0, 14, 0.3, 0.7, 1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(11, 0, 14.9, 3, 1, 0.1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(13.7, 0, 14, 0.3, 0.7, 1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(11.3, 0, 14, 2.4, 0.3, 0.9, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Stairs
+cr_addBlock(17.2, 0, 4, 1.4, 1, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(17.2, 0, 5.4, 1.4, 0.8, 0.5, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(17.2, 0, 5.9, 1.4, 0.6, 0.5, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(17.2, 0, 6.4, 1.4, 0.4, 0.5, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(17.2, 0, 6.9, 1.4, 0.2, 0.5, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(18.6, 0, 4, 0.5, 1.2, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(19.1, 0, 4, 0.5, 1.4, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(19.6, 0, 4, 0.5, 1.6, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(20.1, 0, 4, 0.5, 1.8, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
 
 /**
  * SECTION UTILITY FUNCTIONS
