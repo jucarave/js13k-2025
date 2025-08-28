@@ -532,7 +532,7 @@ function cr_linesIntersect(...A) {
 
 function cr_doesCollidesWithWalls(P, X, Y) {
   for (let J=0;J<cr_walls.length;J++) {
-    if (P[1] >= cr_walls[J][1] - 0.2) continue;
+    if (P[1] >= cr_walls[J][1] - 0.21) continue;
     if (P[1]+1 <= cr_walls[J][0]) continue;
 
     for (let I = 3; I < cr_walls[J].length; I+=2) {
@@ -569,7 +569,7 @@ function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
     if (X2 < cr_planes[I+2] || X1 > cr_planes[I+4]) continue;
     if (Z2 < cr_planes[I+3] || Z1 > cr_planes[I+5]) continue;
     (cr_planes[I] >= P[1] && cr_isCeiling) && (cr_result = cr_Math.min(cr_planes[I], cr_result));
-    (cr_planes[I] <= P[1] + 0.2 && !cr_isCeiling) && (cr_result = cr_Math.max(cr_planes[I], cr_result));
+    (cr_planes[I] <= P[1] + 0.21 && !cr_isCeiling) && (cr_result = cr_Math.max(cr_planes[I], cr_result));
   }
 
   return cr_result;
