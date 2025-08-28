@@ -132,35 +132,34 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [0, 2, 5, 2, 16.2, 2, 16, 0, 16, 0, 4, 8.8, 4, 8.8, 12],
   [1.5, 2, 5, 8.8, 12, 8.8, 13],
 ],
-cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2
+cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isFloor
   // Floors
   // Kitchen
-  0, 6, 9, 4, 17, 9,       // Floor
+  0, 6, 9, 4, 17, 9, 1,       // Floor
   // Dining table
-  0.8, 15, 10, 7, 12.2, 8,
-  0.6, 15, 10, 7, 12.2, 8, 
+  0.8, 15, 10, 7, 12.2, 8, 1,
+  0.6, 15, 10, 7, 12.2, 8, 1,
   // Dining table chairs
-  1, 15, 10.2, 6.7, 10.8, 6.8,    // Chair 1
-  0.5, 1, 10.2, 6.8, 10.8, 7.3,
-  1, 15, 11.4, 6.7, 12, 6.8,      // Chair 2
-  0.5, 1, 11.4, 6.8, 12, 7.3,
-  1, 15, 10.2, 8.2, 10.8, 8.3,    // Chair 3
-  0.5, 1, 10.2, 7.6, 10.8, 8.2,
-  1, 15, 11.4, 8.2, 12, 8.3,      // Chair 4
-  0.5, 1, 11.4, 7.6, 12, 8.2,
+  1, 15, 10.2, 6.7, 10.8, 6.8, 1,    // Chair 1
+  0.5, 1, 10.2, 6.8, 10.8, 7.3, 1,
+  1, 15, 11.4, 6.7, 12, 6.8, 1,      // Chair 2
+  0.5, 1, 11.4, 6.8, 12, 7.3, 1,
+  1, 15, 10.2, 8.2, 10.8, 8.3, 1,    // Chair 3
+  0.5, 1, 10.2, 7.6, 10.8, 8.2, 1,
+  1, 15, 11.4, 8.2, 12, 8.3, 1,      // Chair 4
+  0.5, 1, 11.4, 7.6, 12, 8.2, 1,
   // Living Room
-  0, 17, 9, 9, 20, 15,            // Floors
-  0, 17, 16, 15, 20, 18, 
+  0, 17, 9, 9, 20, 15, 1,            // Floors
+  0, 17, 16, 15, 20, 18, 1, 
 
   // Ceilings
   // Kitchen
-  2, 16, 9, 4, 17, 9,       // Floor
+  2, 16, 9, 4, 17, 9, 0,       // Floor
   // Living Room
-  2, 16, 9, 9, 20, 15,
-  2, 16, 16, 15, 20, 18, 
+  2, 16, 9, 9, 20, 15, 0,
+  2, 16, 16, 15, 20, 18, 0,
 
 ],
-cr_e1m1FloorsCount = 1*6,
 cr_smallUvs = [
   [0,0,1/8,1],
   [1/8,0,2/8,1],
@@ -277,8 +276,7 @@ let cr_canvas,      // HTMLCanvasElement
   cr_textures = [],
   
   cr_walls = cr_e1m1Walls,
-  cr_planes = cr_e1m1Planes,
-  cr_floorsCount = cr_e1m1FloorsCount;
+  cr_planes = cr_e1m1Planes;
 
 
 /**
@@ -292,14 +290,14 @@ function cr_addBlock(X1, Y1, Z1, W, H, L, cr_textures, cr_walls, cr_planes, cr_a
 
   // Textures are top:0, right:1, bottom:2, left:3, ceiling:4 and floor:5
   cr_walls.push(
-    [Y1, Y2, cr_textures[0], X1, Z1, X2, Z1],
-    [Y1, Y2, cr_textures[1], X2, Z1, X2, Z2],
-    [Y1, Y2, cr_textures[2], X2, Z2, X1, Z2],
-    [Y1, Y2, cr_textures[3], X1, Z2, X1, Z1],
+    [Y1, Y2, cr_textures[0], X2, Z1, X1, Z1],
+    [Y1, Y2, cr_textures[1], X2, Z2, X2, Z1],
+    [Y1, Y2, cr_textures[2], X1, Z2, X2, Z2],
+    [Y1, Y2, cr_textures[3], X1, Z1, X1, Z2],
   );
-  cr_planes.push(Y2, cr_textures[4], X1, Z1, X2, Z2); // Ceiling
+  cr_planes.push(Y2, cr_textures[4], X1, Z1, X2, Z2, 1); // Ceiling
   if (cr_addBottom) {
-    cr_planes.push(Y1, cr_textures[5], X1, Z1, X2, Z2); // Floor
+    cr_planes.push(Y1, cr_textures[5], X1, Z1, X2, Z2, 0); // Floor
   }
 }
 
@@ -443,7 +441,7 @@ function cr_initEngine() {
   cr_gl = cr_canvas.getContext("webgl");
   cr_gl.clearColor(0, 0, 0, 1);
   cr_gl.enable(2929);   // Enable depth testing 
-  //cr_gl.enable(2884);   // Enable culling
+  cr_gl.enable(2884);   // Enable culling
   cr_gl.depthFunc(515); // Set the depth function to gl.LEQUAL
   cr_gl.viewport(0, 0, cr_width, cr_height);
 
@@ -536,7 +534,14 @@ function cr_doesCollidesWithWalls(P, X, Y) {
   for (let J=0;J<cr_walls.length;J++) {
     if (P[1] >= cr_walls[J][1] - 0.2) continue;
     if (P[1]+1 <= cr_walls[J][0]) continue;
+
     for (let I = 3; I < cr_walls[J].length; I+=2) {
+      const cr_wallx = -(cr_walls[J][I+3] - cr_walls[J][I+1]),
+      cr_wallz = cr_walls[J][I+2] - cr_walls[J][I],
+      cr_dot = cr_wallx * X + cr_wallz * Y;
+
+      if (cr_dot >= 0) continue;
+
       if (cr_linesIntersect(P[0], P[2], P[0] + X, P[2] + Y, ...cr_walls[J].slice(I, I+4))) return 1;
     }
   }
@@ -558,7 +563,9 @@ function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
     cr_result = cr_enemy.cr_position[1] + 0.8;
   }
 
-  for (let I=0;I<cr_planes.length;I+=6) {
+  for (let I=0;I<cr_planes.length;I+=7) {
+    const cr_isFloor = cr_planes[I + 6] === 1;
+    if (cr_isFloor && cr_isCeiling) continue;
     if (X2 < cr_planes[I+2] || X1 > cr_planes[I+4]) continue;
     if (Z2 < cr_planes[I+3] || Z1 > cr_planes[I+5]) continue;
     (cr_planes[I] >= P[1] && cr_isCeiling) && (cr_result = cr_Math.min(cr_planes[I], cr_result));
@@ -688,8 +695,9 @@ function cr_buildRoomGeometry() {
 }
 
 function cr_buildPlanesGeometry() {
-  for (let I=0;I<cr_planes.length;I+=6) {
-    const cr_geometry = {};
+  for (let I=0;I<cr_planes.length;I+=7) {
+    const cr_geometry = {},
+    cr_isFloor = cr_planes[I + 6] === 1;
     cr_geometry.y = cr_planes[I];
     cr_geometry.cr_textureIndex = cr_planes[I + 1];
     const X1 = cr_planes[I + 2],
@@ -707,9 +715,12 @@ function cr_buildPlanesGeometry() {
       X2, Y, Z1, TX, 0
     ];
 
-    cr_geometry.cr_indices = [
+    cr_geometry.cr_indices = cr_isFloor ? [
       0, 1, 2,
       2, 1, 3
+    ] : [
+      0, 2, 1,
+      2, 3, 1
     ];
 
     cr_bindGeometry(cr_geometry);
