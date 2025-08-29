@@ -88,36 +88,36 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [0, 2, 0, 9, 15, 9, 13, 8.8, 13],
   [1.5, 2, 0, 9, 13, 9, 12],
   // Dining table
-  [0.6, 0.8, 15, 10, 7, 10, 8, 12.2, 8, 12.2, 7, 10, 7],
-  [0, 0.6, 15, 10, 7, 10, 7.1, 10.1, 7.1, 10.1, 7, 10, 7],
-  [0, 0.6, 15, 10, 7.9, 10, 8, 10.1, 8, 10.1, 7.9, 10, 7.9],
-  [0, 0.6, 15, 12.1, 7, 12.1, 7.1, 12.2, 7.1, 12.2, 7, 12.1, 7],
-  [0, 0.6, 15, 12.1, 7.9, 12.1, 8, 12.2, 8, 12.2, 7.9, 12.1, 7.9],
+  [0.6, 0.8, 22, 10, 7, 10, 8, 12.2, 8, 12.2, 7, 10, 7],
+  [0, 0.6, 22, 10, 7, 10, 7.1, 10.1, 7.1, 10.1, 7, 10, 7],
+  [0, 0.6, 22, 10, 7.9, 10, 8, 10.1, 8, 10.1, 7.9, 10, 7.9],
+  [0, 0.6, 22, 12.1, 7, 12.1, 7.1, 12.2, 7.1, 12.2, 7, 12.1, 7],
+  [0, 0.6, 22, 12.1, 7.9, 12.1, 8, 12.2, 8, 12.2, 7.9, 12.1, 7.9],
   // Dining table chairs
-  [0.5, 1, 15, 10.2, 6.7, 10.2, 6.8, 10.8, 6.8, 10.8, 6.7, 10.2, 6.7],      // Chair 1
-  [0, 0.5, 15, 10.2, 6.7, 10.2, 6.8, 10.3, 6.8, 10.3, 6.7, 10.2, 6.7],
-  [0, 0.5, 15, 10.7, 6.7, 10.7, 6.8, 10.8, 6.8, 10.8, 6.7, 10.7, 6.7],
-  [0, 0.5, 15, 10.2, 7.2, 10.2, 7.3, 10.3, 7.3, 10.3, 7.2, 10.2, 7.2],
-  [0, 0.5, 15, 10.7, 7.2, 10.7, 7.3, 10.8, 7.3, 10.8, 7.2, 10.7, 7.2],
-  [0.4, 0.5, 15, 10.2, 6.8, 10.2, 7.3, 10.8, 7.3, 10.8, 6.8, 10.2, 6.8],
-  [0.5, 1, 15, 11.4, 6.7, 11.4, 6.8, 12, 6.8, 12, 6.7, 11.4, 6.7],          // Chair 2
-  [0, 0.5, 15, 11.4, 6.7, 11.4, 6.8, 11.5, 6.8, 11.5, 6.7, 11.4, 6.7],
-  [0, 0.5, 15, 11.9, 6.7, 11.9, 6.8, 12, 6.8, 12, 6.7, 11.9, 6.7],
-  [0, 0.5, 15, 11.4, 7.2, 11.4, 7.3, 11.5, 7.3, 11.5, 7.2, 11.4, 7.2],
-  [0, 0.5, 15, 11.9, 7.2, 11.9, 7.3, 12, 7.3, 12, 7.2, 11.9, 7.2],
-  [0.4, 0.5, 15, 11.4, 6.8, 11.4, 7.3, 12, 7.3, 12, 6.8, 11.4, 6.8],
-  [0.5, 1, 15, 10.2, 8.2, 10.2, 8.3, 10.8, 8.3, 10.8, 8.2, 10.2, 8.2],      // Chair 3
-  [0, 0.5, 15, 10.2, 7.7, 10.2, 7.8, 10.3, 7.8, 10.3, 7.7, 10.2, 7.7],
-  [0, 0.5, 15, 10.7, 7.7, 10.7, 7.8, 10.8, 7.8, 10.8, 7.7, 10.7, 7.7],
-  [0, 0.5, 15, 10.2, 8.2, 10.2, 8.3, 10.3, 8.3, 10.3, 8.2, 10.2, 8.2],
-  [0, 0.5, 15, 10.7, 8.2, 10.7, 8.3, 10.8, 8.3, 10.8, 8.2, 10.7, 8.2],
-  [0.4, 0.5, 15, 10.2, 7.8, 10.2, 8.3, 10.8, 8.3, 10.8, 7.8, 10.2, 7.8],
-  [0.5, 1, 15, 11.4, 8.2, 11.4, 8.3, 12, 8.3, 12, 8.2, 11.4, 8.2],          // Chair 4
-  [0, 0.5, 15, 11.4, 7.7, 11.4, 7.8, 11.5, 7.8, 11.5, 7.7, 11.4, 7.7],
-  [0, 0.5, 15, 11.9, 7.7, 11.9, 7.8, 12, 7.8, 12, 7.7, 11.9, 7.7],
-  [0, 0.5, 15, 11.4, 8.2, 11.4, 8.3, 11.5, 8.3, 11.5, 8.2, 11.4, 8.2],
-  [0, 0.5, 15, 11.9, 8.2, 11.9, 8.3, 12, 8.3, 12, 8.2, 11.9, 8.2],
-  [0.4, 0.5, 15, 11.4, 7.8, 11.4, 8.3, 12, 8.3, 12, 7.8, 11.4, 7.8],
+  [0.5, 1, 22, 10.2, 6.7, 10.2, 6.8, 10.8, 6.8, 10.8, 6.7, 10.2, 6.7],      // Chair 1
+  [0, 0.5, 22, 10.2, 6.7, 10.2, 6.8, 10.3, 6.8, 10.3, 6.7, 10.2, 6.7],
+  [0, 0.5, 22, 10.7, 6.7, 10.7, 6.8, 10.8, 6.8, 10.8, 6.7, 10.7, 6.7],
+  [0, 0.5, 22, 10.2, 7.2, 10.2, 7.3, 10.3, 7.3, 10.3, 7.2, 10.2, 7.2],
+  [0, 0.5, 22, 10.7, 7.2, 10.7, 7.3, 10.8, 7.3, 10.8, 7.2, 10.7, 7.2],
+  [0.4, 0.5, 22, 10.2, 6.8, 10.2, 7.3, 10.8, 7.3, 10.8, 6.8, 10.2, 6.8],
+  [0.5, 1, 22, 11.4, 6.7, 11.4, 6.8, 12, 6.8, 12, 6.7, 11.4, 6.7],          // Chair 2
+  [0, 0.5, 22, 11.4, 6.7, 11.4, 6.8, 11.5, 6.8, 11.5, 6.7, 11.4, 6.7],
+  [0, 0.5, 22, 11.9, 6.7, 11.9, 6.8, 12, 6.8, 12, 6.7, 11.9, 6.7],
+  [0, 0.5, 22, 11.4, 7.2, 11.4, 7.3, 11.5, 7.3, 11.5, 7.2, 11.4, 7.2],
+  [0, 0.5, 22, 11.9, 7.2, 11.9, 7.3, 12, 7.3, 12, 7.2, 11.9, 7.2],
+  [0.4, 0.5, 22, 11.4, 6.8, 11.4, 7.3, 12, 7.3, 12, 6.8, 11.4, 6.8],
+  [0.5, 1, 22, 10.2, 8.2, 10.2, 8.3, 10.8, 8.3, 10.8, 8.2, 10.2, 8.2],      // Chair 3
+  [0, 0.5, 22, 10.2, 7.7, 10.2, 7.8, 10.3, 7.8, 10.3, 7.7, 10.2, 7.7],
+  [0, 0.5, 22, 10.7, 7.7, 10.7, 7.8, 10.8, 7.8, 10.8, 7.7, 10.7, 7.7],
+  [0, 0.5, 22, 10.2, 8.2, 10.2, 8.3, 10.3, 8.3, 10.3, 8.2, 10.2, 8.2],
+  [0, 0.5, 22, 10.7, 8.2, 10.7, 8.3, 10.8, 8.3, 10.8, 8.2, 10.7, 8.2],
+  [0.4, 0.5, 22, 10.2, 7.8, 10.2, 8.3, 10.8, 8.3, 10.8, 7.8, 10.2, 7.8],
+  [0.5, 1, 22, 11.4, 8.2, 11.4, 8.3, 12, 8.3, 12, 8.2, 11.4, 8.2],          // Chair 4
+  [0, 0.5, 22, 11.4, 7.7, 11.4, 7.8, 11.5, 7.8, 11.5, 7.7, 11.4, 7.7],
+  [0, 0.5, 22, 11.9, 7.7, 11.9, 7.8, 12, 7.8, 12, 7.7, 11.9, 7.7],
+  [0, 0.5, 22, 11.4, 8.2, 11.4, 8.3, 11.5, 8.3, 11.5, 8.2, 11.4, 8.2],
+  [0, 0.5, 22, 11.9, 8.2, 11.9, 8.3, 12, 8.3, 12, 8.2, 11.9, 8.2],
+  [0.4, 0.5, 22, 11.4, 7.8, 11.4, 8.3, 12, 8.3, 12, 7.8, 11.4, 7.8],
   // Main House
   [0, 2, 1, 17, 4, 20.6, 4, 20.6, 0, 23, 0, 23, 1, 23.2, 1],
   [0, 2, 1, 23.2, 2, 23, 2, 23, 4, 27, 4, 27, 12, 25, 14, 22, 14, 20, 12, 19.5, 12, 19.5, 18, 18.5, 18, 18.5, 18.2],
@@ -126,7 +126,7 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [1.5, 2, 1, 18.5, 18, 17.5, 18],
   // Bathroom
   [0, 2, 2, 23.2, 1, 23.2, 0, 27, 0, 27, 3.8, 23.2, 3.8, 23.2, 2],
-  [1.5, 2, 2, 23.2, 1, 23.2, 2],
+  [1.5, 2, 2, 23.2, 2, 23.2, 1],
   // Garage
   [0, 2, 5, 8.8, 13, 8.8, 16, 7, 16, 7, 16.2],
   [0, 2, 5, 2, 16.2, 2, 16, 0, 16, 0, 4, 8.8, 4, 8.8, 12],
@@ -151,6 +151,8 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isF
   // Living Room
   0, 17, 9, 9, 20, 15, 1,            // Floors
   0, 17, 16, 15, 20, 18, 1, 
+  0, 17, 17, 4, 27, 9, 1,
+  0, 17, 20, 9, 27, 14, 1, 
 
   // Ceilings
   // Kitchen
@@ -158,7 +160,9 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isF
   // Living Room
   2, 16, 9, 9, 20, 15, 0,
   2, 16, 16, 15, 20, 18, 0,
-
+  2, 16, 17, 5.4, 27, 9, 0,
+  2, 16, 20, 9, 27, 14, 0,
+  2, 16, 20.6, 0, 27, 5.4, 0
 ],
 cr_smallUvs = [
   [0,0,1/8,1],
@@ -212,7 +216,17 @@ cr_img = [
   // Drawer side 19
   [16, 16, "q66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556qq66555555555566qq65555555555556q"],
   // Sofa 20
-  [16, 16, "eeefccdeeeefccdeeeffedddeeffedddddfeeedddffeeeddcceeeeedcceeeeedccdeeeefccdeeeefedddeeffedddeeffeedddffeeedddffeeeedcceeeeedcceeeeefccdeeeefccdeeeffedddeeffeddddffeeedddffeeeddcceeeeedcceeeeedccdeeeefccdeeeefedddeeffedddeeffeedddffeeedddffeeeedcceeeeedccee"]
+  [16, 16, "eeefccdeeeefccdeeeffedddeeffedddddfeeedddffeeeddcceeeeedcceeeeedccdeeeefccdeeeefedddeeffedddeeffeedddffeeedddffeeeedcceeeeedcceeeeefccdeeeefccdeeeffedddeeffeddddffeeedddffeeeddcceeeeedcceeeeedccdeeeefccdeeeefedddeeffedddeeffeedddffeeedddffeeeedcceeeeedccee"],
+  // Other Sofa 21
+  [16, 16, "jkkkkkjjjkkkkkjjkkkkkkkjkkkkkkkjkkkkjkkkkkkjkkkkkkkjjjkkkkjjjkkkkkkkjkkkkkkjkkkjjkkkkkkkjkkkkkjjkkkkkkkjjjkkkkkjkkkjkkkkjkkkkkkkkkjjjkkkkkkkjkkkkkkjkkkkkkkjjjkkkkkkkkkjkkkkjkkkkkkkkkjjjkkkkkkjjkkjkkkjkkkjkkjjkkjjjkkkkkjjjkkjkkkjkkkkkkkjkkkkkkkkkkkjkkkkkkkj"],
+  // Wood 22
+  [16, 16, "65q6655655655565655q555655656555656q6556556q655555666556556q65655565655q655665655q656q55655655655q656q656556556q556556q56556q56q555q5565q655656q56565565555565565656556565556556q656556665556556q565q655665q65566565655556656556556q556565656qq665q6656q655556q6"],
+  // TV Front 23
+  [16, 16, "qqqqqqqqqqqqqqqqoooooooooooooooooqqqqqqqqqqqqqqooqqqqqqqqqqqqqqooqqqqqqqqqqqqqqooqqqqqqqqqqqqqqooqqqqqqqqqqqqqqooqqqqqqqqqqqqqqooqqqqqqqqqqqqqqooooooooooooooo7oqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
+  // TV Back 24
+  [1, 1, "q"],
+  // Bookshelf 25
+  [32, 32, "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq566655555555655555665555556665qq5qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq6qhgqdeqmnqbaq78qbaqhgqdeqdeq6qq6qggqddqmnqbbq87qbbqggqddqddq5qq6qghqeeqnmqabq88qabqghqeeqeeq5qq6qhgqedqnnqbaq77qbaqhgqedqedq5qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq5qq565555565565555655555655555565qq5qqqqqqqqqqqqqqqqqqqqqqqqqqqq5qq6qmnq78qhgqbaqbaqdeqhgq78qmnq6qq6qmnq87qggqbbqbbqddqggq87qmnq6qq6qnmq88qghqabqabqeeqghq88qnmq6qq6qnnq77qhgqbaqbaqedqhgq77qnnq6qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq655555566555565565555555566556qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq5qmnqbaqhgqdeq78qbaqmnqdeq78q6qq6qmnqbbqggqddq87qbbqmnqddq87q6qq6qnmqabqghqeeq88qabqnmqeeq88q6qq6qnnqbaqhgqedq77qbaqnnqedq77q6qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq655555555655555555655555555556qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"]
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
 cr_newImage = (cr_src) => {
@@ -310,23 +324,65 @@ cr_addBlock(15, 0, 4, 1, 1.5, 1, [11, 11, 10, 11, 12, 0], cr_e1m1Walls, cr_e1m1P
 // Living Room
 // Drawers
 cr_addBlock(9, 0, 9.5, 1, 0.7, 2, [19,18,19,19,19,19], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(10, 0, 14, 1, 0.7, 1, [18,19,19,19,19,19], cr_e1m1Walls, cr_e1m1Planes, 1); 
-cr_addBlock(18.5, 0, 13, 1, 0.7, 3, [19,19,19,18,19,19], cr_e1m1Walls, cr_e1m1Planes, 0); 
+cr_addBlock(10, 0, 14, 1, 0.7, 1, [18,19,19,19,19,19], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(18.5, 0, 13, 1, 0.7, 3, [19,19,19,18,19,19], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(18.6, 0, 5.4, 2, 0.7, 1, [19,19,18,19,19,19], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26, 0, 8, 1, 0.7, 3, [19,19,19,18,19,19], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Sofa
-cr_addBlock(11, 0, 14, 0.3, 0.7, 1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(11, 0, 14, 0.3, 0.7, 0.9, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(11, 0, 14.9, 3, 1, 0.1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(13.7, 0, 14, 0.3, 0.7, 1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(13.7, 0, 14, 0.3, 0.7, 0.9, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(11.3, 0, 14, 2.4, 0.3, 0.9, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Stairs
-cr_addBlock(17.2, 0, 4, 1.4, 1, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(17.2, 0, 5.4, 1.4, 0.8, 0.5, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(17.2, 0, 5.9, 1.4, 0.6, 0.5, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(17.2, 0, 6.4, 1.4, 0.4, 0.5, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(17.2, 0, 6.9, 1.4, 0.2, 0.5, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(18.6, 0, 4, 0.5, 1.2, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(19.1, 0, 4, 0.5, 1.4, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(19.6, 0, 4, 0.5, 1.6, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(20.1, 0, 4, 0.5, 1.8, 1.4, [1], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(17.2, 0, 4, 1.4, 1, 1.4, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(17.2, 0, 5.4, 1.4, 0.8, 0.5, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(17.2, 0, 5.9, 1.4, 0.6, 0.5, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(17.2, 0, 6.4, 1.4, 0.4, 0.5, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(17.2, 0, 6.9, 1.4, 0.2, 0.5, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(18.6, 0, 4, 0.5, 1.2, 1.4, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(19.1, 0, 4, 0.5, 1.4, 1.4, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(19.6, 0, 4, 0.5, 1.6, 1.4, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(20.1, 0, 4, 0.5, 1.8, 1.4, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Sofa 21 8
+cr_addBlock(21.1, 0, 8, 0.9, 0.7, 0.3, [9], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(21.1, 0, 10.7, 0.9, 0.7, 0.3, [9], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(21, 0, 8, 0.1, 1, 3, [9], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(21.1, 0, 8.3, 0.9, 0.3, 2.4, [9], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Sofa 23 13
+cr_addBlock(23, 0, 13, 0.3, 0.7, 0.9, [21], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(23, 0, 13.9, 2, 1, 0.1, [21], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(24.7, 0, 13, 0.3, 0.7, 0.9, [21], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(23.3, 0, 13, 1.4, 0.3, 0.9, [21], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Coffee Table 23 8
+cr_addBlock(23, 0.3, 8, 1, 0.1, 3, [22], cr_e1m1Walls, cr_e1m1Planes, 1);
+cr_addBlock(23, 0, 8, 0.1, 0.3, 0.1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(23.9, 0, 8, 0.1, 0.3, 0.1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(23, 0, 10.9, 0.1, 0.3, 0.1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(23.9, 0, 10.9, 0.1, 0.3, 0.1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+// TV 26, 8
+cr_addBlock(26.5, 0.8, 9, 0.1, 0.7, 1, [24, 24, 24, 23, 24, 24], cr_e1m1Walls, cr_e1m1Planes, 1);
+cr_addBlock(26.3, 0.7, 9.2, 0.4, 0.05, 0.6, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26.6, 0.75, 9.45, 0.1, 0.3, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Bookshelf
+cr_addBlock(26.5, 0, 5, 0.5, 1.5, 2, [22, 22, 22, 25, 22, 22], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Living room desk
+cr_addBlock(24, 0.5, 4, 2, 0.1, 1, [22], cr_e1m1Walls, cr_e1m1Planes, 1);
+cr_addBlock(24, 0, 4, 0.1, 0.5, 0.1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(25.9, 0, 4, 0.1, 0.5, 0.1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(24, 0, 4.9, 0.1, 0.5, 0.1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(25.9, 0, 4.9, 0.1, 0.5, 0.1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Living room Studio chair
+cr_addBlock(24.75, 0.4, 5, 0.5, 0.1, 0.5, [24], cr_e1m1Walls, cr_e1m1Planes, 1);
+cr_addBlock(24.75, 0.6, 5.5, 0.5, 0.5, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 1);
+cr_addBlock(24.95, 0.4, 5.5, 0.1, 0.2, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 1);
+cr_addBlock(24.95, 0, 5.2, 0.1, 0.4, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(24.95, 0, 5, 0.1, 0.1, 0.5, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(24.75, 0, 5.2, 0.5, 0.1, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+//Living room Computer
+cr_addBlock(24.5, 0.7, 4.2, 1, 0.7, 0.1, [24,24,23,24,24,24], cr_e1m1Walls, cr_e1m1Planes, 1);
+cr_addBlock(24.7, 0.6, 4.05, 0.6, 0.05, 0.4, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(24.95, 0.6, 4.1, 0.1, 0.3, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(25.65, 0.6, 4.2, 0.3, 0.6, 0.6, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
 
 /**
  * SECTION UTILITY FUNCTIONS
@@ -565,7 +621,7 @@ function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
 
   for (let I=0;I<cr_planes.length;I+=7) {
     const cr_isFloor = cr_planes[I + 6] === 1;
-    if (cr_isFloor && cr_isCeiling) continue;
+    if (!(cr_isFloor ^ cr_isCeiling)) continue;
     if (X2 < cr_planes[I+2] || X1 > cr_planes[I+4]) continue;
     if (Z2 < cr_planes[I+3] || Z1 > cr_planes[I+5]) continue;
     (cr_planes[I] >= P[1] && cr_isCeiling) && (cr_result = cr_Math.min(cr_planes[I], cr_result));
@@ -577,9 +633,10 @@ function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
 
 // moves the entity to it's floor position
 function cr_updateGravity(P, T) {
-  if (P[1] < T) 
+  if (P[1] < T) {
     P[1] = cr_Math.min(P[1] + 0.1, T);
-  else if (P[1] > T) {
+    P[3] = 0;
+  }else if (P[1] > T) {
     (P[3] >= 0) && (P[3] -= cr_gravity);
     (P[3] < 0) && (P[3] -= cr_gravity/5);
     P[1] += P[3];
@@ -658,6 +715,7 @@ function cr_bindGeometry(cr_geometry) {
 function cr_buildRoomGeometry() {
   for (let J=0;J<cr_walls.length;J++) {
     const cr_roomWalls = cr_walls[J],
+    cr_texWidth = cr_img[cr_roomWalls[2]][0],
     cr_texHeight = cr_img[cr_roomWalls[2]][1],
     cr_geometry = {};
     cr_geometry.cr_vertices = [];
@@ -671,7 +729,7 @@ function cr_buildRoomGeometry() {
     for (I=3;I<cr_roomWalls.length-2;I+=2) {
       X1 = cr_roomWalls[I], Z1 = cr_roomWalls[I+1];
       X2 = cr_roomWalls[I+2], Z2 = cr_roomWalls[I+3];
-      TX = cr_Math.sqrt((X2 - X1) ** 2 + (Z2 - Z1) ** 2);
+      TX = (cr_Math.sqrt((X2 - X1) ** 2 + (Z2 - Z1) ** 2)) / (cr_texWidth / 16);
       TY = (cr_roomWalls[1] - cr_roomWalls[0]) / (cr_texHeight / 16);
 
       // Add two triangles for each rectangle defined by the coordinates
@@ -733,10 +791,10 @@ function cr_createBillboard(W, H, T, UV) {
   cr_HW = W/2;
 
   cr_geometry.cr_vertices = [
-    0, 0, -cr_HW,  UV[0], UV[3],
-    0, 0, cr_HW,  UV[2], UV[3],
-    0, H, -cr_HW, UV[0], UV[1],
-    0, H, cr_HW,  UV[2], UV[1]
+    0, 0, cr_HW,  UV[0], UV[3],
+    0, 0, -cr_HW,  UV[2], UV[3],
+    0, H, cr_HW, UV[0], UV[1],
+    0, H, -cr_HW,  UV[2], UV[1]
   ];
 
   cr_geometry.cr_indices = [
