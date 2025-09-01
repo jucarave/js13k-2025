@@ -131,6 +131,35 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [0, 2, 5, 8.8, 13, 8.8, 16, 7, 16, 7, 16.2],
   [0, 2, 5, 2, 16.2, 2, 16, 0, 16, 0, 4, 8.8, 4, 8.8, 12],
   [1.5, 2, 5, 8.8, 12, 8.8, 13],
+
+  // 2nd floor
+  // Hallway
+  [1.8, 2, 22, 20.5, 4, 20.5, 5.4, 20.5, 4],
+  [2, 4, 1, 17, 9, 17.2, 9, 17.2, 4, 22, 4, 22, 5, 22.2, 5],
+  [2, 4, 1, 22.2, 6, 21, 6, 21, 10, 21.2, 10],
+  [2, 4, 1, 21.2, 11, 20, 11, 20, 11.2],
+  [2, 4, 1, 19, 11.2, 19, 11, 17.2, 11, 17.2, 10, 17, 10],
+  [3.5, 4, 1, 22, 5, 22, 6],
+  [3.5, 4, 1, 21, 10, 21, 11],
+  [3.5, 4, 1, 20, 11, 19, 11],
+  [3.5, 4, 1, 17.2, 10, 17.2, 9],
+  // Bedroom 1
+  [2, 4, 29, 22.2, 5, 22.2, 4, 27, 4, 27, 9.8, 22.2, 9.8, 22.2, 6],
+  [3.5, 4, 29, 22.2, 6, 22.2, 5],
+  // Bedroom 2
+  [2, 4, 29, 21.2, 10, 27, 10, 27, 17, 21.2, 17, 21.2, 11],
+  [3.5, 4, 29, 21.2, 11, 21.2, 10],
+  // Bedroom 3
+  [2, 4, 29, 20, 11.2, 21, 11.2, 21, 17, 14.2, 17, 14.2, 11.2, 19, 11.2],
+  [3.5, 4, 29, 19, 11.2, 20, 11.2],
+  // Bedroom 4
+  [2, 4, 29, 12, 11.2, 12, 11, 9, 11, 9, 4, 17, 4, 17, 9],
+  [2, 4, 29, 17, 10, 17, 11, 13, 11, 13, 11.2],
+  [3.5, 4, 29, 17, 9, 17, 10],
+  [3.5, 4, 29, 13, 11, 12, 11],
+  // Bathroom
+  [2, 4, 2, 13, 11.2, 14, 11.2, 14, 14, 10, 14, 10, 11.2, 12, 11.2],
+  [3.5, 4, 2, 12, 11.2, 13, 11.2],
 ],
 cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isFloor
   // Floors
@@ -153,17 +182,56 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isF
   0, 17, 16, 15, 20, 18, 1, 
   0, 17, 17, 4, 27, 9, 1,
   0, 17, 20, 9, 27, 14, 1, 
+  0, 17, 20, 0, 23, 4, 1,
+  // Bathroom
+  0, 2, 23, 0, 27, 4, 1,
+
+  // 2nd Floor
+  // Hallway
+  2, 17, 17, 5.4, 20.5, 11, 1,
+  2, 17, 20.5, 6, 21, 11, 1,
+  2, 17, 20.5, 4, 22, 6, 1,
+  // Bedroom 1
+  2, 17, 22, 4, 27, 9.8, 1,
+  // Bedroom 2
+  2, 17, 21, 10, 27, 17, 1,
+  // Bedroom 3
+  2, 17, 14.2, 11, 21, 17, 1,
+  // Bedroom 4
+  2, 17, 9, 4, 17, 11.2, 1, 
+  // Bathroom
+  2, 2, 10, 11.2, 14, 14, 1,
 
   // Ceilings
   // Kitchen
-  2, 16, 9, 4, 17, 9, 0,       // Floor
+  2, 16, 9, 4, 17, 9, 0,
   // Living Room
   2, 16, 9, 9, 20, 15, 0,
   2, 16, 16, 15, 20, 18, 0,
   2, 16, 17, 5.4, 27, 9, 0,
   2, 16, 20, 9, 27, 14, 0,
-  2, 16, 20.6, 0, 27, 5.4, 0
+  2, 16, 20.6, 0, 27, 5.4, 0,
+
+  // 2nd Floor
+  // Hallway
+  4, 16, 17, 4, 20.5, 11, 0,
+  4, 16, 20.5, 6, 21, 11, 0,
+  4, 16, 20.5, 4, 22, 6, 0,
+  // Bedroom 1
+  4, 16, 22, 4, 27, 9.8, 0,
+  // Bedroom 2
+  4, 16, 21, 10, 27, 17, 0,
+  // Bedroom 3
+  4, 16, 14.2, 11, 21, 17, 0,
+  // Bedroom 4
+  4, 16, 9, 4, 17, 11.2, 0,
+  // Bathroom
+  4, 16, 10, 11.2, 14, 14, 0,
 ],
+cr_e1m1Props = [
+  // TextureUVs, x, y, z, isSolid
+  0, 26.5, 0, 2.7, 1      // Toilet
+];
 cr_smallUvs = [
   [0,0,1/8,1],
   [1/8,0,2/8,1],
@@ -173,6 +241,24 @@ cr_smallUvs = [
   [5/8,0,6/8,1],
   [6/8,0,7/8,1],
   [7/8,0,8/8,1]
+],
+cr_propsUVs = [
+  [0,0,1/8,1/2],
+  [1/8,0,2/8,1/2],
+  [2/8,0,3/8,1/2],
+  [3/8,0,4/8,1/2],
+  [4/8,0,5/8,1/2],
+  [5/8,0,6/8,1/2],
+  [6/8,0,7/8,1/2],
+  [7/8,0,8/8,1/2],
+  [0,1/2,1/8,1],
+  [1/8,1/2,2/8,1],
+  [2/8,1/2,3/8,1],
+  [3/8,1/2,4/8,1],
+  [4/8,1/2,5/8,1],
+  [5/8,1/2,6/8,1],
+  [6/8,1/2,7/8,1],
+  [7/8,1/2,8/8,1]
 ],
 cr_img = [
   // Kitchen Wall 0
@@ -226,7 +312,15 @@ cr_img = [
   // TV Back 24
   [1, 1, "q"],
   // Bookshelf 25
-  [32, 32, "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq566655555555655555665555556665qq5qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq6qhgqdeqmnqbaq78qbaqhgqdeqdeq6qq6qggqddqmnqbbq87qbbqggqddqddq5qq6qghqeeqnmqabq88qabqghqeeqeeq5qq6qhgqedqnnqbaq77qbaqhgqedqedq5qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq5qq565555565565555655555655555565qq5qqqqqqqqqqqqqqqqqqqqqqqqqqqq5qq6qmnq78qhgqbaqbaqdeqhgq78qmnq6qq6qmnq87qggqbbqbbqddqggq87qmnq6qq6qnmq88qghqabqabqeeqghq88qnmq6qq6qnnq77qhgqbaqbaqedqhgq77qnnq6qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq655555566555565565555555566556qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq5qmnqbaqhgqdeq78qbaqmnqdeq78q6qq6qmnqbbqggqddq87qbbqmnqddq87q6qq6qnmqabqghqeeq88qabqnmqeeq88q6qq6qnnqbaqhgqedq77qbaqnnqedq77q6qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq655555555655555555655555555556qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"]
+  [32, 32, "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq566655555555655555665555556665qq5qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq6qhgqdeqmnqbaq78qbaqhgqdeqdeq6qq6qggqddqmnqbbq87qbbqggqddqddq5qq6qghqeeqnmqabq88qabqghqeeqeeq5qq6qhgqedqnnqbaq77qbaqhgqedqedq5qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq5qq565555565565555655555655555565qq5qqqqqqqqqqqqqqqqqqqqqqqqqqqq5qq6qmnq78qhgqbaqbaqdeqhgq78qmnq6qq6qmnq87qggqbbqbbqddqggq87qmnq6qq6qnmq88qghqabqabqeeqghq88qnmq6qq6qnnq77qhgqbaqbaqedqhgq77qnnq6qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq655555566555565565555555566556qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq5qmnqbaqhgqdeq78qbaqmnqdeq78q6qq6qmnqbbqggqddq87qbbqmnqddq87q6qq6qnmqabqghqeeq88qabqnmqeeq88q6qq6qnnqbaqhgqedq77qbaqnnqedq77q6qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qq655555555655555555655555555556qq6qqqqqqqqqqqqqqqqqqqqqqqqqqqq6qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
+  // Bathroom countertop side 26
+  [16, 16, "qqqqqqqqqqqqqqqqjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
+  // Bathroom countertop 27
+  [16, 16, "qqqqqqqqqqqqqqqqkkkkkkkkkkkkkkkkjjjjjjjjjjjjjjjjjjjjjlllllljjjjjjjjllkjjjjklljjjjjljjjjjjjjjjljjjlkjjjjnqjjjjkljjlkjjjnqnqjjjkljjlkjjjqnqnjjjkljjlkjjjjqnjjjjkljjjlkjjjjjjjjjljjjjjllkjjjjklljjjjjjjjlllllljjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkqqqqqqqqqqqqqqqq"],
+  // Props 28
+  [128, 32, "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    qqqqqqq                                                                                                                         qlllllq                                                                                                                        qqqkkklq                                                                                                                         qkkkklq                                                                                                                        qqqqqqqqq                                                                                                                       qkqqqqqlq                                                                                                                       qlkkkkklq                                                                                                                        qkkkklq                                                                                                                          qlklq                                                                                                                          qlqqqlq                                                                                                                         qlllllq                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     "],
+  // Bedroom walls 29
+  [16, 32, "mmmmmmmmmmmmmmmmqqqqqqqqqqqqqqqqleflllllleflllllkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkleflllllleflllllqqqqqqqqqqqqqqqq666666666666666665555555555555556566666666666665656555555555556565655555555555656565555555555565656555555555556565655555555555656565555555555565656666666666666565555555555555556666666666666666"],
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
 cr_newImage = (cr_src) => {
@@ -265,14 +359,14 @@ let cr_canvas,      // HTMLCanvasElement
   cr_getUniformLocation = null, // Function to get uniform locations
   cr_uniformMatrix4fv = null,   // Function to set uniform matrices
 
-  cr_cameraPosition = [2,0.2,9,0],       // Camera position in 3D space + vertical speed
+  cr_cameraPosition = [2,0,9,0],       // Camera position in 3D space + vertical speed
   cr_cameraRotation = 0,             // Camera rotation angle in radians
   cr_cameraView = cr_updateMatrix(cr_cameraPosition, cr_cameraRotation),     // Camera view matrix
   cr_cameraProjection  = [1, 0, 0, 0, // Camera projection matrix
                           0, 1.778, 0, 0, 
                           0, 0, -1, -1, 
                           0, 0, -0.1, 0],
-  cr_cameraTargetFloor = 0.2,       // Where should the camera be placed at vertically?
+  cr_cameraTargetFloor = 0,       // Where should the camera be placed at vertically?
   cr_cameraIsJumping = 0,         // Is the camera jumping
   cr_cameraAttackDelay = 0,       // Delay between attacks
   cr_cameraHealth = 5,            // Player's health
@@ -284,13 +378,15 @@ let cr_canvas,      // HTMLCanvasElement
 
   cr_enemies = [],                      // Array to hold enemy objects
   cr_projectiles = [],                  // Array to hold projectile objects
+  cr_props = [],                        // Array to hold prop objects
 
   cr_identityMatrix = cr_matTranslate(), // Static identity matrix for transformations
   cr_geometries = [],       // Object to hold geometries for different objects in the game
   cr_textures = [],
   
   cr_walls = cr_e1m1Walls,
-  cr_planes = cr_e1m1Planes;
+  cr_planes = cr_e1m1Planes,
+  cr_levelProps = cr_e1m1Props;
 
 
 /**
@@ -383,6 +479,10 @@ cr_addBlock(24.5, 0.7, 4.2, 1, 0.7, 0.1, [24,24,23,24,24,24], cr_e1m1Walls, cr_e
 cr_addBlock(24.7, 0.6, 4.05, 0.6, 0.05, 0.4, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(24.95, 0.6, 4.1, 0.1, 0.3, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(25.65, 0.6, 4.2, 0.3, 0.6, 0.6, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+//Bathroom
+cr_addBlock(25.5, 0, 1.5, 1.5, 1.5, 0.2, [2], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(25.5, 0, 0, 0.2, 0.2, 1.5, [2], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(23.2, 0, 2.8, 1, 0.7, 1, [26,26,26,26,27,26], cr_e1m1Walls, cr_e1m1Planes, 0);
 
 /**
  * SECTION UTILITY FUNCTIONS
@@ -456,7 +556,7 @@ function cr_updateCamera() {
   M = (cr_keys["ArrowUp"] ? -1 : cr_keys["ArrowDown"] ? 1 : 0),
   cr_targetPosition = [cr_cameraPosition[0] + M * S * V, cr_cameraPosition[1], cr_cameraPosition[2] + M * C * V];
 
-  if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L) && !cr_doesCollidesWithEnemy(cr_targetPosition, 0)) {
+  if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L) && !cr_doesCollidesWithEnemy(cr_targetPosition, 0) && !cr_doesCollidesWithProps(cr_targetPosition, 0)) {
     cr_cameraPosition[0] += M * S * V;
     cr_cameraPosition[2] += M * C * V;
     cr_cameraTargetFloor = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, 0);
@@ -614,6 +714,7 @@ function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
   Z2 = P[2] + S,
   
   cr_enemy = cr_doesCollidesWithEnemy(P, 0, 1);
+  cr_enemy = !cr_enemy && cr_doesCollidesWithProps(P, 1);
 
   if (!cr_isCeiling && cr_enemy && cr_enemy.cr_position[1] + 0.8 <= P[1]) {
     cr_result = cr_enemy.cr_position[1] + 0.8;
@@ -663,6 +764,20 @@ function cr_doesCollidesWithEnemy(P, cr_self, cr_2d = 0) {
 
     const cr_distance = (P[0] - cr_enemy.cr_position[0]) ** 2 + (P[2] - cr_enemy.cr_position[2]) ** 2;
     if (cr_distance <= 1) return cr_enemy;
+  }
+  return 0;
+}
+
+// Check for collisions with props
+function cr_doesCollidesWithProps(P, cr_2d = 0) {
+  for (let I=0;I<cr_props.length;I++) {
+    const cr_prop = cr_props[I];
+    if (!cr_prop.cr_isSolid) continue; 
+    if (!cr_2d && P[1] >= cr_prop.cr_position[1] + 0.8) continue;
+    if (!cr_2d && P[1]+1 < cr_prop.cr_position[1]) continue;
+
+    const cr_distance = (P[0] - cr_prop.cr_position[0]) ** 2 + (P[2] - cr_prop.cr_position[2]) ** 2;
+    if (cr_distance <= 1) return cr_prop;
   }
   return 0;
 }
@@ -807,6 +922,17 @@ function cr_createBillboard(W, H, T, UV) {
   cr_bindGeometry(cr_geometry);
 
   return cr_geometry;
+}
+
+function cr_buildLevelProps() {
+  for (let I = 0; I < cr_levelProps.length; I += 4) {
+    cr_props.push({
+      cr_position: [cr_levelProps[I + 1], cr_levelProps[I + 2], cr_levelProps[I + 3]],
+      cr_matriz: cr_matTranslate(cr_levelProps[I + 1], cr_levelProps[I + 2], cr_levelProps[I + 3]),
+      cr_geometry: cr_createBillboard(1, 1, 28, cr_propsUVs[I]),
+      cr_isSolid: cr_levelProps[I + 4] === 1
+    });
+  }
 }
 
 /**
@@ -1029,6 +1155,12 @@ function cr_update() {
     cr_renderGeometry(cr_projectiles[I].cr_geometry, cr_projectiles[I].cr_matriz);
   }
 
+  // Update the props
+  for (I=0;I<cr_props.length;I++) {
+    cr_props[I].cr_matriz = cr_updateMatrix(cr_props[I].cr_position, -cr_cameraRotation+cr_pi_2, 0);
+    cr_renderGeometry(cr_props[I].cr_geometry, cr_props[I].cr_matriz);
+  }
+
   cr_enemies = cr_enemies.filter(cr_enemy => !cr_enemy.cr_destroy);
   cr_projectiles = cr_projectiles.filter(cr_projectile => !cr_projectile.cr_destroy);
 
@@ -1049,6 +1181,7 @@ function cr_main() {
   cr_loadTextures2D();
   cr_buildRoomGeometry();
   cr_buildPlanesGeometry();
+  cr_buildLevelProps();
   //cr_createEnemy(9,0,9,3,3);
   cr_update();
 }
