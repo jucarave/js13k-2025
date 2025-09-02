@@ -483,6 +483,25 @@ cr_addBlock(25.65, 0.6, 4.2, 0.3, 0.6, 0.6, [24], cr_e1m1Walls, cr_e1m1Planes, 0
 cr_addBlock(25.5, 0, 1.5, 1.5, 1.5, 0.2, [2], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(25.5, 0, 0, 0.2, 0.2, 1.5, [2], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(23.2, 0, 2.8, 1, 0.7, 1, [26,26,26,26,27,26], cr_e1m1Walls, cr_e1m1Planes, 0);
+// 2nd Floor
+// Bedroom 1
+// Bed
+cr_addBlock(26, 2, 9.6, 1, 1, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26, 2, 7.4, 1, 0.7, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26, 2, 7.6, 1, 0.6, 2, [9], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Bookshelf
+cr_addBlock(23, 2, 9.3, 2, 1.5, 0.5, [25, 22, 22, 22, 22, 22, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Desk
+cr_addBlock(26, 2.5, 4.5, 1, 0.2, 2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26, 2, 4.5, 0.2, 0.5, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26.8, 2, 4.5, 0.2, 0.5, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26, 2, 6.3, 0.2, 0.5, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26.8, 2, 6.3, 0.2, 0.5, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Chair
+cr_addBlock(25.5, 2, 5.15, 0.2, 1, 0.7, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(25.7, 2, 5.15, 0.5, 0.5, 0.1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(25.7, 2, 5.75, 0.5, 0.5, 0.1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(25.7, 2, 5.25, 0.5, 0.3, 0.5, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 
 /**
  * SECTION UTILITY FUNCTIONS
