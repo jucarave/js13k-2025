@@ -137,8 +137,7 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [1.8, 2, 22, 20.5, 4, 20.5, 5.4, 20.5, 4],
   [2, 4, 1, 17, 9, 17.2, 9, 17.2, 4, 22, 4, 22, 5, 22.2, 5],
   [2, 4, 1, 22.2, 6, 21, 6, 21, 10, 21.2, 10],
-  [2, 4, 1, 21.2, 11, 20, 11, 20, 11.2],
-  [2, 4, 1, 19, 11.2, 19, 11, 17.2, 11, 17.2, 10, 17, 10],
+  [2, 4, 1, 21.2, 11, 20, 11, 17.2, 11, 17.2, 10, 17, 10],
   [3.5, 4, 1, 22, 5, 22, 6],
   [3.5, 4, 1, 21, 10, 21, 11],
   [3.5, 4, 1, 20, 11, 19, 11],
@@ -147,12 +146,9 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [2, 4, 29, 22.2, 5, 22.2, 4, 27, 4, 27, 9.8, 22.2, 9.8, 22.2, 6],
   [3.5, 4, 29, 22.2, 6, 22.2, 5],
   // Bedroom 2
-  [2, 4, 29, 21.2, 10, 27, 10, 27, 17, 21.2, 17, 21.2, 11],
+  [2, 4, 29, 21.2, 10, 26, 10, 26, 15, 21.2, 15, 21.2, 11],
   [3.5, 4, 29, 21.2, 11, 21.2, 10],
   // Bedroom 3
-  [2, 4, 29, 20, 11.2, 21, 11.2, 21, 17, 14.2, 17, 14.2, 11.2, 19, 11.2],
-  [3.5, 4, 29, 19, 11.2, 20, 11.2],
-  // Bedroom 4
   [2, 4, 29, 12, 11.2, 12, 11, 9, 11, 9, 4, 17, 4, 17, 9],
   [2, 4, 29, 17, 10, 17, 11, 13, 11, 13, 11.2],
   [3.5, 4, 29, 17, 9, 17, 10],
@@ -196,8 +192,6 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isF
   // Bedroom 2
   2, 17, 21, 10, 27, 17, 1,
   // Bedroom 3
-  2, 17, 14.2, 11, 21, 17, 1,
-  // Bedroom 4
   2, 17, 9, 4, 17, 11.2, 1, 
   // Bathroom
   2, 2, 10, 11.2, 14, 14, 1,
@@ -222,8 +216,6 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isF
   // Bedroom 2
   4, 16, 21, 10, 27, 17, 0,
   // Bedroom 3
-  4, 16, 14.2, 11, 21, 17, 0,
-  // Bedroom 4
   4, 16, 9, 4, 17, 11.2, 0,
   // Bathroom
   4, 16, 10, 11.2, 14, 14, 0,
@@ -321,6 +313,8 @@ cr_img = [
   [128, 32, "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    qqqqqqq                                                                                                                         qlllllq                                                                                                                        qqqkkklq                                                                                                                         qkkkklq                                                                                                                        qqqqqqqqq                                                                                                                       qkqqqqqlq                                                                                                                       qlkkkkklq                                                                                                                        qkkkklq                                                                                                                          qlklq                                                                                                                          qlqqqlq                                                                                                                         qlllllq                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     "],
   // Bedroom walls 29
   [16, 32, "mmmmmmmmmmmmmmmmqqqqqqqqqqqqqqqqleflllllleflllllkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkleflllllleflllllqqqqqqqqqqqqqqqq666666666666666665555555555555556566666666666665656555555555556565655555555555656565555555555565656555555555556565655555555555656565555555555565656666666666666565555555555555556666666666666666"],
+  // Wardrobe 30
+  [16, 32, "qqqqqqqqqqqqqqqqq66656655555666qq55656555655565qq65656555665566qq65555555565565qq65656555555565qq65555665565665qq65655565556555qq55655555566556qq65555565556556qq65655555555555qq55556655556556qq65565655655565qq65565555656565qqqqqqqqqqqqqqqqqq65555565566656qq56655qqqq56565qq65555565565655qqqqqqqqqqqqqqqqqq65655555555556qq65555qqqq55566qq55565665555656qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
 cr_newImage = (cr_src) => {
@@ -488,9 +482,9 @@ cr_addBlock(23.2, 0, 2.8, 1, 0.7, 1, [26,26,26,26,27,26], cr_e1m1Walls, cr_e1m1P
 // Bed
 cr_addBlock(26, 2, 9.6, 1, 1, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(26, 2, 7.4, 1, 0.7, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
-cr_addBlock(26, 2, 7.6, 1, 0.6, 2, [9], cr_e1m1Walls, cr_e1m1Planes, 0);
-// Bookshelf
-cr_addBlock(23, 2, 9.3, 2, 1.5, 0.5, [25, 22, 22, 22, 22, 22, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26, 2.2, 7.6, 1, 0.4, 2, [9], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Wardrobe
+cr_addBlock(23, 2, 9.3, 2, 1.5, 0.5, [30, 22, 22, 22, 22, 22, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Desk
 cr_addBlock(26, 2.5, 4.5, 1, 0.2, 2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(26, 2, 4.5, 0.2, 0.5, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
@@ -502,6 +496,19 @@ cr_addBlock(25.5, 2, 5.15, 0.2, 1, 0.7, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(25.7, 2, 5.15, 0.5, 0.5, 0.1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(25.7, 2, 5.75, 0.5, 0.5, 0.1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(25.7, 2, 5.25, 0.5, 0.3, 0.5, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Bedroom 2
+// Bed
+cr_addBlock(21.2, 2, 14, 0.2, 1, 1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(23.4, 2, 14, 0.2, 0.7, 1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(21.4, 2.2, 14, 2, 0.4, 1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Wardrobe
+cr_addBlock(24, 2, 14.5, 2, 1.4, 0.5, [30, 22, 22, 22, 22, 22, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Drawer
+cr_addBlock(23, 2, 10, 2, 0.7, 1, [19, 19, 18, 19, 19, 19, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
+// TV
+cr_addBlock(23.5, 2.8, 10.5, 1, 0.7, 0.1, [24,24,23,24,24,24], cr_e1m1Walls, cr_e1m1Planes, 1);
+cr_addBlock(23.7, 2.7, 10.35, 0.6, 0.05, 0.4, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(23.95, 2.7, 10.4, 0.1, 0.3, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
 
 /**
  * SECTION UTILITY FUNCTIONS
