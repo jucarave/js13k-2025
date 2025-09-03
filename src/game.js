@@ -222,7 +222,9 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isF
 ],
 cr_e1m1Props = [
   // TextureUVs, x, y, z, isSolid
-  0, 26.5, 0, 2.7, 1      // Toilet
+  0, 26.5, 0, 2.7, 1,      // Toilet
+  // 2nd Floor
+  0, 10.5, 2, 13.5, 1,      // Toilet
 ];
 cr_smallUvs = [
   [0,0,1/8,1],
@@ -519,6 +521,14 @@ cr_addBlock(11.5, 2, 5, 1, 0.7, 1, [19, 19, 18, 19, 19, 19, 0], cr_e1m1Walls, cr
 cr_addBlock(15.5, 2, 5, 1, 0.7, 1, [19, 19, 18, 19, 19, 19, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Wardrobe
 cr_addBlock(14, 2, 10.5, 2, 1.5, 0.5, [30, 22, 22, 22, 22, 22, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Bathroom
+cr_addBlock(10, 2, 11.2, 1, 0.7, 1, [26,26,26,26,27,26], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Bathtub
+cr_addBlock(12, 2, 13, 2, 0.1, 1, [26], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(12, 2.1, 13, 2, 0.4, 0.1, [26], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(12, 2.1, 13.9, 2, 0.4, 0.1, [26], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(12, 2.1, 13.1, 0.1, 0.4, 0.8, [26], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(13.9, 2.1, 13.1, 0.1, 0.4, 0.8, [26], cr_e1m1Walls, cr_e1m1Planes, 0);
 
 /**
  * SECTION UTILITY FUNCTIONS
@@ -961,11 +971,11 @@ function cr_createBillboard(W, H, T, UV) {
 }
 
 function cr_buildLevelProps() {
-  for (let I = 0; I < cr_levelProps.length; I += 4) {
+  for (let I=0;I<cr_levelProps.length;I+=5) {
     cr_props.push({
       cr_position: [cr_levelProps[I + 1], cr_levelProps[I + 2], cr_levelProps[I + 3]],
       cr_matriz: cr_matTranslate(cr_levelProps[I + 1], cr_levelProps[I + 2], cr_levelProps[I + 3]),
-      cr_geometry: cr_createBillboard(1, 1, 28, cr_propsUVs[I]),
+      cr_geometry: cr_createBillboard(1, 1, 28, cr_propsUVs[cr_levelProps[I]]),
       cr_isSolid: cr_levelProps[I + 4] === 1
     });
   }
