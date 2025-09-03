@@ -149,7 +149,7 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   [2, 4, 29, 21.2, 10, 26, 10, 26, 15, 21.2, 15, 21.2, 11],
   [3.5, 4, 29, 21.2, 11, 21.2, 10],
   // Bedroom 3
-  [2, 4, 29, 12, 11.2, 12, 11, 9, 11, 9, 4, 17, 4, 17, 9],
+  [2, 4, 29, 12, 11.2, 12, 11, 11, 11, 11, 5, 17, 5, 17, 9],
   [2, 4, 29, 17, 10, 17, 11, 13, 11, 13, 11.2],
   [3.5, 4, 29, 17, 9, 17, 10],
   [3.5, 4, 29, 13, 11, 12, 11],
@@ -190,9 +190,9 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isF
   // Bedroom 1
   2, 17, 22, 4, 27, 9.8, 1,
   // Bedroom 2
-  2, 17, 21, 10, 27, 17, 1,
+  2, 17, 21, 10, 26, 15, 1,
   // Bedroom 3
-  2, 17, 9, 4, 17, 11.2, 1, 
+  2, 17, 11, 5, 17, 11.2, 1, 
   // Bathroom
   2, 2, 10, 11.2, 14, 14, 1,
 
@@ -214,9 +214,9 @@ cr_e1m1Planes = [ // Planes coordinates set by y, textureId, x1, z1, x2, z2, isF
   // Bedroom 1
   4, 16, 22, 4, 27, 9.8, 0,
   // Bedroom 2
-  4, 16, 21, 10, 27, 17, 0,
+  4, 16, 21, 10, 26, 15, 0,
   // Bedroom 3
-  4, 16, 9, 4, 17, 11.2, 0,
+  4, 16, 11, 5, 17, 11.2, 0,
   // Bathroom
   4, 16, 10, 11.2, 14, 14, 0,
 ],
@@ -509,6 +509,16 @@ cr_addBlock(23, 2, 10, 2, 0.7, 1, [19, 19, 18, 19, 19, 19, 0], cr_e1m1Walls, cr_
 cr_addBlock(23.5, 2.8, 10.5, 1, 0.7, 0.1, [24,24,23,24,24,24], cr_e1m1Walls, cr_e1m1Planes, 1);
 cr_addBlock(23.7, 2.7, 10.35, 0.6, 0.05, 0.4, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(23.95, 2.7, 10.4, 0.1, 0.3, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Bedroom 3
+// Bed
+cr_addBlock(13, 2, 5, 2, 1, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(13, 2, 7.2, 2, 0.7, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(13, 2.2, 5.2, 2, 0.4, 2, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Nighttables
+cr_addBlock(11.5, 2, 5, 1, 0.7, 1, [19, 19, 18, 19, 19, 19, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(15.5, 2, 5, 1, 0.7, 1, [19, 19, 18, 19, 19, 19, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
+// Wardrobe
+cr_addBlock(14, 2, 10.5, 2, 1.5, 0.5, [30, 22, 22, 22, 22, 22, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
 
 /**
  * SECTION UTILITY FUNCTIONS
