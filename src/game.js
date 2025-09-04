@@ -355,7 +355,7 @@ let cr_canvas,      // HTMLCanvasElement
   cr_getUniformLocation = null, // Function to get uniform locations
   cr_uniformMatrix4fv = null,   // Function to set uniform matrices
 
-  cr_cameraPosition = [2,0,9,0],       // Camera position in 3D space + vertical speed
+  cr_cameraPosition = [2,0,9,0,0.5], // Camera position in 3D space + vertical speed + collision height
   cr_cameraRotation = 0,             // Camera rotation angle in radians
   cr_cameraView = cr_updateMatrix(cr_cameraPosition, cr_cameraRotation),     // Camera view matrix
   cr_cameraProjection  = [1, 0, 0, 0, // Camera projection matrix
@@ -368,7 +368,7 @@ let cr_canvas,      // HTMLCanvasElement
   cr_cameraHealth = 5,            // Player's health
   cr_cameraState = 0,             // 0: Alive, 1: Dead
   cr_cameraHurt = 0,              // Cooldown for camera red flash, in frames
-  cr_cameraHeight = 0.5,
+  cr_cameraHeight = 0.4,
 
   cr_catBobbing = 0,
 
@@ -488,7 +488,7 @@ cr_addBlock(26, 2.2, 7.6, 1, 0.4, 2, [9], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Wardrobe
 cr_addBlock(23, 2, 9.3, 2, 1.5, 0.5, [30, 22, 22, 22, 22, 22, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Desk
-cr_addBlock(26, 2.5, 4.5, 1, 0.2, 2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
+cr_addBlock(26, 2.5, 4.5, 1, 0.2, 2, [22], cr_e1m1Walls, cr_e1m1Planes, 1);
 cr_addBlock(26, 2, 4.5, 0.2, 0.5, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(26.8, 2, 4.5, 0.2, 0.5, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(26, 2, 6.3, 0.2, 0.5, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
@@ -600,11 +600,10 @@ function cr_updateCamera() {
   V = 0.08,            // Velocity
   L = V + 0.5,         // Lookahead distance
   M = (cr_keys["ArrowUp"] ? -1 : cr_keys["ArrowDown"] ? 1 : 0),
-  cr_targetPosition = [cr_cameraPosition[0] + M * S * V, cr_cameraPosition[1], cr_cameraPosition[2] + M * C * V],
-  cr_ceiling = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, 1),
-  PY2 = cr_Math.min(cr_cameraPosition[1] + 1, cr_ceiling);
+  cr_targetPosition = [cr_cameraPosition[0] + M * S * V, cr_cameraPosition[1], cr_cameraPosition[2] + M * C * V, cr_cameraPosition[3], cr_cameraPosition[4]];
+  cr_ceiling = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, 1);
 
-  if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, PY2, M * S * L, M * C * L) && !cr_doesCollidesWithEnemy(cr_targetPosition, PY2, 0) && !cr_doesCollidesWithProps(cr_targetPosition, PY2, 0)) {
+  if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L) && !cr_doesCollidesWithEnemy(cr_targetPosition, 0, 0) && !cr_doesCollidesWithProps(cr_targetPosition, 0)) {
     cr_cameraPosition[0] += M * S * V;
     cr_cameraPosition[2] += M * C * V;
     cr_cameraTargetFloor = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, 0);
@@ -613,7 +612,8 @@ function cr_updateCamera() {
     cr_catBobbing = 0;
   }
 
-  if (cr_keys["Space"] && !cr_cameraIsJumping) {
+  if (cr_keys["Space"] === 1 && !cr_cameraIsJumping && cr_ceiling - cr_cameraPosition[1] > cr_cameraPosition[4]) {
+    cr_keys["Space"] = 2;
     cr_cameraIsJumping = 1;
     cr_cameraPosition[1] += cr_gravity;
     cr_cameraPosition[3] = 0.16;  // Jump speed
@@ -734,10 +734,10 @@ function cr_linesIntersect(...A) {
   return T >= 0 && T <= 1 && U >= 0 && U <= 1;
 }
 
-function cr_doesCollidesWithWalls(P, PY2, X, Y) {
+function cr_doesCollidesWithWalls(P, X, Y) {
   for (let J=0;J<cr_walls.length;J++) {
     if (P[1] >= cr_walls[J][1] - 0.21) continue;
-    if (PY2 <= cr_walls[J][0]) continue;
+    if (P[1]+P[4] <= cr_walls[J][0]) continue;
 
     for (let I = 3; I < cr_walls[J].length; I+=2) {
       const cr_wallx = -(cr_walls[J][I+3] - cr_walls[J][I+1]),
@@ -761,8 +761,8 @@ function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
   Z1 = P[2] - S,
   Z2 = P[2] + S,
   
-  cr_enemy = cr_doesCollidesWithEnemy(P, P[1]+1, 0, 1);
-  cr_enemy = !cr_enemy && cr_doesCollidesWithProps(P, P[1]+1, 1);
+  cr_enemy = cr_doesCollidesWithEnemy(P, 0, 1);
+  cr_enemy = !cr_enemy && cr_doesCollidesWithProps(P, 1);
 
   if (!cr_isCeiling && cr_enemy && cr_enemy.cr_position[1] + 0.8 <= P[1]) {
     cr_result = cr_enemy.cr_position[1] + 0.8;
@@ -773,7 +773,7 @@ function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
     if (!(cr_isFloor ^ cr_isCeiling)) continue;
     if (X2 < cr_planes[I+2] || X1 > cr_planes[I+4]) continue;
     if (Z2 < cr_planes[I+3] || Z1 > cr_planes[I+5]) continue;
-    (cr_planes[I] >= P[1] && cr_isCeiling) && (cr_result = cr_Math.min(cr_planes[I], cr_result));
+    (cr_planes[I] > P[1] && cr_isCeiling) && (cr_result = cr_Math.min(cr_planes[I], cr_result));
     (cr_planes[I] <= P[1] + 0.21 && !cr_isCeiling) && (cr_result = cr_Math.max(cr_planes[I], cr_result));
   }
 
@@ -795,7 +795,7 @@ function cr_updateGravity(P, T) {
     }
     if (P[3] > 0) {
       const cr_ceiling = cr_getHighestFloorOrLowestCeiling(P, 0.5, 1);
-      if (cr_ceiling <= P[1] + 0.5) {
+      if (cr_ceiling <= P[1]+P[4]) {
         P[1] = cr_ceiling - 0.51;
       }
     }
@@ -803,12 +803,12 @@ function cr_updateGravity(P, T) {
 }
 
 // Check for collisions with enemies
-function cr_doesCollidesWithEnemy(P, PY2, cr_self, cr_2d = 0) {
+function cr_doesCollidesWithEnemy(P, cr_self, cr_2d = 0) {
   for (let I=0;I<cr_enemies.length;I++) {
     const cr_enemy = cr_enemies[I];
     if (cr_enemy === cr_self || cr_enemy.cr_state === 3) continue;
     if (!cr_2d && P[1] >= cr_enemy.cr_position[1] + 0.8) continue;
-    if (!cr_2d && PY2 <= cr_enemy.cr_position[1]) continue;
+    if (!cr_2d && P[1]+P[4] <= cr_enemy.cr_position[1]) continue;
 
     const cr_distance = (P[0] - cr_enemy.cr_position[0]) ** 2 + (P[2] - cr_enemy.cr_position[2]) ** 2;
     if (cr_distance <= 1) return cr_enemy;
@@ -817,12 +817,12 @@ function cr_doesCollidesWithEnemy(P, PY2, cr_self, cr_2d = 0) {
 }
 
 // Check for collisions with props
-function cr_doesCollidesWithProps(P, PY2, cr_2d = 0) {
+function cr_doesCollidesWithProps(P, cr_2d = 0) {
   for (let I=0;I<cr_props.length;I++) {
     const cr_prop = cr_props[I];
     if (!cr_prop.cr_isSolid) continue; 
     if (!cr_2d && P[1] >= cr_prop.cr_position[1] + 0.8) continue;
-    if (!cr_2d && PY2 <= cr_prop.cr_position[1]) continue;
+    if (!cr_2d && P[1]+P[4] <= cr_prop.cr_position[1]) continue;
 
     const cr_distance = (P[0] - cr_prop.cr_position[0]) ** 2 + (P[2] - cr_prop.cr_position[2]) ** 2;
     if (cr_distance <= 1) return cr_prop;
@@ -1133,7 +1133,7 @@ function cr_updateProjectile(cr_projectile) {
   cr_projectile.cr_position[0] += cr_xTo;
   cr_projectile.cr_position[2] += cr_zTo;
 
-  const cr_enemy = cr_doesCollidesWithEnemy(cr_projectile.cr_position, cr_projectile.cr_position[1] + 0.2, 0);
+  const cr_enemy = cr_doesCollidesWithEnemy(cr_projectile.cr_position, 0, 0);
   if (cr_enemy && cr_enemy.cr_state != 2) {
     cr_projectile.cr_destroy = 1;
     if (--cr_enemy.cr_hp <= 0) {
