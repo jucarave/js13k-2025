@@ -620,7 +620,7 @@ function cr_updateCamera() {
   }
 
   cr_updateGravity(cr_cameraPosition, cr_cameraTargetFloor);
-  (cr_cameraPosition[1] === cr_cameraTargetFloor) && (cr_cameraIsJumping = 0);
+  cr_cameraPosition[1] === cr_cameraTargetFloor && (cr_cameraIsJumping = 0);
 
   // If there was any movement, update the camera view matrix
   cr_cameraView = cr_updateMatrix([-cr_cameraPosition[0], -cr_cameraPosition[1]-cr_cameraHeight, -cr_cameraPosition[2]], cr_cameraRotation);
@@ -782,15 +782,15 @@ function cr_getHighestFloorOrLowestCeiling(P, S, cr_isCeiling) {
 
 // moves the entity to it's floor position
 function cr_updateGravity(P, T) {
-  if (P[1] < T) {
+  if (P[1] < T && P[3] <= 0) {
     P[1] = cr_Math.min(P[1] + 0.1, T);
     P[3] = 0;
-  }else if (P[1] > T) {
+  } else if (P[1] > T || P[3] !== 0) {
     (P[3] >= 0) && (P[3] -= cr_gravity);
     (P[3] < 0) && (P[3] -= cr_gravity/5);
     P[1] += P[3];
-    if (P[1] <= T) {
-      P[1] = cr_Math.min(P[1] + 0.1, T);
+    if (P[1] <= T && P[3] <= 0) {
+      P[1] = T;
       P[3] = 0;
     }
     if (P[3] > 0) {
@@ -999,7 +999,7 @@ function cr_createEnemy(X, Y, Z, cr_texture, cr_hp) {
     cr_geometryAttack.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
   
   cr_enemies.push({
-    cr_position: [X, Y, Z, 0], // x, y, z, vertical speed
+    cr_position: [X, Y, Z, 0, 0.8], // x, y, z, vertical speed, height
     cr_matriz: cr_matTranslate(X, Y, Z),
     cr_frame: 0,
     cr_geometry: null,
@@ -1112,7 +1112,7 @@ function cr_updateEnemy(cr_enemy) {
  */
 function cr_createProjectile(X, Y, Z, cr_direction, cr_texture) {
   cr_projectiles.push({
-    cr_position: [X, Y, Z, 0], // x, y, z, vertical speed
+    cr_position: [X, Y, Z, 0, 0.2], // x, y, z, vertical speed, height
     cr_matriz: cr_matTranslate(X, Y, Z),
     cr_geometry: cr_createBillboard(0.1, 0.1, cr_texture, [0,0,1,1]),
     cr_direction,
