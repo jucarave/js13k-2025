@@ -127,10 +127,6 @@ cr_e1m1Walls = [ // Room coordinates set by x, y pairs, first three numbers are 
   // Bathroom
   [0, 2, 2, 23.2, 1, 23.2, 0, 27, 0, 27, 3.8, 23.2, 3.8, 23.2, 2],
   [1.5, 2, 2, 23.2, 2, 23.2, 1],
-  // Garage
-  [0, 2, 5, 8.8, 13, 8.8, 16, 7, 16, 7, 16.2],
-  [0, 2, 5, 2, 16.2, 2, 16, 0, 16, 0, 4, 8.8, 4, 8.8, 12],
-  [1.5, 2, 5, 8.8, 12, 8.8, 13],
 
   // 2nd floor
   // Hallway
@@ -317,6 +313,8 @@ cr_img = [
   [16, 32, "mmmmmmmmmmmmmmmmqqqqqqqqqqqqqqqqleflllllleflllllkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkkefkkkkkleflllllleflllllqqqqqqqqqqqqqqqq666666666666666665555555555555556566666666666665656555555555556565655555555555656565555555555565656555555555556565655555555555656565555555555565656666666666666565555555555555556666666666666666"],
   // Wardrobe 30
   [16, 32, "qqqqqqqqqqqqqqqqq66656655555666qq55656555655565qq65656555665566qq65555555565565qq65656555555565qq65555665565665qq65655565556555qq55655555566556qq65555565556556qq65655555555555qq55556655556556qq65565655655565qq65565555656565qqqqqqqqqqqqqqqqqq65555565566656qq56655qqqq56565qq65555565565655qqqqqqqqqqqqqqqqqq65655555555556qq65555qqqq55566qq55565665555656qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
+  // Door 31
+  [16, 32, "qqqqqqqqqqqqqqqqqkkkkkkkkkkkkkkqqkllllllllllllkqqkljjjjjjjjjjlkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqkllllllllllllkqqkkkkkkkkkkqqqkqqkkkkkkkkkqjjqkqqkkkkkkkkkqqqkkqqkllllllllllllkqqkljjjjjjjjjjlkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqkllllllllllllkqqkkkkkkkkkkkkkkqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
 ],
 cr_img_clamp_to_edges = [0,0,0,1],
 cr_newImage = (cr_src) => {
@@ -355,14 +353,14 @@ let cr_canvas,      // HTMLCanvasElement
   cr_getUniformLocation = null, // Function to get uniform locations
   cr_uniformMatrix4fv = null,   // Function to set uniform matrices
 
-  cr_cameraPosition = [2,0,9,0,0.5], // Camera position in 3D space + vertical speed + collision height
-  cr_cameraRotation = 0,             // Camera rotation angle in radians
+  cr_cameraPosition = [13.5,2.6,6,0,0.5], // Camera position in 3D space + vertical speed + collision height
+  cr_cameraRotation = cr_pi_2*2.5,             // Camera rotation angle in radians
   cr_cameraView = cr_updateMatrix(cr_cameraPosition, cr_cameraRotation),     // Camera view matrix
   cr_cameraProjection  = [1, 0, 0, 0, // Camera projection matrix
                           0, 1.778, 0, 0, 
                           0, 0, -1, -1, 
                           0, 0, -0.1, 0],
-  cr_cameraTargetFloor = 0,       // Where should the camera be placed at vertically?
+  cr_cameraTargetFloor = 2.6,    // Where should the camera be placed at vertically?
   cr_cameraIsJumping = 0,         // Is the camera jumping
   cr_cameraAttackDelay = 0,       // Delay between attacks
   cr_cameraHealth = 5,            // Player's health
@@ -408,12 +406,16 @@ function cr_addBlock(X1, Y1, Z1, W, H, L, cr_textures, cr_walls, cr_planes, cr_a
 }
 
 // E1M1 Furniture
+// Garage door
+cr_addBlock(8.8, 0, 12, 0.2, 1.5, 1, [11, 31, 11, 31, 11, 11, 11], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Kitchen
 cr_addBlock(9, 0, 4, 1, 0.8, 1, [8, 8, 7, 8, 9, 8], cr_e1m1Walls, cr_e1m1Planes, 0); // Countertops
 cr_addBlock(10, 0, 4, 1, 0.8, 1, [8, 8, 13, 8, 14, 8], cr_e1m1Walls, cr_e1m1Planes, 0); // Stove
 cr_addBlock(11, 0, 4, 4, 0.8, 1, [8, 8, 7, 8, 9, 8], cr_e1m1Walls, cr_e1m1Planes, 0); // Countertops
 cr_addBlock(15, 0, 4, 1, 1.5, 1, [11, 11, 10, 11, 12, 0], cr_e1m1Walls, cr_e1m1Planes, 0); // Fridge
 // Living Room
+// Exit door
+cr_addBlock(17.5, 0, 18, 1, 1.5, 0.2, [31, 11, 31, 11, 11, 11, 11], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Drawers
 cr_addBlock(9, 0, 9.5, 1, 0.7, 2, [19,18,19,19,19,19], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(10, 0, 14, 1, 0.7, 1, [18,19,19,19,19,19], cr_e1m1Walls, cr_e1m1Planes, 0);
@@ -476,11 +478,13 @@ cr_addBlock(24.7, 0.6, 4.05, 0.6, 0.05, 0.4, [24], cr_e1m1Walls, cr_e1m1Planes, 
 cr_addBlock(24.95, 0.6, 4.1, 0.1, 0.3, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(25.65, 0.6, 4.2, 0.3, 0.6, 0.6, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
 //Bathroom
+cr_addBlock(22.2, 0, 1, 1, 1.5, 0.2, [31, 11, 31, 11, 11, 11, 11], cr_e1m1Walls, cr_e1m1Planes, 0); // Door
 cr_addBlock(25.5, 0, 1.5, 1.5, 1.5, 0.2, [2], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(25.5, 0, 0, 0.2, 0.2, 1.5, [2], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(23.2, 0, 2.8, 1, 0.7, 1, [26,26,26,26,27,26], cr_e1m1Walls, cr_e1m1Planes, 0);
 // 2nd Floor
 // Bedroom 1
+cr_addBlock(22.2, 2, 4.8, 1, 1.5, 0.2, [31, 11, 31, 11, 11, 11, 11], cr_e1m1Walls, cr_e1m1Planes, 0); // Door
 // Bed
 cr_addBlock(26, 2, 9.6, 1, 1, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(26, 2, 7.4, 1, 0.7, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
@@ -499,6 +503,7 @@ cr_addBlock(25.7, 2, 5.15, 0.5, 0.5, 0.1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(25.7, 2, 5.75, 0.5, 0.5, 0.1, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(25.7, 2, 5.25, 0.5, 0.3, 0.5, [20], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Bedroom 2
+cr_addBlock(21.2, 2, 11, 0.2, 1.5, 1, [11, 31, 11, 31, 11, 11, 11], cr_e1m1Walls, cr_e1m1Planes, 0); // Door
 // Bed
 cr_addBlock(21.2, 2, 14, 0.2, 1, 1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(23.4, 2, 14, 0.2, 0.7, 1, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
@@ -512,6 +517,7 @@ cr_addBlock(23.5, 2.8, 10.5, 1, 0.7, 0.1, [24,24,23,24,24,24], cr_e1m1Walls, cr_
 cr_addBlock(23.7, 2.7, 10.35, 0.6, 0.05, 0.4, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(23.95, 2.7, 10.4, 0.1, 0.3, 0.1, [24], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Bedroom 3
+cr_addBlock(16, 2, 10, 1, 1.5, 0.2, [31, 11, 31, 11, 11, 11, 11], cr_e1m1Walls, cr_e1m1Planes, 0); // Door
 // Bed
 cr_addBlock(13, 2, 5, 2, 1, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
 cr_addBlock(13, 2, 7.2, 2, 0.7, 0.2, [22], cr_e1m1Walls, cr_e1m1Planes, 0);
@@ -522,6 +528,8 @@ cr_addBlock(15.5, 2, 5, 1, 0.7, 1, [19, 19, 18, 19, 19, 19, 0], cr_e1m1Walls, cr
 // Wardrobe
 cr_addBlock(14, 2, 10.5, 2, 1.5, 0.5, [30, 22, 22, 22, 22, 22, 0], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Bathroom
+cr_addBlock(13, 2, 11.2, 0.2, 1.5, 1, [11, 31, 11, 31, 11, 11, 11], cr_e1m1Walls, cr_e1m1Planes, 0); // Door
+// Sink
 cr_addBlock(10, 2, 11.2, 1, 0.7, 1, [26,26,26,26,27,26], cr_e1m1Walls, cr_e1m1Planes, 0);
 // Bathtub
 cr_addBlock(12, 2, 13, 2, 0.1, 1, [26], cr_e1m1Walls, cr_e1m1Planes, 0);
