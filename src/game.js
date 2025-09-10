@@ -315,8 +315,10 @@ cr_img = [
   [16, 32, "qqqqqqqqqqqqqqqqq66656655555666qq55656555655565qq65656555665566qq65555555565565qq65656555555565qq65555665565665qq65655565556555qq55655555566556qq65555565556556qq65655555555555qq55556655556556qq65565655655565qq65565555656565qqqqqqqqqqqqqqqqqq65555565566656qq56655qqqq56565qq65555565565655qqqqqqqqqqqqqqqqqq65655555555556qq65555qqqq55566qq55565665555656qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
   // Door 31
   [16, 32, "qqqqqqqqqqqqqqqqqkkkkkkkkkkkkkkqqkllllllllllllkqqkljjjjjjjjjjlkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqkllllllllllllkqqkkkkkkkkkkqqqkqqkkkkkkkkkqjjqkqqkkkkkkkkkqqqkkqqkllllllllllllkqqkljjjjjjjjjjlkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqkllllllllllllkqqkkkkkkkkkkkkkkqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
+  // Mouse Wizard 32
+  [128, 16, "                                                                                                                                                                                                                                                                      qqq                                                                                             qqq              qqq           qghhq            qqq             qqq                                                            qghhq            qghhq         qooghgq          qghhq           qghhq            qqq                                           qooghgq          qooghgq         qqoghq         qooghgq         qooghgq          q788q                                           qqoghq           qqoghq      abaqqqhqqq         qqoghq          qqoghq         q77787q            qqqq                          qqqhqqq          qaaaqqq     bjboq666qoq      abaqqhqqq      abaqqqhqqq         qq778q           qghhgq                        qaba66qoq        qabjbaqoq    abaqqp6pqq       bjbq666qoq     bjboq666qoq      777qq8qqq         qooghhq                         bjb6pqq          ajjjaqq      qq q555q        abaqp6pqq      abaqqp6pqq       787qqqqq7q         qqqhqqq                       qaba55q           abjbaq       qq qogoq         qqq555q        qq q555q        777qqqqqq         qoq666qoq          qqq         qqqogoq           qaaaoq        qq5qgq6q        qqqggqqq       qqqqqgqq         qqq7q7q           qqq6qqq         qqgggq       qq5qggq6q          q5ggqq        q56hgh56q       qqghgq5q        q65qghq         qq7q7q7q         qqq555q         qggqghhq      q56ghghg6q        qqqhghgq        qqhghqq         qghgq5q        q56hghgq        qq787877q       q56hq55q       qqhqqqqqqqq      qqqhghgqq         qqhghgq        qhghghq         qhghgqq         qqghghq        qqq787qq        qqqhqqqq      qhqgggqq6qqoq      qhghghq         qhghghq         qqqqqqq         qghgqqq         qqqghgq         qqqqqqq        qqqqqqq       qhhqqqq555qq       qqqqqqq         qqqqqqq    "],
 ],
-cr_img_clamp_to_edges = [0,0,0,1],
+cr_img_clamp_to_edges = [4, 32],
 cr_newImage = (cr_src) => {
   const img = new Image();
   img.src = cr_src;
@@ -636,7 +638,7 @@ function cr_updateCamera() {
   if (cr_keys["KeyZ"] === 1 && !cr_cameraAttackDelay) {
     cr_cameraAttackDelay = 20;
     cr_keys["KeyZ"] = 2;
-    cr_createProjectile(cr_cameraPosition[0], cr_cameraPosition[1]+0.4, cr_cameraPosition[2], [-S, -C], 4);
+    cr_createProjectile(cr_cameraPosition[0], cr_cameraPosition[1]+0.4, cr_cameraPosition[2], [-S, -C], 4, 1);
   }
 }
 
@@ -713,7 +715,7 @@ function cr_loadTextures() {
     cr_gl.texImage2D(A, 0, 6408, cr_img[J][0], cr_img[J][1], 0, 6408, 5121, cr_pixels);
     cr_gl.texParameteri(A, 10240, 9728);
     cr_gl.texParameteri(A, 10241, 9728);
-    if (cr_img_clamp_to_edges[J]) {
+    if (cr_img_clamp_to_edges.includes(J)) {
       cr_gl.texParameteri(A, 10242, 33071);
       cr_gl.texParameteri(A, 10243, 33071);
     }
@@ -991,20 +993,33 @@ function cr_buildLevelProps() {
   }
 }
 
+function cr_buildEnemies() {
+  cr_createEnemy(22.5,0,6.5,32,3,1);
+  cr_createEnemy(19.5,0,11.5,32,3,1);
+  cr_createEnemy(17.5,0,13.5,32,3,1);
+  cr_createEnemy(12.5,0,12.5,32,3,1);
+  cr_createEnemy(14.5,0,7.5,32,3,1);
+  cr_createEnemy(25.5,0,2.5,32,3,1);
+
+  // 2nd floor
+  cr_createEnemy(24.5,2,7.5,32,3,1);
+  cr_createEnemy(24.5,2,14.5,32,3,1);
+}
+
 /**
  * SECTION ENEMIES
  */
-function cr_createEnemy(X, Y, Z, cr_texture, cr_hp) {
+function cr_createEnemy(X, Y, Z, cr_texture, cr_hp, cr_isRanged) {
   const cr_geometryWalk = [],
   cr_geometryDeath = [],
   cr_geometryAttack = [];
   let I;
-  for (I of [0,1,2,1])
-    cr_geometryWalk.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
+  for (I of [0,1,0,2])
+    cr_geometryWalk.push(cr_createBillboard(1/2, 1/2, cr_texture, cr_smallUvs[I]));
   for (I of [4,5])
-    cr_geometryDeath.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
-  for (I of [6,7,6,1])
-    cr_geometryAttack.push(cr_createBillboard(1, 1, cr_texture, cr_smallUvs[I]));
+    cr_geometryDeath.push(cr_createBillboard(1/2, 1/2, cr_texture, cr_smallUvs[I]));
+  for (I of [0,6,7,6])
+    cr_geometryAttack.push(cr_createBillboard(1/2, 1/2, cr_texture, cr_smallUvs[I]));
   
   cr_enemies.push({
     cr_position: [X, Y, Z, 0, 0.8], // x, y, z, vertical speed, height
@@ -1014,7 +1029,7 @@ function cr_createEnemy(X, Y, Z, cr_texture, cr_hp) {
     cr_geometryWalk,
     cr_geometryDeath,
     cr_geometryAttack,
-    cr_geometryHurt: cr_createBillboard(1, 1, cr_texture, cr_smallUvs[3]),
+    cr_geometryHurt: cr_createBillboard(1/2, 1/2, cr_texture, cr_smallUvs[3]),
     cr_state: 0,                // 0: Idle/Walk, 1: Hurt, 2: Dying, 3: Dead, 4: Attack
     cr_hurt: 0,                 // How long the enemy is hurt
     cr_attackCooldown: 0,       // How long until the enemy can attack again
@@ -1022,6 +1037,7 @@ function cr_createEnemy(X, Y, Z, cr_texture, cr_hp) {
     cr_speed: 0.03,
     cr_targetFloor: Y,
     cr_destroy: 0,
+    cr_isRanged: cr_isRanged,
     cr_hp
   });
 }
@@ -1036,10 +1052,18 @@ function cr_enemyMeleeAttack(cr_enemy) {
   }
 }
 
+function cr_enemyRangedAttack(cr_enemy) {
+  const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
+  cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
+  cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
+  cr_createProjectile(cr_enemy.cr_position[0], cr_enemy.cr_position[1]+0.3, cr_enemy.cr_position[2], [cr_dx/cr_length, cr_dz/cr_length], 4, 0);
+}
+
 function cr_updateEnemy(cr_enemy) {
   cr_enemy.cr_attackCooldown = cr_Math.max(cr_enemy.cr_attackCooldown - 1, 0);
 
   // Update geometry
+  let cr_previousFrame;
   switch (cr_enemy.cr_state) {
     case 0:
       cr_enemy.cr_frame = (cr_enemy.cr_frame + cr_spriteSpeed) % 4; // Cycle through frames
@@ -1060,11 +1084,22 @@ function cr_updateEnemy(cr_enemy) {
       }
       return;
     case 4:
-      const cr_previousFrame = cr_enemy.cr_frame << 0;
+      cr_previousFrame = cr_enemy.cr_frame << 0;
       cr_enemy.cr_frame += cr_spriteSpeed;
       cr_enemy.cr_geometry = cr_enemy.cr_geometryAttack[cr_enemy.cr_frame << 0];
       if ((cr_enemy.cr_frame<<0) === 2 && cr_previousFrame == 1) {
         cr_enemyMeleeAttack(cr_enemy);  
+      }
+      if (cr_enemy.cr_frame+cr_spriteSpeed >= 4) {
+        cr_enemy.cr_state = 0;
+      }
+      return;
+    case 5:
+      cr_previousFrame = cr_enemy.cr_frame << 0;
+      cr_enemy.cr_frame += cr_spriteSpeed;
+      cr_enemy.cr_geometry = cr_enemy.cr_geometryAttack[cr_enemy.cr_frame << 0];
+      if ((cr_enemy.cr_frame<<0) === 2 && cr_previousFrame == 1) {
+        cr_enemyRangedAttack(cr_enemy);  
       }
       if (cr_enemy.cr_frame+cr_spriteSpeed >= 4) {
         cr_enemy.cr_state = 0;
@@ -1077,21 +1112,29 @@ function cr_updateEnemy(cr_enemy) {
   // Update movement
   const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
   cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
+  cr_differentFloor = cr_Math.abs(cr_cameraPosition[1] - cr_enemy.cr_position[1]) >= 2,
   cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
 
-  if (cr_length > 8 && !cr_enemy.cr_active) return;
+  if ((cr_length > 8 && !cr_enemy.cr_active) || cr_differentFloor) return;
 
-  const cr_enemyEyePosition = [cr_enemy.cr_position[0], cr_enemy.cr_position[1] + 1, cr_enemy.cr_position[2]];
+  const cr_enemyEyePosition = [cr_enemy.cr_position[0], cr_enemy.cr_position[1] + 1, cr_enemy.cr_position[2], cr_enemy.cr_position[3], cr_enemy.cr_position[4]];
   if (!cr_enemy.cr_active && cr_doesCollidesWithWalls(cr_enemyEyePosition, cr_dx, cr_dz))
     return;
 
   cr_enemy.cr_active = 1;
 
-  if (cr_length <= 1.2) {
+  if (cr_length <= 1.2 && !cr_enemy.cr_isRanged) {
     if (cr_enemy.cr_attackCooldown <= 0){
       cr_enemy.cr_state = 4;
       cr_enemy.cr_frame = 0;
       cr_enemy.cr_attackCooldown = 60;
+    }  
+    return;
+  } else if (cr_length <= 3 && cr_enemy.cr_isRanged) {
+    if (cr_enemy.cr_attackCooldown <= 0){
+      cr_enemy.cr_state = 5;
+      cr_enemy.cr_frame = 0;
+      cr_enemy.cr_attackCooldown = 120;
     }  
     return;
   }
@@ -1118,14 +1161,15 @@ function cr_updateEnemy(cr_enemy) {
 /**
  * SECTION PROJECTILES
  */
-function cr_createProjectile(X, Y, Z, cr_direction, cr_texture) {
+function cr_createProjectile(X, Y, Z, cr_direction, cr_texture, cr_isPlayers) {
   cr_projectiles.push({
     cr_position: [X, Y, Z, 0, 0.2], // x, y, z, vertical speed, height
     cr_matriz: cr_matTranslate(X, Y, Z),
     cr_geometry: cr_createBillboard(0.1, 0.1, cr_texture, [0,0,1,1]),
     cr_direction,
     cr_destroy: 0,
-    cr_timeToLive: 180            // 180 frames
+    cr_timeToLive: 180,            // 180 frames
+    cr_isPlayers                   // 1 if it's the player's projectile, 0 if it's an enemy's
   });
 }
 
@@ -1141,15 +1185,24 @@ function cr_updateProjectile(cr_projectile) {
   cr_projectile.cr_position[0] += cr_xTo;
   cr_projectile.cr_position[2] += cr_zTo;
 
-  const cr_enemy = cr_doesCollidesWithEnemy(cr_projectile.cr_position, 0, 0);
-  if (cr_enemy && cr_enemy.cr_state != 2) {
-    cr_projectile.cr_destroy = 1;
-    if (--cr_enemy.cr_hp <= 0) {
-      cr_enemy.cr_state = 2;
-      cr_enemy.cr_frame = 0;
-    } else {
-      cr_enemy.cr_state = 1;
-      cr_enemy.cr_hurt = 10;
+  if (cr_projectile.cr_isPlayers) {
+    const cr_enemy = cr_doesCollidesWithEnemy(cr_projectile.cr_position, 0, 0);
+    if (cr_enemy && cr_enemy.cr_state != 2) {
+      cr_projectile.cr_destroy = 1;
+      if (--cr_enemy.cr_hp <= 0) {
+        cr_enemy.cr_state = 2;
+        cr_enemy.cr_frame = 0;
+      } else {
+        cr_enemy.cr_state = 1;
+        cr_enemy.cr_hurt = 10;
+      }
+    }
+  } else {
+    const cr_distanceToPlayer = (cr_projectile.cr_position[0] - cr_cameraPosition[0]) ** 2 + (cr_projectile.cr_position[2] - cr_cameraPosition[2]) ** 2;
+    if (cr_distanceToPlayer <= 0.3 && cr_projectile.cr_position[1] >= cr_cameraPosition[1] && cr_projectile.cr_position[1] <= cr_cameraPosition[1] + cr_cameraHeight) {
+      cr_projectile.cr_destroy = 1;
+      cr_cameraHurt = 10;
+      if (--cr_cameraHealth <= 0) cr_cameraState = 1;
     }
   }
 
@@ -1238,7 +1291,7 @@ function cr_main() {
   cr_buildRoomGeometry();
   cr_buildPlanesGeometry();
   cr_buildLevelProps();
-  //cr_createEnemy(9,0,9,3,3);
+  cr_buildEnemies();
   cr_update();
 }
 
