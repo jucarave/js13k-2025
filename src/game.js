@@ -382,7 +382,10 @@ let cr_canvas,      // HTMLCanvasElement
   
   cr_walls = cr_e1m1Walls,
   cr_planes = cr_e1m1Planes,
-  cr_levelProps = cr_e1m1Props;
+  cr_levelProps = cr_e1m1Props,
+  
+  cr_wave = 1,
+  cr_enemiesLeft = 0;
 
 
 /**
@@ -994,32 +997,40 @@ function cr_buildLevelProps() {
 }
 
 function cr_buildEnemies() {
-  cr_createEnemy(22.5,0,6.5,32,3,1);
-  cr_createEnemy(19.5,0,11.5,32,3,1);
-  cr_createEnemy(17.5,0,13.5,32,3,1);
-  cr_createEnemy(12.5,0,12.5,32,3,1);
-  cr_createEnemy(14.5,0,7.5,32,3,1);
-  cr_createEnemy(25.5,0,2.5,32,3,1);
+  if (cr_wave === 1) {
+    cr_createMouseWizard(13.5,0,8.5);
+    cr_createBroom(12.5,0,12.5);
+  } else if (cr_wave === 2) {
+    cr_createMouseWizard(22,0,3.5);
+    cr_createMouseWizard(12.5,0,12.5);
+    cr_createBroom(19,2,9.5);
+  }
+}
 
-  // 2nd floor
-  cr_createEnemy(24.5,2,7.5,32,3,1);
-  cr_createEnemy(24.5,2,14.5,32,3,1);
+function cr_checkCurrentWave() {
+  if (cr_enemiesLeft === 0) {
+    cr_wave++;
+    setTimeout(() => {
+      document.getElementById("wave").innerText = `Wave ${cr_wave}`;
+      cr_buildEnemies();
+    }, 5000);
+  }
 }
 
 /**
  * SECTION ENEMIES
  */
-function cr_createEnemy(X, Y, Z, cr_texture, cr_hp, cr_isRanged) {
+function cr_createEnemy(X, Y, Z, cr_texture, cr_hp, cr_isRanged, cr_scale=1) {
   const cr_geometryWalk = [],
   cr_geometryDeath = [],
   cr_geometryAttack = [];
   let I;
   for (I of [0,1,0,2])
-    cr_geometryWalk.push(cr_createBillboard(1/2, 1/2, cr_texture, cr_smallUvs[I]));
+    cr_geometryWalk.push(cr_createBillboard(cr_scale, cr_scale, cr_texture, cr_smallUvs[I]));
   for (I of [4,5])
-    cr_geometryDeath.push(cr_createBillboard(1/2, 1/2, cr_texture, cr_smallUvs[I]));
+    cr_geometryDeath.push(cr_createBillboard(cr_scale, cr_scale, cr_texture, cr_smallUvs[I]));
   for (I of [0,6,7,6])
-    cr_geometryAttack.push(cr_createBillboard(1/2, 1/2, cr_texture, cr_smallUvs[I]));
+    cr_geometryAttack.push(cr_createBillboard(cr_scale, cr_scale, cr_texture, cr_smallUvs[I]));
   
   cr_enemies.push({
     cr_position: [X, Y, Z, 0, 0.8], // x, y, z, vertical speed, height
@@ -1029,7 +1040,7 @@ function cr_createEnemy(X, Y, Z, cr_texture, cr_hp, cr_isRanged) {
     cr_geometryWalk,
     cr_geometryDeath,
     cr_geometryAttack,
-    cr_geometryHurt: cr_createBillboard(1/2, 1/2, cr_texture, cr_smallUvs[3]),
+    cr_geometryHurt: cr_createBillboard(cr_scale, cr_scale, cr_texture, cr_smallUvs[3]),
     cr_state: 0,                // 0: Idle/Walk, 1: Hurt, 2: Dying, 3: Dead, 4: Attack
     cr_hurt: 0,                 // How long the enemy is hurt
     cr_attackCooldown: 0,       // How long until the enemy can attack again
@@ -1040,6 +1051,16 @@ function cr_createEnemy(X, Y, Z, cr_texture, cr_hp, cr_isRanged) {
     cr_isRanged: cr_isRanged,
     cr_hp
   });
+
+  cr_enemiesLeft++;
+}
+
+function cr_createMouseWizard(X, Y, Z) {
+  cr_createEnemy(X, Y, Z, 32, 4, 1, 1/2);
+}
+
+function cr_createBroom(X, Y, Z) {
+  cr_createEnemy(X, Y, Z, 3, 5, 0, 1);
 }
 
 function cr_enemyMeleeAttack(cr_enemy) {
@@ -1081,6 +1102,8 @@ function cr_updateEnemy(cr_enemy) {
       if (cr_enemy.cr_frame >= 2) {
         cr_enemy.cr_geometry = cr_enemy.cr_geometryDeath[1];
         cr_enemy.cr_state = 3;
+        cr_enemiesLeft--;
+        cr_checkCurrentWave();
       }
       return;
     case 4:
@@ -1249,7 +1272,7 @@ function cr_update() {
       cr_ctx2D.putImageData(cr_textures2D[3], 1 + I * 16, 1);
     }
   }
-
+  
   // Update the enemies
   for (I=0;I<cr_enemies.length;I++) {
     (cr_enemies[I].cr_state !== 3) && cr_updateEnemy(cr_enemies[I]);
