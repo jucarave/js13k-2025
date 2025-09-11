@@ -318,7 +318,7 @@ cr_img = [
   // Mouse Wizard 32
   [128, 16, "                                                                                                                                                                                                                                                                      qqq                                                                                             qqq              qqq           qghhq            qqq             qqq                                                            qghhq            qghhq         qooghgq          qghhq           qghhq            qqq                                           qooghgq          qooghgq         qqoghq         qooghgq         qooghgq          q788q                                           qqoghq           qqoghq      abaqqqhqqq         qqoghq          qqoghq         q77787q            qqqq                          qqqhqqq          qaaaqqq     bjboq666qoq      abaqqhqqq      abaqqqhqqq         qq778q           qghhgq                        qaba66qoq        qabjbaqoq    abaqqp6pqq       bjbq666qoq     bjboq666qoq      777qq8qqq         qooghhq                         bjb6pqq          ajjjaqq      qq q555q        abaqp6pqq      abaqqp6pqq       787qqqqq7q         qqqhqqq                       qaba55q           abjbaq       qq qogoq         qqq555q        qq q555q        777qqqqqq         qoq666qoq          qqq         qqqogoq           qaaaoq        qq5qgq6q        qqqggqqq       qqqqqgqq         qqq7q7q           qqq6qqq         qqgggq       qq5qggq6q          q5ggqq        q56hgh56q       qqghgq5q        q65qghq         qq7q7q7q         qqq555q         qggqghhq      q56ghghg6q        qqqhghgq        qqhghqq         qghgq5q        q56hghgq        qq787877q       q56hq55q       qqhqqqqqqqq      qqqhghgqq         qqhghgq        qhghghq         qhghgqq         qqghghq        qqq787qq        qqqhqqqq      qhqgggqq6qqoq      qhghghq         qhghghq         qqqqqqq         qghgqqq         qqqghgq         qqqqqqq        qqqqqqq       qhhqqqq555qq       qqqqqqq         qqqqqqq    "],
 ],
-cr_img_clamp_to_edges = [4, 32],
+cr_img_clamp_to_edges = [3, 32],
 cr_newImage = (cr_src) => {
   const img = new Image();
   img.src = cr_src;
@@ -332,7 +332,7 @@ cr_img2D = [
   // Cat Attack 2
   [30, 24, "        iiiii                       iihhhhhiii                   ihhqqqqqhhhi                 ihqq88888qqqhi    iiii       ihq7888888888qhii ihhhhi     ihq877777777777qhhihkqqkhi   ihq77777777777qqqqqhhqqqqhi   ihq7777777777qqq588qhqqqqkhi ihq77776666qqq4qqq87qhqqqqhi  ihq777qq66q44455q87qhhqqqhi   ihq776qqqq4455qq77qhihqqqhi   ihq776q5qqq5qq77qqqhihqqqhi   ihq77qqqqqqq77qqqqqqhhqqqhi   ihq777qq6677qqqqqqqqhhqqqhi   ihq7q7qhq7qqqqq7777qhqqqqhi   ihqq7qqhhqqqqq777qqqqqqqqhi    ihq77qhihhqq77qqqqqqqqqqhi     ihqqqhiiihqqqqqqqqqqqqqhi      ihhqhi  ihqqqqqqqqqqqqhi       iihi  ihqqqqqqqqqqqqqqhi        i   ihqqqqqqqqqqqqqqhi           ihqqqqqqqqqqqqqqqqhi          ihqqqqqqqqqqqqqqqqhi         ihqqqqqqqqqqqqqqqqqqhi"],
   // Cat Life 3
-  [15, 13, "           q             qqq     q       qq     qq       qq   qqq       qq  qdqq       qq qqqqq7qqqqqqqq  qqq7qqqqqqqqq     7qqqqqqqqq     qqqqqqqqqq    qq qq qqqqqq  qqq qq qq  qq qqq qq qqq qqq"]
+  [15, 13, "           q             qqq     q       qq     qq       qq   qqq       qq  qdqq       qq qqqqq7qqqqqqqq  qqq7qqqqqqqqq     7qqqqqqqqq     qqqqqqqqqq    qq qq qqqqqq  qqq qq qq  qq qqq qq qqq qqq"],
 ],
 cr_textures2D = [];
 
@@ -615,8 +615,8 @@ function cr_resizeCanvas() {
     cr_canvas2D.height = cr_height / 4;
   } else {
     cr_cameraProjection = cr_createPerspective(70, cr_ratio, 0.1, 100);
-    cr_canvas2D.width = cr_width / 4;
-    cr_canvas2D.height = cr_width / cr_ratio / 4;
+    cr_canvas2D.width = cr_width / 6;
+    cr_canvas2D.height = cr_width / cr_ratio / 6;
   }
 }
 
@@ -755,10 +755,11 @@ function cr_loadTextures() {
   }
 }
 
-function cr_loadTextures2D() {
-  for (let I=0;I<4;I++) {
+async function cr_loadTextures2D() {
+  for (let I=0;I<cr_img2D.length;I++) {
     const cr_pixels = cr_parsePixels(cr_img2D[I]);
-    cr_textures2D.push(new ImageData(cr_pixels, cr_img2D[I][0], cr_img2D[I][1]));
+    const cr_imageData = new ImageData(cr_pixels, cr_img2D[I][0], cr_img2D[I][1]);
+    cr_textures2D.push(await createImageBitmap(cr_imageData));
   }
 }
 
@@ -1283,28 +1284,28 @@ function cr_update() {
 
   // Render the HUD
   cr_ctx2D.clearRect(0, 0, cr_canvas2D.width, cr_canvas2D.height);
-  const cr_width = cr_canvas2D.width / 2,
-  cr_height = cr_canvas2D.height;
+  const cr_width = cr_Math.floor(cr_canvas2D.width / 2),
+  cr_height = cr_Math.floor(cr_canvas2D.height);
   if (cr_cameraState === 0){
     const S = cr_Math.sin(cr_catBobbing);
     if (cr_cameraAttackDelay) { 
-      cr_ctx2D.putImageData(cr_textures2D[2], cr_width-15, cr_height-24);
+      cr_ctx2D.drawImage(cr_textures2D[2], cr_width-15, cr_height-24);
       cr_cameraAttackDelay--;
     } 
     else {
-      (!cr_cameraIsJumping) && cr_ctx2D.putImageData(cr_textures2D[0], (cr_width-10)+S*8, (cr_height-22)+cr_Mathabs(S)*4);
-      (cr_cameraIsJumping) && cr_ctx2D.putImageData(cr_textures2D[1], (cr_width-14), cr_height-27);
+      (!cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_textures2D[0], cr_Math.round((cr_width-10)+S*8), cr_Math.round((cr_height-22)+cr_Mathabs(S)*4));
+      (cr_cameraIsJumping) && cr_ctx2D.drawImage(cr_textures2D[1], (cr_width-14), cr_height-27);
     }
     if (--cr_cameraHurt > 0){
       cr_ctx2D.fillStyle="rgba(255,0,68,0.5)";
-      cr_ctx2D.fillRect(0, 0, cr_width, cr_height);
+      cr_ctx2D.fillRect(0, 0, cr_width*2, cr_height);
       cr_ctx2D.fillStyle="white";
     }
     for (I=0;I<cr_cameraHealth;I++) {
-      cr_ctx2D.putImageData(cr_textures2D[3], 1 + I * 16, 1);
+      cr_ctx2D.drawImage(cr_textures2D[3], 1 + I * 16, 1);
     }
   }
-  
+
   // Update the enemies
   for (I=0;I<cr_enemies.length;I++) {
     (cr_enemies[I].cr_state !== 3) && cr_updateEnemy(cr_enemies[I]);
@@ -1336,13 +1337,13 @@ function cr_update() {
  * 
  * This is the main function that initializes the engine and starts the game.
  */
-function cr_main() {
+async function cr_main() {
   cr_lastTime = Date.now();
 
   cr_initEngine();
   cr_initEngine2D();
   cr_loadTextures();
-  cr_loadTextures2D();
+  await cr_loadTextures2D();
   cr_buildRoomGeometry();
   cr_buildPlanesGeometry();
   cr_buildLevelProps();
