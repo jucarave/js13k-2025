@@ -592,6 +592,34 @@ function cr_updateMatrix(cr_position, cr_rotation, cr_transMat = 1) {
     cr_matMultiply(cr_rot, cr_trans);
 }
 
+function cr_createPerspective(cr_fov, cr_ratio, cr_znear, cr_zfar) {
+  const S = 1 / cr_Math.tan((cr_fov * cr_pi / 180) / 2),
+    R = S * cr_ratio,
+    A = -cr_zfar / (cr_zfar - cr_znear),
+    B = -(cr_zfar * cr_znear) / (cr_zfar - cr_znear);
+
+  return [
+    S, 0, 0, 0, 
+    0, R, 0, 0, 
+    0, 0, A, -1, 
+    0, 0, B, 0
+  ];
+}
+
+function cr_resizeCanvas() {
+  const cr_ratio = window.innerWidth / window.innerHeight;
+  
+  if (window.innerWidth > window.innerHeight) {
+    cr_cameraProjection = cr_createPerspective(90, cr_ratio, 0.1, 100);
+    cr_canvas2D.width = cr_height * cr_ratio / 4;
+    cr_canvas2D.height = cr_height / 4;
+  } else {
+    cr_cameraProjection = cr_createPerspective(70, cr_ratio, 0.1, 100);
+    cr_canvas2D.width = cr_width / 4;
+    cr_canvas2D.height = cr_width / cr_ratio / 4;
+  }
+}
+
 /**
  * SECTION CAMERA FUNCTIONS
  */
@@ -684,6 +712,8 @@ function cr_initEngine() {
   cr_document.addEventListener("keyup", (cr_event) => 
     cr_keys[cr_event.code] = 0
   );
+
+  window.addEventListener("resize", cr_resizeCanvas);
 }
 
 function cr_initEngine2D() {
@@ -1041,14 +1071,14 @@ function cr_createEnemy(X, Y, Z, cr_texture, cr_hp, cr_isRanged, cr_scale=1) {
     cr_geometryDeath,
     cr_geometryAttack,
     cr_geometryHurt: cr_createBillboard(cr_scale, cr_scale, cr_texture, cr_smallUvs[3]),
-    cr_state: 0,                // 0: Idle/Walk, 1: Hurt, 2: Dying, 3: Dead, 4: Attack
+    cr_state: 0,                // 0: Idle/Walk, 1: Hurt, 2: Dying, 3: Dead, 4: Attack, 5: Ranged Attack
     cr_hurt: 0,                 // How long the enemy is hurt
     cr_attackCooldown: 0,       // How long until the enemy can attack again
     cr_active: 0,
     cr_speed: 0.03,
     cr_targetFloor: Y,
     cr_destroy: 0,
-    cr_isRanged: cr_isRanged,
+    cr_isRanged,                // 0: Melee, 1: Ranged
     cr_hp
   });
 
@@ -1252,16 +1282,18 @@ function cr_update() {
     cr_renderGeometry(cr_geometries[I], cr_identityMatrix);
 
   // Render the HUD
-  cr_ctx2D.clearRect(0, 0, cr_width, cr_height);
+  cr_ctx2D.clearRect(0, 0, cr_canvas2D.width, cr_canvas2D.height);
+  const cr_width = cr_canvas2D.width / 2,
+  cr_height = cr_canvas2D.height;
   if (cr_cameraState === 0){
     const S = cr_Math.sin(cr_catBobbing);
     if (cr_cameraAttackDelay) { 
-      cr_ctx2D.putImageData(cr_textures2D[2], 85, 89); 
+      cr_ctx2D.putImageData(cr_textures2D[2], cr_width-15, cr_height-24);
       cr_cameraAttackDelay--;
     } 
     else {
-      (!cr_cameraIsJumping) && cr_ctx2D.putImageData(cr_textures2D[0], 90+S*8, 90+cr_Mathabs(S)*4);
-      (cr_cameraIsJumping) && cr_ctx2D.putImageData(cr_textures2D[1], 86, 86);
+      (!cr_cameraIsJumping) && cr_ctx2D.putImageData(cr_textures2D[0], (cr_width-10)+S*8, (cr_height-22)+cr_Mathabs(S)*4);
+      (cr_cameraIsJumping) && cr_ctx2D.putImageData(cr_textures2D[1], (cr_width-14), cr_height-27);
     }
     if (--cr_cameraHurt > 0){
       cr_ctx2D.fillStyle="rgba(255,0,68,0.5)";
@@ -1315,6 +1347,7 @@ function cr_main() {
   cr_buildPlanesGeometry();
   cr_buildLevelProps();
   cr_buildEnemies();
+  cr_resizeCanvas();
   cr_update();
 }
 
