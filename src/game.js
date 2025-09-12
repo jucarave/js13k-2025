@@ -250,6 +250,7 @@ cr_propsUVs = [
   [6/8,1/2,7/8,1],
   [7/8,1/2,8/8,1]
 ],
+cr_catLife = [8, 8, " qq  qq q88qq88qq778778qq777777qq777777q q7777q   q77q     qq   "],
 cr_img = [
   // Kitchen Wall 0
   [16, 16, "mmmmmmmmmmmmmmmmmlkkklmlkklmlkklmmmmmmmmmmmmmmmmkklmlkkklmlkklmlmmmmmmmmmmmmmmmmmlkkklmlkklmlkklmmmmmmmmmmmmmmmmkklmlkkklmlkklmlmmmmmmmmmmmmmmmmmlkkklmlkklmlkklmmmmmmmmmmmmmmmmkklmlkkklmlkklmlmmmmmmmmmmmmmmmmmlkkklmlkklmlkklmmmmmmmmmmmmmmmmkklmlkkklmlkklml"],
@@ -317,8 +318,10 @@ cr_img = [
   [16, 32, "qqqqqqqqqqqqqqqqqkkkkkkkkkkkkkkqqkllllllllllllkqqkljjjjjjjjjjlkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqkllllllllllllkqqkkkkkkkkkkqqqkqqkkkkkkkkkqjjqkqqkkkkkkkkkqqqkkqqkllllllllllllkqqkljjjjjjjjjjlkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqklkkkkkkkkkklkqqkllllllllllllkqqkkkkkkkkkkkkkkqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"],
   // Mouse Wizard 32
   [128, 16, "                                                                                                                                                                                                                                                                      qqq                                                                                             qqq              qqq           qghhq            qqq             qqq                                                            qghhq            qghhq         qooghgq          qghhq           qghhq            qqq                                           qooghgq          qooghgq         qqoghq         qooghgq         qooghgq          q788q                                           qqoghq           qqoghq      abaqqqhqqq         qqoghq          qqoghq         q77787q            qqqq                          qqqhqqq          qaaaqqq     bjboq666qoq      abaqqhqqq      abaqqqhqqq         qq778q           qghhgq                        qaba66qoq        qabjbaqoq    abaqqp6pqq       bjbq666qoq     bjboq666qoq      777qq8qqq         qooghhq                         bjb6pqq          ajjjaqq      qq q555q        abaqp6pqq      abaqqp6pqq       787qqqqq7q         qqqhqqq                       qaba55q           abjbaq       qq qogoq         qqq555q        qq q555q        777qqqqqq         qoq666qoq          qqq         qqqogoq           qaaaoq        qq5qgq6q        qqqggqqq       qqqqqgqq         qqq7q7q           qqq6qqq         qqgggq       qq5qggq6q          q5ggqq        q56hgh56q       qqghgq5q        q65qghq         qq7q7q7q         qqq555q         qggqghhq      q56ghghg6q        qqqhghgq        qqhghqq         qghgq5q        q56hghgq        qq787877q       q56hq55q       qqhqqqqqqqq      qqqhghgqq         qqhghgq        qhghghq         qhghgqq         qqghghq        qqq787qq        qqqhqqqq      qhqgggqq6qqoq      qhghghq         qhghghq         qqqqqqq         qghgqqq         qqqghgq         qqqqqqq        qqqqqqq       qhhqqqq555qq       qqqqqqq         qqqqqqq    "],
+  // Cat Life 33
+  cr_catLife,
 ],
-cr_img_clamp_to_edges = [3, 32],
+cr_img_clamp_to_edges = [3, 32, 33],
 cr_newImage = (cr_src) => {
   const img = new Image();
   img.src = cr_src;
@@ -332,9 +335,22 @@ cr_img2D = [
   // Cat Attack 2
   [30, 24, "        iiiii                       iihhhhhiii                   ihhqqqqqhhhi                 ihqq88888qqqhi    iiii       ihq7888888888qhii ihhhhi     ihq877777777777qhhihkqqkhi   ihq77777777777qqqqqhhqqqqhi   ihq7777777777qqq588qhqqqqkhi ihq77776666qqq4qqq87qhqqqqhi  ihq777qq66q44455q87qhhqqqhi   ihq776qqqq4455qq77qhihqqqhi   ihq776q5qqq5qq77qqqhihqqqhi   ihq77qqqqqqq77qqqqqqhhqqqhi   ihq777qq6677qqqqqqqqhhqqqhi   ihq7q7qhq7qqqqq7777qhqqqqhi   ihqq7qqhhqqqqq777qqqqqqqqhi    ihq77qhihhqq77qqqqqqqqqqhi     ihqqqhiiihqqqqqqqqqqqqqhi      ihhqhi  ihqqqqqqqqqqqqhi       iihi  ihqqqqqqqqqqqqqqhi        i   ihqqqqqqqqqqqqqqhi           ihqqqqqqqqqqqqqqqqhi          ihqqqqqqqqqqqqqqqqhi         ihqqqqqqqqqqqqqqqqqqhi"],
   // Cat Life 3
-  [15, 13, "           q             qqq     q       qq     qq       qq   qqq       qq  qdqq       qq qqqqq7qqqqqqqq  qqq7qqqqqqqqq     7qqqqqqqqq     qqqqqqqqqq    qq qq qqqqqq  qqq qq qq  qq qqq qq qqq qqq"],
+  cr_catLife,
 ],
-cr_textures2D = [];
+cr_textures2D = [],
+cr_itemsSpawnPoints = [
+  [14, 2.8, 6],
+  [10.5, 2.9, 11.5],
+  [19, 2.2, 8],
+  [24, 2.9, 10.5],
+  [26.5, 2.9, 5.5],
+  [19, 0.9, 15],
+  [12, 0.5, 14.5],
+  [9.5, 0.9, 10],
+  [13, 1, 4.5],
+  [23.5, 0.6, 9],
+  [26.5, 1.7, 6]
+];
 
 /**
  * SECTION VARIABLES
@@ -375,6 +391,7 @@ let cr_canvas,      // HTMLCanvasElement
   cr_enemies = [],                      // Array to hold enemy objects
   cr_projectiles = [],                  // Array to hold projectile objects
   cr_props = [],                        // Array to hold prop objects
+  cr_items = [],                        // Array to hold item objects
 
   cr_identityMatrix = cr_matTranslate(), // Static identity matrix for transformations
   cr_geometries = [],       // Object to hold geometries for different objects in the game
@@ -903,7 +920,6 @@ function cr_renderGeometry(cr_geometry, cr_worldMatrix) {
   cr_gl.uniform1i(cr_textureLocation, 0);
 
   const cr_uniformTime = cr_getUniformLocation(cr_program, "u_tm");
-  //cr_gl.uniform2f(cr_uniformTime, cr_geometry.cr_textureIndex === 8 ? cr_time * 0.3 : 0, 0);
   cr_gl.uniform2f(cr_uniformTime, 0, 0);
 
   cr_gl.drawElements(4, cr_geometry.cr_indices.length, 5123, 0); // 4 is for TRIANGLES, 6 is the number of indices, 5123 is for UNSIGNED_SHORT
@@ -1266,6 +1282,42 @@ function cr_updateProjectile(cr_projectile) {
 }
 
 /**
+ * SECTION OTHERS
+ */
+function cr_spawnHealth() {
+  const cr_position = cr_itemsSpawnPoints[cr_Math.floor(cr_Math.random() * cr_itemsSpawnPoints.length)];
+  
+  cr_items.push({
+    cr_position: [cr_position[0], cr_position[1], cr_position[2], 0, 0.2], // x, y, z, vertical speed, height
+    cr_matriz: cr_matTranslate(cr_position[0], cr_position[1], cr_position[2]),
+    cr_geometry: cr_createBillboard(0.25, 0.25, 33, [0,0,1,1]),
+    cr_isHealth: 1,
+    cr_destroy: 0,
+    cr_y: cr_position[1],
+    cr_time: 0,
+    cr_type: 1 // 1 for health
+  });
+}
+
+function cr_updateItem(cr_item) {
+  if (cr_item.cr_destroy) return;
+  
+  const S = cr_Mathsin(cr_item.cr_time);
+  cr_item.cr_position[1] = cr_item.cr_y + S * 0.03;
+  cr_item.cr_time = (cr_item.cr_time + 0.1) % (cr_pi * 2);
+
+  if (cr_item.cr_type === 1) {
+    const cr_distanceToPlayer = (cr_item.cr_position[0] - cr_cameraPosition[0]) ** 2 + (cr_item.cr_position[2] - cr_cameraPosition[2]) ** 2;
+    if (cr_distanceToPlayer <= 0.5 && cr_item.cr_position[1] >= cr_cameraPosition[1] && cr_item.cr_position[1] <= cr_cameraPosition[1] + cr_cameraHeight) {
+      if (cr_cameraHealth < 5) {
+        cr_cameraHealth++;
+        cr_item.cr_destroy = 1;
+      }
+    }
+  }
+}
+
+/**
  * SECTION GAME LOOP
  */
 function cr_update() {
@@ -1302,7 +1354,7 @@ function cr_update() {
       cr_ctx2D.fillStyle="white";
     }
     for (I=0;I<cr_cameraHealth;I++) {
-      cr_ctx2D.drawImage(cr_textures2D[3], 1 + I * 16, 1);
+      cr_ctx2D.drawImage(cr_textures2D[3], 1 + I * 9, 1);
     }
   }
 
@@ -1326,8 +1378,16 @@ function cr_update() {
     cr_renderGeometry(cr_props[I].cr_geometry, cr_props[I].cr_matriz);
   }
 
+  // Update the items
+  for (I=0;I<cr_items.length;I++) {
+    cr_updateItem(cr_items[I]);
+    cr_items[I].cr_matriz = cr_updateMatrix(cr_items[I].cr_position, -cr_cameraRotation+cr_pi_2, 0);
+    cr_renderGeometry(cr_items[I].cr_geometry, cr_items[I].cr_matriz);
+  }
+
   cr_enemies = cr_enemies.filter(cr_enemy => !cr_enemy.cr_destroy);
   cr_projectiles = cr_projectiles.filter(cr_projectile => !cr_projectile.cr_destroy);
+  cr_items = cr_items.filter(cr_item => !cr_item.cr_destroy);
 
   requestAnimationFrame(cr_update);
 }
@@ -1348,6 +1408,7 @@ async function cr_main() {
   cr_buildPlanesGeometry();
   cr_buildLevelProps();
   cr_buildEnemies();
+  for (let I=0;I<3;I++) cr_spawnHealth();
   cr_resizeCanvas();
   cr_update();
 }
