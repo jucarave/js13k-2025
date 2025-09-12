@@ -402,6 +402,7 @@ let cr_canvas,      // HTMLCanvasElement
   cr_levelProps = cr_e1m1Props,
   
   cr_wave = 1,
+  cr_gameScore = 0,
   cr_enemiesLeft = 0;
 
 
@@ -687,6 +688,11 @@ function cr_updateCamera() {
     cr_cameraAttackDelay = 20;
     cr_keys["KeyZ"] = 2;
     cr_createProjectile(cr_cameraPosition[0], cr_cameraPosition[1]+0.4, cr_cameraPosition[2], [-S, -C], 4, 1);
+  }
+
+  if (cr_keys["KeyE"] === 1) {
+    cr_keys["KeyE"] = 2;
+    console.log(cr_cameraPosition);
   }
 }
 
@@ -1064,10 +1070,14 @@ function cr_checkCurrentWave() {
   }
 }
 
+function cr_updateScore() {
+  document.getElementById("score").innerText = `Score ${cr_gameScore}`;
+}
+
 /**
  * SECTION ENEMIES
  */
-function cr_createEnemy(X, Y, Z, cr_texture, cr_hp, cr_isRanged, cr_scale=1) {
+function cr_createEnemy(X, Y, Z, cr_texture, cr_hp, cr_isRanged, cr_scale=1, cr_score) {
   const cr_geometryWalk = [],
   cr_geometryDeath = [],
   cr_geometryAttack = [];
@@ -1096,18 +1106,19 @@ function cr_createEnemy(X, Y, Z, cr_texture, cr_hp, cr_isRanged, cr_scale=1) {
     cr_targetFloor: Y,
     cr_destroy: 0,
     cr_isRanged,                // 0: Melee, 1: Ranged
-    cr_hp
+    cr_hp,
+    cr_score
   });
 
   cr_enemiesLeft++;
 }
 
 function cr_createMouseWizard(X, Y, Z) {
-  cr_createEnemy(X, Y, Z, 32, 4, 1, 1/2);
+  cr_createEnemy(X, Y, Z, 32, 4, 1, 1/2, 100);
 }
 
 function cr_createBroom(X, Y, Z) {
-  cr_createEnemy(X, Y, Z, 3, 5, 0, 1);
+  cr_createEnemy(X, Y, Z, 3, 5, 0, 1, 200);
 }
 
 function cr_enemyMeleeAttack(cr_enemy) {
@@ -1151,6 +1162,8 @@ function cr_updateEnemy(cr_enemy) {
         cr_enemy.cr_state = 3;
         cr_enemiesLeft--;
         cr_checkCurrentWave();
+        cr_gameScore += cr_enemy.cr_score;
+        cr_updateScore();
       }
       return;
     case 4:
