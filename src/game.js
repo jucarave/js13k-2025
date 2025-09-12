@@ -645,6 +645,11 @@ function cr_updateCamera() {
   if (cr_cameraState === 1) {
     cr_cameraHeight = cr_Math.max(cr_cameraHeight - 0.008, 0.1);
     cr_cameraView = cr_updateMatrix([-cr_cameraPosition[0], -cr_cameraPosition[1]-cr_cameraHeight, -cr_cameraPosition[2]], cr_cameraRotation);
+
+    if (cr_keys["KeyR"] === 1) {
+      cr_keys["KeyR"] = 2;
+      cr_gameRestart();
+    }
     return;
   }
 
@@ -1127,7 +1132,10 @@ function cr_enemyMeleeAttack(cr_enemy) {
   cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
   if (cr_length <= 1.5) {
     cr_cameraHurt = 10;
-    if (--cr_cameraHealth <= 0) cr_cameraState = 1;
+    if (--cr_cameraHealth <= 0){ 
+      cr_cameraState = 1;
+      document.getElementById("dead").style.visibility = "visible";
+    }
   }
 }
 
@@ -1285,7 +1293,10 @@ function cr_updateProjectile(cr_projectile) {
     if (cr_distanceToPlayer <= 0.3 && cr_projectile.cr_position[1] >= cr_cameraPosition[1] && cr_projectile.cr_position[1] <= cr_cameraPosition[1] + cr_cameraHeight) {
       cr_projectile.cr_destroy = 1;
       cr_cameraHurt = 10;
-      if (--cr_cameraHealth <= 0) cr_cameraState = 1;
+      if (--cr_cameraHealth <= 0) {
+        cr_cameraState = 1;
+        document.getElementById("dead").style.visibility = "visible";
+      }
     }
   }
 
@@ -1403,6 +1414,33 @@ function cr_update() {
   cr_items = cr_items.filter(cr_item => !cr_item.cr_destroy);
 
   requestAnimationFrame(cr_update);
+}
+
+function cr_gameRestart() {
+  cr_cameraPosition = [13.5,2.6,6,0,0.5];
+  cr_cameraRotation = cr_pi_2*2.5;
+  cr_cameraView = cr_updateMatrix(cr_cameraPosition, cr_cameraRotation);
+  cr_cameraTargetFloor = 2.6;
+  cr_cameraIsJumping = 0;
+  cr_cameraAttackDelay = 0;
+  cr_cameraHealth = 5;
+  cr_cameraState = 0;
+  cr_cameraHurt = 0;
+  cr_cameraHeight = 0.4;
+  
+  cr_enemies = [];
+  cr_projectiles = [];
+  cr_items = [];
+  cr_wave = 1;
+  cr_enemiesLeft = 0;
+  cr_gameScore = 0;
+  cr_updateScore();
+  document.getElementById("wave").innerText = `Wave ${cr_wave}`;
+
+  cr_buildEnemies();
+  for (let I=0;I<3;I++) cr_spawnHealth();
+
+  document.getElementById("dead").style.visibility = "hidden";
 }
 
 /**
