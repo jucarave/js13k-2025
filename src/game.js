@@ -320,8 +320,12 @@ cr_img = [
   [128, 16, "                                                                                                                                                                                                                                                                      qqq                                                                                             qqq              qqq           qghhq            qqq             qqq                                                            qghhq            qghhq         qooghgq          qghhq           qghhq            qqq                                           qooghgq          qooghgq         qqoghq         qooghgq         qooghgq          q788q                                           qqoghq           qqoghq      abaqqqhqqq         qqoghq          qqoghq         q77787q            qqqq                          qqqhqqq          qaaaqqq     bjboq666qoq      abaqqhqqq      abaqqqhqqq         qq778q           qghhgq                        qaba66qoq        qabjbaqoq    abaqqp6pqq       bjbq666qoq     bjboq666qoq      777qq8qqq         qooghhq                         bjb6pqq          ajjjaqq      qq q555q        abaqp6pqq      abaqqp6pqq       787qqqqq7q         qqqhqqq                       qaba55q           abjbaq       qq qogoq         qqq555q        qq q555q        777qqqqqq         qoq666qoq          qqq         qqqogoq           qaaaoq        qq5qgq6q        qqqggqqq       qqqqqgqq         qqq7q7q           qqq6qqq         qqgggq       qq5qggq6q          q5ggqq        q56hgh56q       qqghgq5q        q65qghq         qq7q7q7q         qqq555q         qggqghhq      q56ghghg6q        qqqhghgq        qqhghqq         qghgq5q        q56hghgq        qq787877q       q56hq55q       qqhqqqqqqqq      qqqhghgqq         qqhghgq        qhghghq         qhghgqq         qqghghq        qqq787qq        qqqhqqqq      qhqgggqq6qqoq      qhghghq         qhghghq         qqqqqqq         qghgqqq         qqqghgq         qqqqqqq        qqqqqqq       qhhqqqq555qq       qqqqqqq         qqqqqqq    "],
   // Cat Life 33
   cr_catLife,
+  // Mouse Warrior 34
+  [128, 16, "      qqqqq                                                                                                                          qqmllqq          qqqqq           qqqqq           qqqqq                                            qqqqq           qqqqq         q6qqq6q         qqmllqq         qqmllqq         qq788qq                                          qqmllqq         qqmllqq        q67676q         q6qqq6q         q6qqq6q         q7qqq7q          qqqqq                           q6qqq6q        qqqqqq6q       qmq555qlq        q67676q         q67676q        qq7q7q7qq        qqmmmqq                       qqqq67676q       q55555q6q       qqq656qqq       qmq555qlq       qmq555qlq       qqq888qqq    qqq q6qqq6q                      q555mq555qlq      q55555qqlq     qmlmqqqmllq      qqq656qqq       qqq656qqq      q78q787q88q  q65fqq6q6q6qq                     q656qq656qqq      q56565qqqq    qfqmlmmmllqfq     qlmqqqmqlq     qlqmqqqmlq     q7q78qqq88q7q q56fqmmqqqmmqqqq                  q666lmqqqmqlq     q56565qmqq    ffqqmllllqqff    qqmlmmmqllq     qmlqmmmllqq    78qqq888qqq87  qeqqqmlllmqqf56                   qqqmlmmmqllq     q66666qqlq    eqqqmmmllqqqe    qqqmllqqffq     qffqqllmqqq    qq87q778q78qq   q qqmmmllqqf65       qqqqq        qqmlllqqffq      qqqqqqqfq    q56qqqqqqq65q    qqqmmq56qfq     qfq65qmmqqq     q78qqqqq87q       qqqqqqq qeq      qqmmmqq        qmmmq56qfq      qmmmqq6q     q65qqmlmqq56q    q6qqqq65qq       qq56qqqq6q      qq77877qq       qllmlmqq  q       q6qqq6q        qqqqq65qq       qqqqqfq       qqffqqqffqq      qqfqqqfq         qfqqqfqq       q87qqq78q       qllqqqfq        qqqmqqmmfq       qfqqqfq         qfqqqfq        qqq   qqq        qqq qmq         qmq qqq        qqq   qqq       qllq qqq       qllqmllmqffq      qqq qmq         qqq qmq       qlmq   qllq       qllqqqq         qqqqllq       q87q   q88q       qq  qllq       qllqmmmq6qq      qllqqqq         qllqqqq       qmmq   qmmq       qmmq               qmmq       q77q   q77q           qmmq        qqqqqqqqq       qmmq            qmmq       "],
+  // Mouse Wizard Green 35
+  [128, 16, "                                                                                                                                                                                                                                                                      qqq                                                                                             qqq              qqq           qeddq            qqq             qqq                                                            qeddq            qeddq         qffedeq          qeddq           qeddq            qqq                                           qffedeq          qffedeq         qqfedq         qffedeq         qffedeq          q788q                                           qqfedq           qqfedq      787qqqdqqq         qqfedq          qqfedq         q77787q            qqqq                          qqqdqqq          q777qqq     8j8fq666qfq      787qqdqqq      787qqqdqqq         qq778q           qeddeq                        q78766qfq        q78j87qfq    787qqp6pqq       8j8q666qfq     8j8fq666qfq      777qq8qqq         qffeddq                         8j86pqq          7jjj7qq      qq q555q        787qp6pqq      787qqp6pqq       787qqqqq7q         qqqdqqq                       q78755q           78j87q       qq qfefq         qqq555q        qq q555q        777qqqqqq         qfq666qfq          qqq         qqqfefq           q777fq        qq5qeq6q        qqqeeqqq       qqqqqeqq         qqq7q7q           qqq6qqq         qqeeeq       qq5qeeq6q          q5eeqq        q56ded56q       qqedeq5q        q65qedq         qq7q7q7q         qqq555q         qeeqeddq      q56edede6q        qqqdedeq        qqdedqq         qedeq5q        q56dedeq        qq787877q       q56dq55q       qqdqqqqqqqq      qqqdedeqq         qqdedeq        qdededq         qdedeqq         qqededq        qqq787qq        qqqdqqqq      qdqeeeqq6qqfq      qdededq         qdededq         qqqqqqq         qedeqqq         qqqedeq         qqqqqqq        qqqqqqq       qddqqqq555qq       qqqqqqq         qqqqqqq    "],
 ],
-cr_img_clamp_to_edges = [3, 32, 33],
+cr_img_clamp_to_edges = [3, 32, 33, 34, 35],
 cr_newImage = (cr_src) => {
   const img = new Image();
   img.src = cr_src;
@@ -350,6 +354,15 @@ cr_itemsSpawnPoints = [
   [13, 1, 4.5],
   [23.5, 0.6, 9],
   [26.5, 1.7, 6]
+],
+cr_enemyTypes = [cr_createBroom, cr_createMouseWizard, cr_createMouseWarrior, cr_createMouseWizardGreen], // Enemy types in difficulty order
+cr_spawnPositions = [ // Rounded spawn positions (x, y, z)
+  [11.2, 0, 10.5], [12.7, 0, 13.5], [14.6, 0, 10.7], [13.6, 0, 5.8], [16.0, 0, 6.3],
+  [16.8, 0, 12.8], [17.3, 0, 17.2], [18.7, 0, 11.0], [22.7, 0, 12.4], [25.3, 0, 9.7],
+  [24.2, 0, 6.9], [21.9, 0, 6.9], [21.5, 0, 4.6], [22.4, 0, 1.7], [24.9, 0, 2.2],
+  [20.0, 2, 7.6], [18.7, 2, 9.4], [15.7, 2, 9.0], [13.0, 2, 9.2], [12.2, 2, 6.8],
+  [12.4, 2, 11.9], [25.5, 2, 12.6], [23.2, 2, 12.9], [22.4, 2, 12.9], [24.4, 2, 5.7],
+  [23.7, 2, 8.0]
 ];
 
 /**
@@ -1058,10 +1071,22 @@ function cr_buildEnemies() {
   if (cr_wave === 1) {
     cr_createMouseWizard(13.5,0,8.5);
     cr_createBroom(12.5,0,12.5);
-  } else if (cr_wave === 2) {
-    cr_createMouseWizard(22,0,3.5);
-    cr_createMouseWizard(12.5,0,12.5);
-    cr_createBroom(19,2,9.5);
+    return;
+  }
+
+  // Progressive difficulty: more enemies and harder types as wave increases
+  let cr_numEnemies = Math.min(cr_wave * 2, cr_spawnPositions.length),
+    cr_typeCount = Math.min(cr_enemyTypes.length, 1 + Math.floor((cr_wave-1)/2));
+
+  let cr_availableSpawns = cr_spawnPositions.slice();
+  for (let I=0;I<cr_numEnemies;I++) {
+    if (cr_availableSpawns.length === 0) break;
+    let cr_type = Math.min(cr_typeCount-1, Math.floor(I/Math.ceil(cr_numEnemies/cr_typeCount))),
+      cr_randomSpot = Math.floor(cr_Math.random() * cr_availableSpawns.length),
+      cr_spawnPosition = cr_availableSpawns[cr_randomSpot];
+
+    cr_enemyTypes[cr_type](cr_spawnPosition[0], cr_spawnPosition[1], cr_spawnPosition[2]);
+    cr_availableSpawns.splice(cr_randomSpot, 1);
   }
 }
 
@@ -1071,6 +1096,9 @@ function cr_checkCurrentWave() {
     setTimeout(() => {
       document.getElementById("wave").innerText = `Wave ${cr_wave}`;
       cr_buildEnemies();
+      if (cr_wave % 5 === 0) {
+        for (let I=0;I<3;I++) cr_spawnHealth();
+      }
     }, 5000);
   }
 }
@@ -1126,6 +1154,14 @@ function cr_createBroom(X, Y, Z) {
   cr_createEnemy(X, Y, Z, 3, 5, 0, 1, 200);
 }
 
+function cr_createMouseWarrior(X, Y, Z) {
+  cr_createEnemy(X, Y, Z, 34, 6, 0, 2/3, 250);
+}
+
+function cr_createMouseWizardGreen(X, Y, Z) {
+  cr_createEnemy(X, Y, Z, 35, 10, 2, 2/3, 250);
+}
+
 function cr_enemyMeleeAttack(cr_enemy) {
   const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
   cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
@@ -1141,9 +1177,20 @@ function cr_enemyMeleeAttack(cr_enemy) {
 
 function cr_enemyRangedAttack(cr_enemy) {
   const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
-  cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
-  cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
-  cr_createProjectile(cr_enemy.cr_position[0], cr_enemy.cr_position[1]+0.3, cr_enemy.cr_position[2], [cr_dx/cr_length, cr_dz/cr_length], 4, 0);
+    cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
+    cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
+
+  if (cr_enemy.cr_isRanged === 2) {
+    const cr_angleToPlayer = cr_Math.atan2(cr_dz, cr_dx);
+    for (let I=-2;I<=2;I++) {
+      const cr_angle = cr_angleToPlayer + I * (10 * cr_pi / 180);
+      const cr_dirx = cr_Mathcos(cr_angle);
+      const cr_dirz = cr_Mathsin(cr_angle);
+      cr_createProjectile(cr_enemy.cr_position[0], cr_enemy.cr_position[1] + 0.3, cr_enemy.cr_position[2], [cr_dirx, cr_dirz], 4, 0);
+    }
+  } else {
+    cr_createProjectile(cr_enemy.cr_position[0], cr_enemy.cr_position[1] + 0.3, cr_enemy.cr_position[2], [cr_dx / cr_length, cr_dz / cr_length], 4, 0);
+  }
 }
 
 function cr_updateEnemy(cr_enemy) {
@@ -1203,12 +1250,12 @@ function cr_updateEnemy(cr_enemy) {
   // Update movement
   const cr_dx = (cr_cameraPosition[0] - cr_enemy.cr_position[0]),
   cr_dz = (cr_cameraPosition[2] - cr_enemy.cr_position[2]),
-  cr_differentFloor = cr_Math.abs(cr_cameraPosition[1] - cr_enemy.cr_position[1]) >= 2,
+  cr_differentFloor = cr_Math.abs(cr_cameraPosition[1] - cr_enemy.cr_position[1]) >= 2 || cr_cameraPosition[1] < cr_enemy.cr_position[1] - 0.4,
   cr_length = cr_Math.sqrt(cr_dx ** 2 + cr_dz ** 2);
 
   if ((cr_length > 8 && !cr_enemy.cr_active) || cr_differentFloor) return;
 
-  const cr_enemyEyePosition = [cr_enemy.cr_position[0], cr_enemy.cr_position[1] + 1, cr_enemy.cr_position[2], cr_enemy.cr_position[3], cr_enemy.cr_position[4]];
+  const cr_enemyEyePosition = [cr_enemy.cr_position[0], cr_enemy.cr_position[1] + 0.8, cr_enemy.cr_position[2], cr_enemy.cr_position[3], cr_enemy.cr_position[4]];
   if (!cr_enemy.cr_active && cr_doesCollidesWithWalls(cr_enemyEyePosition, cr_dx, cr_dz))
     return;
 
@@ -1280,6 +1327,7 @@ function cr_updateProjectile(cr_projectile) {
     const cr_enemy = cr_doesCollidesWithEnemy(cr_projectile.cr_position, 0, 0);
     if (cr_enemy && cr_enemy.cr_state != 2) {
       cr_projectile.cr_destroy = 1;
+      cr_enemy.cr_active = 1;
       if (--cr_enemy.cr_hp <= 0) {
         cr_enemy.cr_state = 2;
         cr_enemy.cr_frame = 0;
