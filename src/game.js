@@ -703,11 +703,33 @@ function cr_updateCamera() {
   cr_targetPosition = [cr_cameraPosition[0] + M * S * V, cr_cameraPosition[1], cr_cameraPosition[2] + M * C * V, cr_cameraPosition[3], cr_cameraPosition[4]];
   cr_ceiling = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, 1);
 
-  if (M != 0 && !cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L) && !cr_doesCollidesWithEnemy(cr_targetPosition, 0, 0) && !cr_doesCollidesWithProps(cr_targetPosition, 0)) {
-    cr_cameraPosition[0] += M * S * V;
-    cr_cameraPosition[2] += M * C * V;
-    cr_cameraTargetFloor = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, 0);
-    cr_catBobbing += 0.08;
+  if (M != 0) {
+    let moved = false;
+    // Try direct movement first
+    if (!cr_doesCollidesWithWalls(cr_cameraPosition, M * S * L, M * C * L) && !cr_doesCollidesWithEnemy(cr_targetPosition, 0, 0) && !cr_doesCollidesWithProps(cr_targetPosition, 0)) {
+      cr_cameraPosition[0] += M * S * V;
+      cr_cameraPosition[2] += M * C * V;
+      cr_cameraTargetFloor = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, 0);
+      cr_catBobbing += 0.08;
+      moved = true;
+    } else {
+      // Try in a 60° arc (every 10°)
+      for (let angle = -30; angle <= 30; angle += 10) {
+        const rad = cr_cameraRotation + angle * cr_pi / 180;
+        const S_arc = cr_Mathsin(rad);
+        const C_arc = cr_Mathcos(rad);
+        const targetPosArc = [cr_cameraPosition[0] + M * S_arc * V, cr_cameraPosition[1], cr_cameraPosition[2] + M * C_arc * V, cr_cameraPosition[3], cr_cameraPosition[4]];
+        if (!cr_doesCollidesWithWalls(cr_cameraPosition, M * S_arc * L, M * C_arc * L) && !cr_doesCollidesWithEnemy(targetPosArc, 0, 0) && !cr_doesCollidesWithProps(targetPosArc, 0)) {
+          cr_cameraPosition[0] += M * S_arc * V;
+          cr_cameraPosition[2] += M * C_arc * V;
+          cr_cameraTargetFloor = cr_getHighestFloorOrLowestCeiling(cr_cameraPosition, 0.5, 0);
+          cr_catBobbing += 0.08;
+          moved = true;
+          break;
+        }
+      }
+    }
+    if (!moved) cr_catBobbing = 0;
   } else {
     cr_catBobbing = 0;
   }
